@@ -3,7 +3,27 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - NoShoot
+  - ItemKiller
+  - PlayerLaser
+  - GameCon
+  - EnemyNormal
+  - EnemyTank
+  - EnemyShooter
+  - EnemyMothership
+  - EnemyLaserNormal
+  - EnergyBoost
+  - ShieldBoost
+  - HealthBoost
+  - SpeedBoost
+  - EnemyLaserShooter
+  - EnemyKamikadze
+  - EnemyLaserKamikadze
+  - --------
+  - Barrel
+  - Laser
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -11,12 +31,12 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Laser
+  - Player
+  - Enemy
+  - Bonus
+  - Border
+  - Trigger
   - 
   - 
   - 

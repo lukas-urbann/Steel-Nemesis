@@ -1,0 +1,12 @@
+fileFormatVersion: 2
+guid: de888e209c1537f49972027dd6b0e394
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - strela: {fileID: 1988944043773170, guid: c9c57730e31f0c14981f2851b7e970b5, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

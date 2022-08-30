@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 35ddb93394f014ef3b0ba24a26df4305
+timeCreated: 1590681225
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - destroyAnim: {instanceID: 0}
+  - shooter: {fileID: 8300000, guid: ee459c1072da2c74ba512b181059c465, type: 3}
+  - kamikadze: {fileID: 8300000, guid: f68b91086511a894ca09118fdb4be015, type: 3}
+  - normal: {fileID: 8300000, guid: 6901216e9eac4154990e3394518e3ba3, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
