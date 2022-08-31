@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Other;
+using Triggers;
 using UnityEngine;
 
 namespace Enemy
@@ -26,6 +28,7 @@ namespace Enemy
    public class BasicEnemy : MonoBehaviour
     {
         protected float speed;
+        protected float hp;
 
         protected FlyDirection flyDirection;
 
@@ -50,6 +53,40 @@ namespace Enemy
         private void OnBecameInvisible()
         {
             
+        }
+
+        private void OnTriggerEnter2D(Collider2D col)
+        {
+            if (col.CompareTag("Trigger"))
+            {
+                TypeOfTrigger trigger;
+                
+                try
+                {
+                    trigger = col.GetComponent<TriggerType>().triggerType;
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    throw;
+                }
+
+                switch (trigger)
+                {
+                    case TypeOfTrigger.border:
+                        switch (col.gameObject.layer)
+                        {
+                            case 3:
+                                Debug.Log("Konec hry");
+                                Controllers.Game.Instance.GameOver();
+                                break;
+                            case 10:
+                                GetComponent<Boundaries>().enabled = false;
+                                break;
+                        }
+                        break;
+                }
+            }
         }
     }
 }

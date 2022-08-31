@@ -9,10 +9,11 @@ namespace Enemy
     public class Basic : BasicEnemy
     {
         private Vector3 move;
+        
 
         private void Start()
         {
-            move = new Vector3(0, -3 * (Controllers.Wave.Instance.GetLevel() * 0.1f), 0);
+            move = new Vector3(0, -4 * (Controllers.Wave.Instance.GetLevel() * 0.1f), 0);
             flyDirection = FlyDirection.Down;
         }
 
@@ -25,5 +26,7 @@ namespace Enemy
                     break;
             }
         }
+        
+        
     }
 }

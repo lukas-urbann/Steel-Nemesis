@@ -24,11 +24,12 @@ TagManager:
   - Barrel
   - Laser
   - Enemy
+  - Trigger
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - GameOver
   - Water
   - UI
   - Laser
