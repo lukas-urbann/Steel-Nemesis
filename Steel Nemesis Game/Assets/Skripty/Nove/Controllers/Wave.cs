@@ -82,6 +82,7 @@ namespace Controllers
         {
             yield return new WaitForSeconds(5.99f);
             level++;
+            Player.Player.Instance.AddFireDamage(1);
             waveCountdown = 5.99f;
             ResetText();
             countdownActive = false;

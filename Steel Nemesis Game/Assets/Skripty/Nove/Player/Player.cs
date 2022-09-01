@@ -1,17 +1,22 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Controllers;
 using UnityEngine;
 
 namespace Player
 {
     public class Player : MonoBehaviour
     {
+        public static Player Instance;
+        
         private int hp = 100;
         private int energy = 100;
         
         private float fireCooldown = 0.5f;
         private float firePower = 20;
+        private int fireDamage = 25;
+        
         private bool canFire = true;
 
         public GameObject crosshair;
@@ -21,6 +26,18 @@ namespace Player
         private Vector3 vectorToTarget;
         private float angle;
         private Quaternion qt;
+
+        private void Awake()
+        {
+            if (Instance != null && Instance != this)
+            {
+                Destroy(gameObject);
+            }
+            else
+            {
+                Instance = this;
+            }
+        }
 
         private void Update()
         {
@@ -51,8 +68,12 @@ namespace Player
                 if (canFire && !Controllers.Pause.Instance.GetPauseState())
                 {
                     GameObject projectile = Instantiate(laser, firePoint.position, firePoint.rotation);
+                    //-------DAMAGE
+                    projectile.GetComponent<Laser.PlayerLaser>().SetDamage(fireDamage);
+                    //-------FORCE
                     Rigidbody2D rb = projectile.GetComponent<Rigidbody2D>();
-                    rb.AddForce(firePoint.up * 10, ForceMode2D.Impulse);
+                    rb.AddForce(firePoint.up * firePower, ForceMode2D.Impulse);
+                    //------------
                     StartCoroutine(FireCooldown());
                 }
         }
@@ -62,6 +83,11 @@ namespace Player
             canFire = false;
             yield return new WaitForSeconds(fireCooldown);
             canFire = true;
+        }
+
+        public void AddFireDamage(int value)
+        {
+            fireDamage += value;
         }
     }
 } 

@@ -50,9 +50,13 @@ namespace Enemy
             
         }
 
-        private void OnBecameInvisible()
+        private void OnCollisionEnter2D(Collision2D col)
         {
-            
+            if (col.gameObject.CompareTag("Laser") && col.gameObject.layer == 7)
+            {
+                Debug.Log("laser hit");
+                Destroy(col.gameObject);
+            }
         }
 
         private void OnTriggerEnter2D(Collider2D col)

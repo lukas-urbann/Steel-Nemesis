@@ -13,6 +13,7 @@ namespace Enemy
 
         private void Start()
         {
+            hp = 50;
             move = new Vector3(0, -4 * (Controllers.Wave.Instance.GetLevel() * 0.1f), 0);
             flyDirection = FlyDirection.Down;
         }

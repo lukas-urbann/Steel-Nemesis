@@ -35,6 +35,8 @@ namespace Controllers
                 if(type.triggerType == TypeOfTrigger.ship)
                     ships.Add(type.transform.root.gameObject);
             }
+            
+            Destroy(FindObjectOfType<Controllers.Wave>().gameObject);
 
             foreach (GameObject ship in ships)
             {
