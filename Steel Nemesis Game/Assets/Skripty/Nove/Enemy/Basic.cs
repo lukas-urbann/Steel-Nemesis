@@ -27,7 +27,10 @@ namespace Enemy
                     break;
             }
         }
-        
-        
+
+        protected override void LaserHit()
+        {
+            base.LaserHit();
+        }
     }
 }

@@ -12,13 +12,17 @@ namespace Player
         
         private int hp = 100;
         private int energy = 100;
-        
+
+
+        private float fireCost = 20;
         private float fireCooldown = 0.5f;
-        private float firePower = 20;
+        private float firePower = 1.0f;
         private int fireDamage = 25;
         
         private bool canFire = true;
-
+        public AudioClip laserSfx;
+        
+        
         public GameObject crosshair;
         public Transform firePoint;
         public GameObject laser;
@@ -67,6 +71,8 @@ namespace Player
             if (Input.GetAxis("Fire") != 0 || Input.GetMouseButton(0))
                 if (canFire && !Controllers.Pause.Instance.GetPauseState())
                 {
+                    Controllers.Audio.Instance.PlaySound(laserSfx);
+                    energy -= (int) fireCost;
                     GameObject projectile = Instantiate(laser, firePoint.position, firePoint.rotation);
                     //-------DAMAGE
                     projectile.GetComponent<Laser.PlayerLaser>().SetDamage(fireDamage);
@@ -88,6 +94,11 @@ namespace Player
         public void AddFireDamage(int value)
         {
             fireDamage += value;
+        }
+        
+        public int GetFireDamage()
+        {
+            return fireDamage;
         }
     }
 } 

@@ -31,9 +31,17 @@ namespace Enemy
         protected float hp;
 
         protected FlyDirection flyDirection;
+        public GameObject hitEffect;
 
         [SerializeField] protected GameObject laser;
         [SerializeField] protected List<Transform> barrelPoints = new List<Transform>();
+
+        private Death deathScript;
+
+        private void OnEnable()
+        {
+            deathScript = transform.root.GetComponent<Death>();
+        }
 
         protected void SetSpeed(float spd)
         {
@@ -54,9 +62,23 @@ namespace Enemy
         {
             if (col.gameObject.CompareTag("Laser") && col.gameObject.layer == 7)
             {
-                Debug.Log("laser hit");
+                LaserHit();
+                Instantiate(hitEffect, col.transform.position, Quaternion.identity);
                 Destroy(col.gameObject);
             }
+        }
+
+        protected virtual void LaserHit()
+        {
+            Controllers.Audio.Instance.HitSound();
+            hp -= Player.Player.Instance.GetFireDamage();
+            CheckHp();
+        }
+
+        protected virtual void CheckHp()
+        {
+            if (hp <= 0)
+                deathScript.DeathEvent();
         }
 
         private void OnTriggerEnter2D(Collider2D col)
