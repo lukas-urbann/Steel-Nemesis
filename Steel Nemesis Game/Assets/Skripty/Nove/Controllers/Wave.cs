@@ -15,7 +15,7 @@ namespace Controllers
         private Vector2 minSpawnDimension = new Vector2(-5.50f, 4.5f);
         private Vector2 maxSpawnDimension = new Vector2(5.50f, 2f);
         public TMP_Text levelTitle, levelSeconds;
-        private bool waveEnd = true, wavePending = false;
+        private bool waveEnd = false, wavePending = false;
         private bool countdownActive = false;
         private float waveCountdown = 5.99f;
         private float enemyCountdown = 1;
@@ -132,6 +132,11 @@ namespace Controllers
         public void SetRemainingEnemies(int val)
         {
             remainingToKill += val;
+        }
+
+        public void StartGame()
+        {
+            waveEnd = true;
         }
     }
 }

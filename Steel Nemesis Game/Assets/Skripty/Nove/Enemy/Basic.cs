@@ -15,10 +15,12 @@ namespace Enemy
             hp = 50;
 
             if(speed < 5.5f)
-                speed = -1 + (Controllers.Wave.Instance.GetLevel() * 0.05f);
+                speed = 1 + (Controllers.Wave.Instance.GetLevel() * 0.05f);
             
-            move = new Vector3(0, speed, 0);
+            move = new Vector3(0, -speed, 0);
             flyDirection = FlyDirection.Down;
+            
+            InitMaxHP();
         }
 
         private void Update()

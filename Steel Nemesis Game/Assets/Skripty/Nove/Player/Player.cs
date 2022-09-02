@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Controllers;
+using Enemy;
 using UnityEngine;
 
 namespace Player
@@ -10,8 +11,13 @@ namespace Player
     {
         public static Player Instance;
         
-        private int hp = 100;
-        private int energy = 100;
+        private float hp = 100;
+        private float maxHp = 100;
+        
+        
+        private float energy = 200;
+        private float maxEnergy = 200;
+        private float energyGain = 10;
 
 
         private float fireCost = 20;
@@ -48,6 +54,18 @@ namespace Player
             RotatePlayer();            
             CheckMovement();
             CheckFire();
+            CheckStats();
+        }
+
+        private void CheckStats()
+        {
+            if (energy < maxEnergy)
+                energy += energyGain * Time.deltaTime;
+            else
+                energy = maxEnergy;
+
+            if (hp > maxHp)
+                hp = maxHp;
         }
 
         private void CheckMovement()
@@ -63,7 +81,7 @@ namespace Player
             qt = Quaternion.AngleAxis(angle - 90, Vector3.forward);
             
             if(!Controllers.Pause.Instance.GetPauseState())
-                transform.rotation = Quaternion.RotateTowards(transform.rotation, qt, Time.time ); 
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, qt, 5 ); 
         }
 
         private void CheckFire()
@@ -71,6 +89,9 @@ namespace Player
             if (Input.GetAxis("Fire") != 0 || Input.GetMouseButton(0))
                 if (canFire && !Controllers.Pause.Instance.GetPauseState())
                 {
+                    if(energy < fireCost)
+                        return;
+                    
                     Controllers.Audio.Instance.PlaySound(laserSfx);
                     energy -= (int) fireCost;
                     GameObject projectile = Instantiate(laser, firePoint.position, firePoint.rotation);
@@ -91,6 +112,17 @@ namespace Player
             canFire = true;
         }
 
+        public void RemoveHitpoints(float value)
+        {
+            hp -= value;
+        }
+
+        private void CheckHP()
+        {
+            if(hp <= 0)
+                Controllers.Game.Instance.GameOver();
+        }
+
         public void AddFireDamage(int value)
         {
             fireDamage += value;
@@ -99,6 +131,29 @@ namespace Player
         public int GetFireDamage()
         {
             return fireDamage;
+        }
+
+        public float GetEnergy()
+        {
+            return energy;
+        }
+
+        public float GetHitpoints()
+        {
+            return hp;
+        }
+
+        public void OnCollisionEnter2D(Collision2D col)
+        {
+            if (col.gameObject.CompareTag("Ship") && col.gameObject.layer == 8)
+            {
+                col.gameObject.GetComponent<BasicEnemy>().InstaKill();
+
+                if (!(hp < hp / 4))
+                    hp -= hp / 2; 
+                else
+                    RemoveHitpoints(hp);
+            }
         }
     }
 } 

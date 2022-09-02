@@ -25,6 +25,7 @@ TagManager:
   - Laser
   - Enemy
   - Trigger
+  - Ship
   layers:
   - Default
   - TransparentFX
@@ -38,7 +39,7 @@ TagManager:
   - Bonus
   - Border
   - Trigger
-  - 
+  - WaveController
   - 
   - 
   - 

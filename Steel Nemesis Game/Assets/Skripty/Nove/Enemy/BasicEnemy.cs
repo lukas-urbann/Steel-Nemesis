@@ -29,6 +29,8 @@ namespace Enemy
     {
         protected float speed;
         protected float hp;
+        protected float maxHp;
+        protected float damage;
 
         protected FlyDirection flyDirection;
         public GameObject hitEffect;
@@ -40,7 +42,13 @@ namespace Enemy
 
         private void OnEnable()
         {
+            damage = 0;
             deathScript = transform.root.GetComponent<Death>();
+        }
+
+        protected virtual void InitMaxHP()
+        {
+            maxHp = hp;
         }
 
         protected void SetSpeed(float spd)
@@ -76,14 +84,26 @@ namespace Enemy
             CheckHp();
         }
 
+        public void InstaKill()
+        {
+            hp = 0;
+            CheckHp();
+        }
+
         protected virtual void CheckHp()
         {
             if (hp <= 0)
             {
                 Controllers.Game.Instance.AddKill();
                 Controllers.Wave.Instance.SetRemainingEnemies(-1);
+                CustomDeath();
                 deathScript.DeathEvent();
             }
+        }
+
+        protected virtual void CustomDeath()
+        {
+            Controllers.Score.Instance.AddScore((int) ((speed + maxHp/3 + damage) * Controllers.Wave.Instance.GetLevel()) );  
         }
 
         private void OnTriggerEnter2D(Collider2D col)
