@@ -18,7 +18,7 @@ namespace Controllers
         private bool waveEnd = true, wavePending = false;
         private bool countdownActive = false;
         private float waveCountdown = 5.99f;
-        private float enemyCountdown = 5;
+        private float enemyCountdown = 1;
 
         private void Awake()
         {
@@ -31,11 +31,9 @@ namespace Controllers
         private void Start()
         {
             ResetText();
-            WaveEnd();
         }
 
-        private int remainingEnemies;
-        private int minEnemies = 3, maxEnemies = 5, actualEnemies;
+        private int minEnemies = 3, maxEnemies = 5, actualEnemies, remainingToKill = 100;
         private int level = 0;
 
         private void Update()
@@ -60,8 +58,9 @@ namespace Controllers
                     waveCountdown = 0.1f;
             }
 
-            if (Input.GetKeyDown(KeyCode.K))
+            if (remainingToKill == 0)
             {
+                remainingToKill = 69;
                 waveEnd = true;
             }
         }
@@ -75,13 +74,13 @@ namespace Controllers
         private void WaveEnd()
         {
             StartCoroutine(WavePostEnd());
-            levelTitle.text = "Wave " + (level + 1);
+            level++;
+            levelTitle.text = "Wave " + (level);
         }
 
         private IEnumerator WavePostEnd()
         {
             yield return new WaitForSeconds(5.99f);
-            level++;
             Player.Player.Instance.AddFireDamage(1);
             waveCountdown = 5.99f;
             ResetText();
@@ -95,7 +94,9 @@ namespace Controllers
         {
             Debug.Log("Wave Start");
             actualEnemies = Random.Range(minEnemies, maxEnemies);
+            remainingToKill = actualEnemies;
             
+            Debug.Log("Enemies for level " + level + ". Remaining to kill: " + actualEnemies);
             
             wavePending = true;
         }
@@ -126,6 +127,11 @@ namespace Controllers
         public int GetLevel()
         {
             return level;
+        }
+
+        public void SetRemainingEnemies(int val)
+        {
+            remainingToKill += val;
         }
     }
 }

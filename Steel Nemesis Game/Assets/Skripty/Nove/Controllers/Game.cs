@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Other;
+using TMPro;
 using Triggers;
 using UnityEngine;
 
@@ -10,6 +11,19 @@ namespace Controllers
     public class Game : MonoBehaviour
     {
         public static Game Instance;
+
+        private float gameTimer = 0;
+        private int gameKills = 0;
+        
+        public GameObject statScreen;
+        public GameObject cursor;
+        private bool gameover = false;
+
+        [Header("StatScreen texts")]
+        public TMP_Text statTime;
+        public TMP_Text statKills;
+        public TMP_Text statScore;
+        public TMP_Text statMoney;
 
         private void Awake()
         {
@@ -23,8 +37,26 @@ namespace Controllers
             }
         }
 
+        public bool GetGameOver()
+        {
+            return gameover;
+        }
+
+        private void Update()
+        {
+            if (!gameover)
+                gameTimer += Time.deltaTime * 1;
+        }
+
+        public void AddKill()
+        {
+            gameKills++;
+        }
+
         public void GameOver()
         {
+            gameover = true;
+            
             TriggerType[] trigs;
             trigs = FindObjectsOfType<TriggerType>();
 
@@ -42,6 +74,16 @@ namespace Controllers
             {
                 ship.GetComponent<Death>().DeathEvent();
             }
+            
+            statTime.text = "Game Length: " + ((int)gameTimer / 60) + ":" + ((int)gameTimer % 60).ToString("00");
+            statKills.text = "Enemies destroyed: " + gameKills;
+            statScore.text = "Earned score: " + Score.Instance.GetScore();
+
+            statScreen.SetActive(true);
+
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+            cursor.SetActive(false);
         }
     }
 }

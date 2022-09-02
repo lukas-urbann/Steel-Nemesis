@@ -34,8 +34,16 @@ namespace Controllers
         private IEnumerator TimeScoreBonus()
         {
             yield return new WaitForSeconds(10);
-            score += 10;
-            StartCoroutine(TimeScoreBonus());
+            if (!Game.Instance.GetGameOver())
+            {
+                score += 10;
+                StartCoroutine(TimeScoreBonus());
+            }
+        }
+
+        public int GetScore()
+        {
+            return score;
         }
 
         public void AddScore(int amount)

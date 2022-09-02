@@ -45,7 +45,7 @@ namespace Enemy
 
         protected void SetSpeed(float spd)
         {
-            speed = spd;
+            speed += spd;
         }
 
         protected void ChangeDirection(FlyDirection side)
@@ -64,6 +64,7 @@ namespace Enemy
             {
                 LaserHit();
                 Instantiate(hitEffect, col.transform.position, Quaternion.identity);
+                SetSpeed(-1f);
                 Destroy(col.gameObject);
             }
         }
@@ -78,7 +79,11 @@ namespace Enemy
         protected virtual void CheckHp()
         {
             if (hp <= 0)
+            {
+                Controllers.Game.Instance.AddKill();
+                Controllers.Wave.Instance.SetRemainingEnemies(-1);
                 deathScript.DeathEvent();
+            }
         }
 
         private void OnTriggerEnter2D(Collider2D col)
