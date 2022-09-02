@@ -115,6 +115,8 @@ namespace Player
         public void RemoveHitpoints(float value)
         {
             hp -= value;
+            
+            CheckHP();
         }
 
         private void CheckHP()
@@ -148,11 +150,11 @@ namespace Player
             if (col.gameObject.CompareTag("Ship") && col.gameObject.layer == 8)
             {
                 col.gameObject.GetComponent<BasicEnemy>().InstaKill();
-
-                if (!(hp < hp / 4))
-                    hp -= hp / 2; 
-                else
+                
+                if (hp < (maxHp / 4))
                     RemoveHitpoints(hp);
+                else
+                    hp -= hp / 2; 
             }
         }
     }
