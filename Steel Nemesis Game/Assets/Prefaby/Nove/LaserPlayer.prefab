@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1178998862013183783}
   - component: {fileID: 1178998862013183784}
-  - component: {fileID: 1178998862013183785}
   - component: {fileID: 1178998862013183782}
   - component: {fileID: -2493340859970484245}
+  - component: {fileID: 7709184384050875621}
   m_Layer: 7
   m_Name: LaserPlayer
   m_TagString: Laser
@@ -87,32 +87,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &1178998862013183785
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1178998862013183786}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.16, y: 0.16}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.05, y: 0.05}
-  m_EdgeRadius: 0
 --- !u!114 &1178998862013183782
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -146,3 +120,36 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
+--- !u!60 &7709184384050875621
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1178998862013183786}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.16, y: 0.16}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: -0.008455241, y: 0.02577765}
+      - {x: -0.018332496, y: 0.018414347}
+      - {x: -0.015242983, y: -0.0053657386}
+      - {x: -0.0072966823, y: -0.028718673}
+      - {x: 0.008800527, y: -0.02871868}
+      - {x: 0.015629156, y: -0.005629182}
+      - {x: 0.018332496, y: 0.018414332}
+      - {x: 0.008887036, y: 0.026332181}

@@ -7422,14 +7422,14 @@ MonoBehaviour:
     m_Bits: 2147483647
   stopNaNPropagation: 1
   finalBlitToCameraTarget: 0
-  antialiasingMode: 0
+  antialiasingMode: 2
   temporalAntialiasing:
     jitterSpread: 0.75
     sharpness: 0.25
     stationaryBlending: 0.95
     motionBlending: 0.85
   subpixelMorphologicalAntialiasing:
-    quality: 2
+    quality: 1
   fastApproximateAntialiasing:
     fastMode: 0
     keepAlpha: 0
@@ -8383,7 +8383,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 902e788be8c4840c3b5def50aedd8f0a, type: 3}
-  m_Color: {r: 1, g: 0.37523973, b: 0, a: 1}
+  m_Color: {r: 0, g: 0.9093275, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
