@@ -109,7 +109,7 @@ namespace Controllers
             {
                 SpawnEnemy();
                 actualEnemies--;
-                enemyCountdown = Random.Range(0, 5);
+                enemyCountdown = Random.Range(0.5f, 5);
             }
         }
 
