@@ -10,12 +10,7 @@ namespace Other
         [SerializeField] private float baseScrollSpeed;
         [SerializeField] private float incrementalScrollSpeed;
         [SerializeField] private float sideScrollSpeed;
-        private Renderer backgroundRenderer;
-
-        private void Start()
-        {
-            backgroundRenderer = GetComponent<MeshRenderer>();
-        }
+        public MeshRenderer backgroundRenderer;
 
         private void Update()
         {

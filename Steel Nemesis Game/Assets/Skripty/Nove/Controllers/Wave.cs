@@ -19,7 +19,11 @@ namespace Controllers
         private bool countdownActive = false;
         private float waveCountdown = 5.99f;
         private float enemyCountdown = 1;
-
+        private float minSpawnDelay, maxSpawnDelay;
+        
+        public delegate void WaveChangeDelegate();
+        public WaveChangeDelegate onWaveEnd;
+        
         private void Awake()
         {
             if (Instance != null && Instance != this)
@@ -34,7 +38,7 @@ namespace Controllers
         }
 
         private int minEnemies = 3, maxEnemies = 5, actualEnemies, remainingToKill = 100;
-        private int level = 0;
+        private int level = 40;
 
         private void Update()
         {
@@ -74,6 +78,7 @@ namespace Controllers
         private void WaveEnd()
         {
             StartCoroutine(WavePostEnd());
+            onWaveEnd.Invoke();
             level++;
             levelTitle.text = "Wave " + (level);
         }
@@ -99,6 +104,12 @@ namespace Controllers
             Debug.Log("Enemies for level " + level + ". Remaining to kill: " + actualEnemies);
             
             wavePending = true;
+
+            if(minSpawnDelay > 0.1f)
+                minSpawnDelay = (0.5f - (Controllers.Wave.Instance.level * 0.002f));
+
+            if (maxSpawnDelay > 1)
+                maxSpawnDelay = (5 - (Controllers.Wave.Instance.level * 0.02f));
         }
 
         private void WavePending()
@@ -109,7 +120,7 @@ namespace Controllers
             {
                 SpawnEnemy();
                 actualEnemies--;
-                enemyCountdown = Random.Range(0.5f, 5);
+                enemyCountdown = Random.Range(minSpawnDelay, 5);
             }
         }
 
