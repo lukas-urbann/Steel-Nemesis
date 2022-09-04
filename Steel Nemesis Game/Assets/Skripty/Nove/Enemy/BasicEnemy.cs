@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Controllers;
 using Other;
 using Triggers;
 using UnityEngine;
@@ -31,6 +32,7 @@ namespace Enemy
         protected float hp;
         protected float maxHp;
         protected float damage;
+        protected bool isColliding = false;
 
         protected FlyDirection flyDirection;
         public GameObject hitEffect;
@@ -106,8 +108,16 @@ namespace Enemy
             Controllers.Score.Instance.AddScore((int) ((speed + maxHp/3 + damage) * Controllers.Wave.Instance.GetLevel()) );  
         }
 
+        protected void DropConsumable()
+        {
+            
+        }
+
         private void OnTriggerEnter2D(Collider2D col)
         {
+            if(isColliding) return;
+            isColliding = true;
+            
             if (col.CompareTag("Trigger"))
             {
                 TypeOfTrigger trigger;
@@ -128,8 +138,9 @@ namespace Enemy
                         switch (col.gameObject.layer)
                         {
                             case 3:
-                                Debug.Log("Konec hry");
-                                Controllers.Game.Instance.GameOver();
+                                Barrier.Instance.ChangeHitpoints(-1);
+                                Controllers.Wave.Instance.SetRemainingEnemies(-1);
+                                deathScript.DeathEvent();
                                 break;
                             case 10:
                                 GetComponent<Boundaries>().enabled = false;
@@ -138,6 +149,14 @@ namespace Enemy
                         break;
                 }
             }
+            
+            StartCoroutine(Reset());
+        }
+        
+        IEnumerator Reset()
+        {
+            yield return new WaitForEndOfFrame();
+            isColliding = false;
         }
     }
 }

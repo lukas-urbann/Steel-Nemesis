@@ -10,11 +10,13 @@ namespace Other
     {
         public List<Sprite> backgrounds = new List<Sprite>();
         private SpriteRenderer background;
+        private Animator anim;
 
         private void Start()
         {
-            background.sprite = backgrounds[Random.Range(0, backgrounds.Count)];
-            Controllers.Wave.Instance.onWaveEnd += () => CheckBackground();
+            anim = GetComponent<Animator>();
+            //background.sprite = backgrounds[Random.Range(0, backgrounds.Count)]; wtf
+            Controllers.Wave.Instance.onWaveEnd += () => StartBackgroundChangeAnimation();
         }
 
         public void OnEnable()
@@ -34,6 +36,11 @@ namespace Other
             {
                 background.sprite = backgrounds[level];
             }
+        }
+
+        public void StartBackgroundChangeAnimation()
+        {
+            anim.Play("BackgroundChange");
         }
     }
 }
