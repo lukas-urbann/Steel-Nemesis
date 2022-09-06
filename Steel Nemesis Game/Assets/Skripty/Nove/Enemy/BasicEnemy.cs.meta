@@ -4,6 +4,13 @@ MonoImporter:
   externalObjects: {}
   serializedVersion: 2
   defaultReferences:
+  - barrierCollectible: {fileID: 8328084218441586807, guid: 0af2e86f5946840119335fb4fd2eb4f7, type: 3}
+  - damageCollectible: {fileID: 6006044333214253919, guid: 48baf0f9180d24b3683722873b76a2e2, type: 3}
+  - speedCollectible: {fileID: 2615940932570520883, guid: c273a3c1e472d43e28aaf7c84ba8de6d, type: 3}
+  - firepowerCollectible: {fileID: 1130542429864654594, guid: 4e308ad49c34f4d36853342145634a2e, type: 3}
+  - cooldownCollectible: {fileID: 7722938746613993377, guid: b65d9f9e9dc9a49018d473b1283cc66a, type: 3}
+  - hitpointsCollectible: {fileID: 7067706464472600897, guid: 287b0bf6923494473b0bb9657bf2cd4d, type: 3}
+  - energyCollectible: {fileID: 548837112311985480, guid: fc2e3ac8c5beb416ab09f202dc9ad97d, type: 3}
   - hitEffect: {fileID: 5052683511057602913, guid: bacd9643419f74431bdc93723c186629, type: 3}
   - laser: {instanceID: 0}
   executionOrder: 0

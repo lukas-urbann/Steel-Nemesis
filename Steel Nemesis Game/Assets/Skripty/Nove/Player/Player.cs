@@ -1,8 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Collectible;
 using Controllers;
 using Enemy;
+using TMPro;
 using UnityEngine;
 
 namespace Player
@@ -13,30 +15,33 @@ namespace Player
         
         private float hp = 100;
         private float maxHp = 100;
-        
-        
-        private float energy = 200;
-        private float maxEnergy = 200;
+        private float energy = 50;
+        private float maxEnergy = 50;
         private float energyGain = 10;
-
-
-        private float fireCost = 20;
+        private float fireCost = 10;
         private float fireCooldown = 0.5f;
-        private float firePower = 1.0f;
-        private int fireDamage = 25;
-        
+        private float firePower = 1;
+        private float fireDamage = 25;
+        private float playerSpeed = 3;
         private bool canFire = true;
-        public AudioClip laserSfx;
-        
-        
-        public GameObject crosshair;
-        public Transform firePoint;
-        public GameObject laser;
         
         private Vector3 vectorToTarget;
         private float angle;
         private Quaternion qt;
 
+        private bool isColliding = false;
+        
+        [Header("Assignable")]
+        public GameObject crosshair;
+        public Transform firePoint;
+        public GameObject laser;
+        public AudioClip laserSfx, pickupSfx;
+        
+        [Header("Notification Pickup")]
+        public TMP_Text notificationText;
+        
+        [SerializeField] private Color positive, negative;
+        
         private void Awake()
         {
             if (Instance != null && Instance != this)
@@ -71,7 +76,7 @@ namespace Player
         private void CheckMovement()
         {
             var move = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0);
-            transform.position += move * (Time.deltaTime * 3);
+            transform.position += move * (Time.deltaTime * playerSpeed);
         }
 
         private void RotatePlayer()
@@ -95,6 +100,8 @@ namespace Player
                     Controllers.Audio.Instance.PlaySound(laserSfx);
                     energy -= (int) fireCost;
                     GameObject projectile = Instantiate(laser, firePoint.position, firePoint.rotation);
+                    //-------SCALE
+                    projectile.transform.localScale = new Vector3(3.75f + (0.125f * (fireDamage - 15)), 3.75f + (0.125f * (fireDamage - 15)), 1);
                     //-------DAMAGE
                     projectile.GetComponent<Laser.PlayerLaser>().SetDamage(fireDamage);
                     //-------FORCE
@@ -130,7 +137,7 @@ namespace Player
             fireDamage += value;
         }
         
-        public int GetFireDamage()
+        public float GetFireDamage()
         {
             return fireDamage;
         }
@@ -156,6 +163,105 @@ namespace Player
                 else
                     hp -= hp / 2; 
             }
+        }
+
+        private void OnTriggerEnter2D(Collider2D col)
+        {
+            if (isColliding) return;
+            isColliding = true;
+
+            string collectibleType;
+            
+            if (col.gameObject.CompareTag("Collectible"))
+            {
+                BasicCollectible collectible = col.gameObject.GetComponent<BasicCollectible>();
+                Controllers.Audio.Instance.PlaySound(pickupSfx);
+
+                if (collectible.GetValue() > 0)
+                {
+                    notificationText.color = positive;
+                    collectibleType = "++";
+                }
+                else
+                {
+                    notificationText.color = negative;
+                    collectibleType = "--";
+                }
+                
+                switch (collectible.pickupType)
+                {
+                    case CollectibleType.Barrier:
+                        Controllers.Barrier.Instance.ChangeHitpoints(1);
+                        collectible.Collect();
+                        notificationText.text = collectibleType + " Barrier";
+                        break;
+                    
+                    case CollectibleType.Cooldown:
+                        fireCooldown -= collectible.GetValue();
+                        collectible.Collect();
+                        notificationText.text = collectibleType + " Cooldown";
+                        
+                        if (fireCooldown < 0.05f)
+                            fireCooldown = 0.05f;
+                        else if (fireCooldown > 2)
+                            fireCooldown = 2;
+                        break;
+                    
+                    case CollectibleType.Damage:
+                        fireDamage += collectible.GetValue();
+                        collectible.Collect();
+                        notificationText.text = collectibleType + " Damage";
+                        
+                        if (fireDamage < 5f)
+                            fireDamage = 5;
+                        
+                        fireCost = fireDamage - 15;
+                        break;
+                    
+                    case CollectibleType.Energy:
+                        
+                        break;
+                    
+                    case CollectibleType.Firepower:
+                        firePower += collectible.GetValue();
+                        collectible.Collect();
+                        notificationText.text = collectibleType + " Firepower";
+                        
+                        if (firePower < 0.1f)
+                            firePower = 0.1f;
+                        else if (firePower > 5)
+                            firePower = 5;
+                        break;
+                    
+                    case CollectibleType.Speed:
+                        playerSpeed += collectible.GetValue();
+                        collectible.Collect();
+                        notificationText.text = collectibleType + " Speed";
+                        
+                        if (playerSpeed < 0.5f)
+                            playerSpeed = 0.5f;
+                        else if (playerSpeed > 10)
+                            playerSpeed = 10;
+                        break;
+                    
+                    case CollectibleType.HP:
+                        break;
+                    
+                    default:
+                        Debug.Log("the fuck");
+                        break;
+                }
+                notificationText.transform.position = transform.position;
+                notificationText.GetComponent<Animator>().Play("NotificationText");
+            }
+            
+            StartCoroutine(TriggerCollisionReset());
+        }
+
+        private IEnumerator TriggerCollisionReset()
+        {
+            yield return new WaitForEndOfFrame();
+            isColliding = false;
         }
     }
 } 

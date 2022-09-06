@@ -7,14 +7,14 @@ namespace Laser
 {
     public class PlayerLaser : BasicLaser
     {
-        private int damage;
+        private float damage;
 
-        public void SetDamage(int dmg)
+        public void SetDamage(float dmg)
         {
             damage = dmg;
         }
 
-        private int GetDamage()
+        private float GetDamage()
         {
             return damage;
         }

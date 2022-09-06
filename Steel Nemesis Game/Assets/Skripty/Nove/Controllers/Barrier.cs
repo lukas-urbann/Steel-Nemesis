@@ -23,10 +23,7 @@ namespace Controllers
         private void Start()
         {
             for (int i = 0; i < hp; i++)
-            {
-                Debug.Log(hpSymbols[i]);
                 hpSymbols[i].GetComponent<Animator>().Play("HPAppear");
-            }
         }
 
         public void ChangeHitpoints(int value)
@@ -40,7 +37,10 @@ namespace Controllers
                 if (value > 0)
                     hpSymbols[hp-1].GetComponent<Animator>().Play("HPAppear");
                 else
+                {
                     hpSymbols[hp].GetComponent<Animator>().Play("HPDisappear");
+                    Controllers.Score.Instance.AddScore(-1000);
+                }
 
             CheckHP();
         }

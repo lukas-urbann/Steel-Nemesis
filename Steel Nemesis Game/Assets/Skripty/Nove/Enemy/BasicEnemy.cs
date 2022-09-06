@@ -5,6 +5,7 @@ using Controllers;
 using Other;
 using Triggers;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Enemy
 {
@@ -27,12 +28,21 @@ namespace Enemy
     }
 
    public class BasicEnemy : MonoBehaviour
-    {
-        protected float speed;
+   {
+       public GameObject barrierCollectible,
+           damageCollectible,
+           speedCollectible,
+           firepowerCollectible,
+           cooldownCollectible,
+           hitpointsCollectible,
+           energyCollectible;
+       
+       protected float speed;
         protected float hp;
         protected float maxHp;
         protected float damage;
         protected bool isColliding = false;
+        protected int minWave, maxWave;
 
         protected FlyDirection flyDirection;
         public GameObject hitEffect;
@@ -99,6 +109,7 @@ namespace Enemy
                 Controllers.Game.Instance.AddKill();
                 Controllers.Wave.Instance.SetRemainingEnemies(-1);
                 CustomDeath();
+                DropConsumable();
                 deathScript.DeathEvent();
             }
         }
@@ -110,7 +121,35 @@ namespace Enemy
 
         protected void DropConsumable()
         {
-            
+            int[] values = {0,0,1,0,4,0,0,3,0,6,0,0,7,0,0,5,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+            int selected = values[Random.Range( 0, values.Length )];
+
+            switch (selected)
+            {
+                case 1:
+                    Instantiate(damageCollectible, transform.position, Quaternion.identity);
+                    break;
+                case 2:
+                    Instantiate(firepowerCollectible, transform.position, Quaternion.identity);
+                    break;
+                case 3:
+                    Instantiate(hitpointsCollectible, transform.position, Quaternion.identity);
+                    break;
+                case 4:
+                    Instantiate(cooldownCollectible, transform.position, Quaternion.identity);
+                    break;
+                case 5:
+                    Instantiate(energyCollectible, transform.position, Quaternion.identity);
+                    break;
+                case 6:
+                    Instantiate(speedCollectible, transform.position, Quaternion.identity);
+                    break;
+                case 7:
+                    Instantiate(barrierCollectible, transform.position, Quaternion.identity);
+                    break;
+                default:
+                    break;
+            }
         }
 
         private void OnTriggerEnter2D(Collider2D col)

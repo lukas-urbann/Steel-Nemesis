@@ -31,8 +31,15 @@ namespace Controllers
             audioSource = GetComponent<AudioSource>();
         }
 
-        private void Update()
+        private void LateUpdate()
         {
+            if (!audioSource.isPlaying)
+                StartCoroutine(CheckAudio());
+        }
+
+        private IEnumerator CheckAudio()
+        {
+            yield return new WaitForSeconds(5);
             if (!audioSource.isPlaying)
             {
                 selectedSong = musicClips[Random.Range(0, musicClips.Count)];

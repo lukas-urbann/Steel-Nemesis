@@ -109,7 +109,7 @@ namespace Controllers
                 minSpawnDelay = (0.5f - (Controllers.Wave.Instance.level * 0.002f));
 
             if (maxSpawnDelay > 1)
-                maxSpawnDelay = (5 - (Controllers.Wave.Instance.level * 0.02f));
+                maxSpawnDelay = (6 - (Controllers.Wave.Instance.level * 0.02f));
         }
 
         private void WavePending()
