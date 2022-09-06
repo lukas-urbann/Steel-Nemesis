@@ -9,7 +9,7 @@ namespace Collectible
     {
         private void OnEnable()
         {
-            value = (value * 5);
+            base.value = 5;
         }
     }
 }

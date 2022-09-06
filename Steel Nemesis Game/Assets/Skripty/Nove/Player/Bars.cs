@@ -29,9 +29,11 @@ namespace Player
             {
                 case BarType.Energy:
                     slider.value = Player.Instance.GetEnergy();
+                    slider.maxValue = Player.Instance.GetMaxEnergy();
                     break;
                 case BarType.HitPoints:
                     slider.value = Player.Instance.GetHitpoints();
+                    slider.maxValue = Player.Instance.GetMaxHitpoints();
                     break;
             }
         }

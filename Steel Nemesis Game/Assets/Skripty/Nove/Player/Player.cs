@@ -23,6 +23,10 @@ namespace Player
         private float firePower = 1;
         private float fireDamage = 25;
         private float playerSpeed = 3;
+
+        private float crosshairSpeed = 5;
+        private float shipTurnSpeed = 5;
+        
         private bool canFire = true;
         
         private Vector3 vectorToTarget;
@@ -33,6 +37,7 @@ namespace Player
         
         [Header("Assignable")]
         public GameObject crosshair;
+        public GameObject shipFlame;
         public Transform firePoint;
         public GameObject laser;
         public AudioClip laserSfx, pickupSfx;
@@ -41,6 +46,11 @@ namespace Player
         public TMP_Text notificationText;
         
         [SerializeField] private Color positive, negative;
+
+        public float GetCrosshairSpeed()
+        {
+            return crosshairSpeed;
+        }
         
         private void Awake()
         {
@@ -86,7 +96,7 @@ namespace Player
             qt = Quaternion.AngleAxis(angle - 90, Vector3.forward);
             
             if(!Controllers.Pause.Instance.GetPauseState())
-                transform.rotation = Quaternion.RotateTowards(transform.rotation, qt, 5 ); 
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, qt, shipTurnSpeed ); 
         }
 
         private void CheckFire()
@@ -151,6 +161,16 @@ namespace Player
         {
             return hp;
         }
+        
+        public float GetMaxEnergy()
+        {
+            return maxEnergy;
+        }
+
+        public float GetMaxHitpoints()
+        {
+            return maxHp;
+        }
 
         public void OnCollisionEnter2D(Collision2D col)
         {
@@ -200,7 +220,8 @@ namespace Player
                         fireCooldown -= collectible.GetValue();
                         collectible.Collect();
                         notificationText.text = collectibleType + " Cooldown";
-                        
+                        shipTurnSpeed = 2 + ((fireCooldown * 5));
+
                         if (fireCooldown < 0.05f)
                             fireCooldown = 0.05f;
                         else if (fireCooldown > 2)
@@ -219,14 +240,23 @@ namespace Player
                         break;
                     
                     case CollectibleType.Energy:
+                        maxEnergy += collectible.GetValue();
+                        collectible.Collect();
+                        notificationText.text = collectibleType + " Battery";
                         
+                        if (maxEnergy < 20)
+                            maxEnergy = 20;
+                        else if (maxEnergy > 1000)
+                            maxEnergy = 1000;
                         break;
                     
                     case CollectibleType.Firepower:
                         firePower += collectible.GetValue();
                         collectible.Collect();
                         notificationText.text = collectibleType + " Firepower";
-                        
+
+                        crosshairSpeed = 5 / firePower;
+
                         if (firePower < 0.1f)
                             firePower = 0.1f;
                         else if (firePower > 5)
@@ -237,7 +267,9 @@ namespace Player
                         playerSpeed += collectible.GetValue();
                         collectible.Collect();
                         notificationText.text = collectibleType + " Speed";
-                        
+
+                        shipFlame.transform.localScale = new Vector3(1 * (playerSpeed / 7.5f), 1 * (playerSpeed / 7.5f), 1);
+
                         if (playerSpeed < 0.5f)
                             playerSpeed = 0.5f;
                         else if (playerSpeed > 10)
@@ -245,6 +277,15 @@ namespace Player
                         break;
                     
                     case CollectibleType.HP:
+                        maxHp += collectible.GetValue();
+                        collectible.Collect();
+                        notificationText.text = collectibleType + " HP";
+                        transform.localScale = new Vector3(5 + ((maxHp - 100) / 100), 5 + ((maxHp - 100) / 100), 1);
+                        
+                        if (maxHp < 20)
+                            maxHp = 20;
+                        else if (maxHp > 1000)
+                            maxHp = 1000;
                         break;
                     
                     default:
