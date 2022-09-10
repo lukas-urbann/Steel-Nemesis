@@ -1,30 +1,27 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using Laser;
+using Other;
+using Triggers;
 using UnityEngine;
 
 namespace Enemy
 {
-    public class Basic : BasicEnemy
+    public class Attacker : BasicEnemy
     {
         private void Start()
         {
-            hp = 50;
-
+            hp = 100;
+            
             if(speed < 5.5f)
                 speed = 1 + (Controllers.Wave.Instance.GetLevel() * 0.05f);
             
             flyDirection = FlyDirection.Down;
-            ChangeDirection(flyDirection);
             
             InitMaxHP();
         }
-
-        private void Update()
-        {
-            transform.position += movement * (Time.deltaTime * 2);
-        }
+        
+        
 
         protected override void LaserHit()
         {
