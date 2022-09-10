@@ -11,10 +11,20 @@ namespace Other
         [SerializeField] private float incrementalScrollSpeed;
         [SerializeField] private float sideScrollSpeed;
         public MeshRenderer backgroundRenderer;
+        private bool useController = false;
+
+        private void Start()
+        {
+            if (Controllers.Wave.Instance != null)
+                useController = true;
+        }
 
         private void Update()
         {
-            backgroundRenderer.material.mainTextureOffset += new Vector2(sideScrollSpeed, ((baseScrollSpeed + (incrementalScrollSpeed * Controllers.Wave.Instance.GetLevel())) * Time.deltaTime));
+            if(useController)
+                backgroundRenderer.material.mainTextureOffset += new Vector2(sideScrollSpeed, ((baseScrollSpeed + (incrementalScrollSpeed * Controllers.Wave.Instance.GetLevel())) * Time.deltaTime));
+            else
+                backgroundRenderer.material.mainTextureOffset += new Vector2(sideScrollSpeed, baseScrollSpeed * Time.deltaTime);
         }
     }
 }
