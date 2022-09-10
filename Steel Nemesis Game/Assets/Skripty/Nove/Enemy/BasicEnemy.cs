@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Other;
 using Triggers;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Enemy
 {
@@ -31,6 +32,7 @@ namespace Enemy
         protected float hp;
         protected float maxHp;
         protected float damage;
+        protected float reloadTimeLeft;
 
         protected FlyDirection flyDirection;
         public GameObject hitEffect;
@@ -74,24 +76,36 @@ namespace Enemy
                 case FlyDirection.Top:
                     movement = new Vector2(0, speed);
                     break;
-                default:
-                    break;
             }
         }
 
-        protected virtual void CalculateFire()
+        protected void Shoot(float reloadTime)
         {
-            
+            reloadTimeLeft = Random.Range(reloadTime - 2f, reloadTime + 2f);
+                
+            CalculateFireCooldown(reloadTimeLeft);
         }
 
+        protected IEnumerator CalculateFireCooldown(float time)
+        {
+            yield return new WaitForSeconds(time);
+            Fire();
+        }
+        
         protected void Fire()
         {
+            GameObject enemyLaser;
             
+            foreach (Transform barrel in barrelPoints)
+            {
+                enemyLaser = Instantiate(laser, barrel.position, Quaternion.identity);
+                enemyLaser.GetComponent<Enemy.Laser>().SetDamage(damage);
+            }
         }
 
-        private void Update()
+        protected void Fly()
         {
-            
+            transform.position += movement * (Time.deltaTime * 2);
         }
 
         private void OnCollisionEnter2D(Collision2D col)

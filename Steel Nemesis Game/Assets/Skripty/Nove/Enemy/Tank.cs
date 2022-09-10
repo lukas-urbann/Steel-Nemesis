@@ -7,18 +7,14 @@ using UnityEngine;
 
 namespace Enemy
 {
-    public class Attacker : BasicEnemy
+    public class Tank : BasicEnemy
     {
-        private bool canShoot = false;
-        
         private void Start()
         {
-            hp = 100;
+            hp = 400;
             
             if(speed < 5.5f)
                 speed = 1 + (Controllers.Wave.Instance.GetLevel() * 0.05f);
-
-            damage = 20 + (Controllers.Wave.Instance.GetLevel() * 1);
             
             flyDirection = FlyDirection.Down;
             
@@ -28,13 +24,11 @@ namespace Enemy
         private void Update()
         {
             Fly();
+        }
 
-            if (canShoot)
-            {
-                
-                Shoot(5);
-
-            }
+        protected override void LaserHit()
+        {
+            base.LaserHit();
         }
     }
 }

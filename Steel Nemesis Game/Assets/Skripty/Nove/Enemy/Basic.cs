@@ -23,7 +23,7 @@ namespace Enemy
 
         private void Update()
         {
-            transform.position += movement * (Time.deltaTime * 2);
+            Fly();
         }
 
         protected override void LaserHit()
