@@ -24,7 +24,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 9918
+  controlID: 24547
 --- !u!114 &2
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -141,7 +141,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 9919
+  controlID: 24548
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -166,7 +166,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 9920
+  controlID: 24549
 --- !u!114 &5
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -224,9 +224,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: ea8f0000
-      m_LastClickedID: 36842
-      m_ExpandedIDs: 683bf7ff143df7ff383df7ffdef6f8ff24f7f8ff96f8f8ffe6f8f8ff02f9f8ff06f9f8ff24fff8ffcafff8ff9c11f9ff08fbffffb6670000f072000030730000968f0000
+      m_SelectedIDs: ec630000
+      m_LastClickedID: 0
+      m_ExpandedIDs: eab8f3ffd8bcf6ff683bf7ff143df7ff383df7ffdef6f8ff24f7f8ff96f8f8ffe6f8f8ff02f9f8ff06f9f8ff24fff8ffcafff8ff9c11f9ff08fbffffb6670000f072000030730000968f000004ad0000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -242,7 +242,7 @@ MonoBehaviour:
         m_IsRenaming: 0
         m_OriginalEventType: 11
         m_IsRenamingFilename: 0
-        m_ClientGUIView: {fileID: 0}
+        m_ClientGUIView: {fileID: 5}
       m_SearchString: 
     m_ExpandedScenes: []
     m_CurrenRootInstanceID: 0
@@ -504,9 +504,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 838.5331, y: 266.9215, z: 7.137816}
+    m_Target: {x: 1249.6549, y: 136.04832, z: 10.036214}
     speed: 2
-    m_Value: {x: 838.5331, y: 266.9215, z: 7.137816}
+    m_Value: {x: 1249.6549, y: 136.04832, z: 10.036214}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -557,9 +557,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 461.57922
+    m_Target: 171.73834
     speed: 2
-    m_Value: 461.57922
+    m_Value: 171.73834
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -806,7 +806,7 @@ MonoBehaviour:
   - {fileID: 14}
   - {fileID: 15}
   m_Selected: 0
-  m_LastSelected: 2
+  m_LastSelected: 1
 --- !u!114 &12
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -846,24 +846,24 @@ MonoBehaviour:
     m_SceneHandles: 
     m_ShowAllHits: 0
     m_SkipHidden: 0
-    m_SearchArea: 0
+    m_SearchArea: 1
     m_Folders:
-    - Assets/Zvuky/SFX
+    - Assets/Textury/Mist
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Zvuky/SFX
+  - Assets/Textury/Mist
   m_LastFoldersGridSize: -1
   m_LastProjectPath: /Users/lukas/Documents/GitHub/Steel-Nemesis/Steel Nemesis Game
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 156}
-    m_SelectedIDs: 14640000
-    m_LastClickedID: 25620
-    m_ExpandedIDs: 00000000ce630000d0630000d2630000d463000000ca9a3bffffff7f
+    scrollPos: {x: 0, y: 220}
+    m_SelectedIDs: be640000
+    m_LastClickedID: 25790
+    m_ExpandedIDs: 00000000ce630000d0630000d2630000d46300001064000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -916,8 +916,8 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: ea8f0000
-    m_LastClickedInstanceID: 36842
+    m_SelectedInstanceIDs: ec630000
+    m_LastClickedInstanceID: 25580
     m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: c6230000865e000000000000f4830000
     m_RenameOverlay:
@@ -1005,7 +1005,7 @@ MonoBehaviour:
     m_SaveData: []
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: 29556
+  m_LastSelectedObjectID: -574920
 --- !u!114 &15
 MonoBehaviour:
   m_ObjectHideFlags: 52
