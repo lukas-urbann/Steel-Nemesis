@@ -64,6 +64,11 @@ namespace Player
             }
         }
 
+        private void Start()
+        {
+            SetProportions();
+        }
+
         private void Update()
         {
             RotatePlayer();            
@@ -185,6 +190,15 @@ namespace Player
             }
         }
 
+        private void SetProportions()
+        {
+            shipTurnSpeed = 2 + ((fireCooldown * 5));
+            crosshairSpeed = 5 / firePower;
+            fireCost = fireDamage - 15;
+            shipFlame.transform.localScale = new Vector3(1 * (playerSpeed / 7.5f), 1 * (playerSpeed / 7.5f), 1);
+            transform.localScale = new Vector3(5 + ((maxHp - 100) / 100), 5 + ((maxHp - 100) / 100), 1);
+        }
+
         private void OnTriggerEnter2D(Collider2D col)
         {
             if (isColliding) return;
@@ -220,7 +234,6 @@ namespace Player
                         fireCooldown -= collectible.GetValue();
                         collectible.Collect();
                         notificationText.text = collectibleType + " Cooldown";
-                        shipTurnSpeed = 2 + ((fireCooldown * 5));
 
                         if (fireCooldown < 0.05f)
                             fireCooldown = 0.05f;
@@ -235,8 +248,6 @@ namespace Player
                         
                         if (fireDamage < 5f)
                             fireDamage = 5;
-                        
-                        fireCost = fireDamage - 15;
                         break;
                     
                     case CollectibleType.Energy:
@@ -255,8 +266,6 @@ namespace Player
                         collectible.Collect();
                         notificationText.text = collectibleType + " Firepower";
 
-                        crosshairSpeed = 5 / firePower;
-
                         if (firePower < 0.1f)
                             firePower = 0.1f;
                         else if (firePower > 5)
@@ -268,8 +277,6 @@ namespace Player
                         collectible.Collect();
                         notificationText.text = collectibleType + " Speed";
 
-                        shipFlame.transform.localScale = new Vector3(1 * (playerSpeed / 7.5f), 1 * (playerSpeed / 7.5f), 1);
-
                         if (playerSpeed < 0.5f)
                             playerSpeed = 0.5f;
                         else if (playerSpeed > 10)
@@ -280,7 +287,6 @@ namespace Player
                         maxHp += collectible.GetValue();
                         collectible.Collect();
                         notificationText.text = collectibleType + " HP";
-                        transform.localScale = new Vector3(5 + ((maxHp - 100) / 100), 5 + ((maxHp - 100) / 100), 1);
                         
                         if (maxHp < 20)
                             maxHp = 20;
@@ -294,8 +300,8 @@ namespace Player
                 }
                 notificationText.transform.position = transform.position;
                 notificationText.GetComponent<Animator>().Play("NotificationText");
+                SetProportions();
             }
-            
             StartCoroutine(TriggerCollisionReset());
         }
 
