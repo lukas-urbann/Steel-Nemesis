@@ -33,6 +33,16 @@ namespace Enemy
         protected float maxHp;
         protected float damage;
         protected float reloadTimeLeft;
+        protected bool isColliding = false;
+        protected int minWave, maxWave;
+        
+        public GameObject barrierCollectible,
+            damageCollectible,
+            speedCollectible,
+            firepowerCollectible,
+            cooldownCollectible,
+            hitpointsCollectible,
+            energyCollectible;
 
         protected FlyDirection flyDirection;
         public GameObject hitEffect;
@@ -139,6 +149,7 @@ namespace Enemy
                 Controllers.Game.Instance.AddKill();
                 Controllers.Wave.Instance.SetRemainingEnemies(-1);
                 CustomDeath();
+                DropConsumable();
                 deathScript.DeathEvent();
             }
         }
@@ -147,9 +158,45 @@ namespace Enemy
         {
             Controllers.Score.Instance.AddScore((int) ((speed + maxHp/3 + damage) * Controllers.Wave.Instance.GetLevel()) );  
         }
+        
+        protected void DropConsumable()
+        {
+            int[] values = {0,0,1,0,4,0,0,3,0,6,0,0,7,0,0,5,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+            int selected = values[Random.Range( 0, values.Length )];
+
+            switch (selected)
+            {
+                case 1:
+                    Instantiate(damageCollectible, transform.position, Quaternion.identity);
+                    break;
+                case 2:
+                    Instantiate(firepowerCollectible, transform.position, Quaternion.identity);
+                    break;
+                case 3:
+                    Instantiate(hitpointsCollectible, transform.position, Quaternion.identity);
+                    break;
+                case 4:
+                    Instantiate(cooldownCollectible, transform.position, Quaternion.identity);
+                    break;
+                case 5:
+                    Instantiate(energyCollectible, transform.position, Quaternion.identity);
+                    break;
+                case 6:
+                    Instantiate(speedCollectible, transform.position, Quaternion.identity);
+                    break;
+                case 7:
+                    Instantiate(barrierCollectible, transform.position, Quaternion.identity);
+                    break;
+                default:
+                    break;
+            }
+        }
 
         private void OnTriggerEnter2D(Collider2D col)
         {
+            if(isColliding) return;
+            isColliding = true;
+            
             if (col.CompareTag("Trigger"))
             {
                 TypeOfTrigger trigger;
@@ -170,8 +217,9 @@ namespace Enemy
                         switch (col.gameObject.layer)
                         {
                             case 3:
-                                Debug.Log("Konec hry");
-                                Controllers.Game.Instance.GameOver();
+                                Controllers.Barrier.Instance.ChangeHitpoints(-1);
+                                Controllers.Wave.Instance.SetRemainingEnemies(-1);
+                                deathScript.DeathEvent();
                                 break;
                             case 10:
                                 GetComponent<Boundaries>().enabled = false;
@@ -180,6 +228,14 @@ namespace Enemy
                         break;
                 }
             }
+            
+            StartCoroutine(Reset());
+        }
+        
+        private IEnumerator Reset()
+        {
+            yield return new WaitForEndOfFrame();
+            isColliding = false;
         }
     }
 }
