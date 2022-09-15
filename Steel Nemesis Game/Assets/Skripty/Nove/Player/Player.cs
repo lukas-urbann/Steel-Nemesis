@@ -12,6 +12,7 @@ namespace Player
     public class Player : MonoBehaviour
     {
         public static Player Instance;
+        public GameObject hitEffect;
         
         private float hp = 100;
         private float maxHp = 100;
@@ -181,12 +182,32 @@ namespace Player
         {
             if (col.gameObject.CompareTag("Ship") && col.gameObject.layer == 8)
             {
-                col.gameObject.GetComponent<BasicEnemy>().InstaKill();
                 
-                if (hp < (maxHp / 4))
-                    RemoveHitpoints(hp);
-                else
-                    hp -= hp / 2; 
+            }
+
+            switch (col.gameObject.tag)
+            {
+                case "Ship":
+                    if (col.gameObject.layer != 8)
+                        return;
+                    
+                    col.gameObject.GetComponent<BasicEnemy>().InstaKill();
+                
+                    if (hp < (maxHp / 4))
+                        RemoveHitpoints(hp);
+                    else
+                        hp -= hp / 2; 
+                    break;
+                case "Laser":
+                    if (col.gameObject.layer != 8)
+                        return;
+                    
+                    Instantiate(hitEffect, col.transform.position, Quaternion.identity);
+                    Destroy(col.gameObject);
+                    hp -= 20 + (Controllers.Wave.Instance.GetLevel() * 0.5f);
+                    break;
+                default:
+                    break;
             }
         }
 

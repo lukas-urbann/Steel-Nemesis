@@ -7,8 +7,19 @@ namespace Laser
 {
     public class BasicLaser : MonoBehaviour
     {
-        private void OnBecameInvisible() {
+        public GameObject collisionEffect;
+        
+        protected void OnBecameInvisible() {
             Destroy(gameObject);
+        }
+
+        protected void OnCollisionEnter2D(Collision2D col)
+        {
+            if (col.gameObject.CompareTag("Laser"))
+            {
+                Destroy(gameObject);
+                Instantiate(collisionEffect, transform.position, Quaternion.identity);
+            }
         }
     }
 }

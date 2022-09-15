@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Enemy;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -20,6 +21,9 @@ namespace Controllers
         private float waveCountdown = 5.99f;
         private float enemyCountdown = 1;
         private float minSpawnDelay, maxSpawnDelay;
+
+        private List<GameObject> enemyList = new List<GameObject>();
+        [SerializeField] private List<GameObject> selectedEnemies = new List<GameObject>();
         
         public delegate void WaveChangeDelegate();
         public WaveChangeDelegate onWaveEnd;
@@ -34,6 +38,11 @@ namespace Controllers
 
         private void Start()
         {
+            enemyList.Add(Prefabs.Instance.basicEnemy);
+            enemyList.Add(Prefabs.Instance.attackerEnemy);
+            enemyList.Add(Prefabs.Instance.fighterEnemy);
+            enemyList.Add(Prefabs.Instance.tankEnemy);
+            
             ResetText();
         }
 
@@ -98,6 +107,7 @@ namespace Controllers
         private void WaveStart()
         {
             Debug.Log("Wave Start");
+            SelectEnemies();
             actualEnemies = Random.Range(minEnemies, maxEnemies);
             remainingToKill = actualEnemies;
             
@@ -124,15 +134,32 @@ namespace Controllers
             }
         }
 
+        private void SelectEnemies()
+        {
+            selectedEnemies.Clear();
+            
+            foreach (GameObject obj in enemyList)
+            {
+                BasicEnemy en = obj.GetComponentInChildren<BasicEnemy>();
+                
+                Debug.Log(en.name + " | Min Level: " + en.GetMinLevel() + " | Max Level: " + en.GetMaxLevel());
+                
+                if (en.GetMinLevel() !>= level && en.GetMaxLevel() !<= level)
+                    selectedEnemies.Add(obj);
+            }
+        }
+
         private void SpawnEnemy()
         {
             float x = Random.Range(minSpawnDimension.x, maxSpawnDimension.x);
             float y = Random.Range(minSpawnDimension.y, maxSpawnDimension.y);
-
+//TODO: OPRAVIT NEVIM
             Vector2 spawnLocation = new Vector2(x, y);
-
+            
+            int enemyIndex = Random.Range(0, selectedEnemies.Count);
+            
             GameObject spawnedEnemy =
-                Instantiate(Controllers.Prefabs.Instance.basicEnemy, spawnLocation, Quaternion.identity);
+                Instantiate(selectedEnemies[enemyIndex].gameObject, spawnLocation, Quaternion.identity);
         }
         
         public int GetLevel()

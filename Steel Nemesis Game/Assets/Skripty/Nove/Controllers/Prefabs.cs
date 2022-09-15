@@ -9,7 +9,7 @@ namespace Controllers
     {
         public static Prefabs Instance;
 
-        public GameObject basicEnemy;
+        public GameObject basicEnemy, attackerEnemy, fighterEnemy, tankEnemy;
 
         private void Awake()
         {

@@ -10,6 +10,8 @@ namespace Enemy
     {
         private void Start()
         {
+            base.minWave = 0;
+            base.maxWave = 50;
             hp = 22.5f + (Controllers.Wave.Instance.GetLevel() * 0.5f);
 
             if(speed < 5.5f)

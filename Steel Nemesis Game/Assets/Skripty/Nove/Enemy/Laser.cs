@@ -1,8 +1,9 @@
-﻿using UnityEngine;
+﻿using Laser;
+using UnityEngine;
 
 namespace Enemy
 {
-    public class Laser : MonoBehaviour
+    public class Laser : BasicLaser
     {
         private float damage;
 

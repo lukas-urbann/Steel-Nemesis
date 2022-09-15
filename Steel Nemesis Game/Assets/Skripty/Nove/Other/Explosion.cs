@@ -15,6 +15,7 @@ public class Explosion : MonoBehaviour
 	
 	public void Destroy()
 	{
+	//TODO: Opravit tu metodu
 		Destroy(gameObject);
 	}
 }
