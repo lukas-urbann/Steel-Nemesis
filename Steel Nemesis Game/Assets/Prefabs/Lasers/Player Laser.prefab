@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6028458911016078980}
   - component: {fileID: 1057114866215276234}
   m_Layer: 7
-  m_Name: LaserPlayer
+  m_Name: Player Laser
   m_TagString: Laser
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -77,8 +77,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: f26fb56abedca08439d1654a353e9f0d, type: 3}
-  m_Color: {r: 0, g: 0.5733936, b: 1, a: 1}
+  m_Sprite: {fileID: 21300000, guid: e1e98402647144d808699d77c77616ac, type: 3}
+  m_Color: {r: 0.23113209, g: 0.67048496, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -184,7 +184,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 0.06
+  m_Time: 0.1
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
@@ -192,8 +192,8 @@ TrailRenderer:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0
-        value: 0.2040816
+        time: 0.30859372
+        value: 0.111493245
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -215,7 +215,7 @@ TrailRenderer:
     colorGradient:
       serializedVersion: 2
       key0: {r: 1, g: 1, b: 1, a: 1}
-      key1: {r: 1, g: 1, b: 1, a: 0.24313726}
+      key1: {r: 1, g: 1, b: 1, a: 0}
       key2: {r: 0, g: 0, b: 0, a: 1}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -247,7 +247,7 @@ TrailRenderer:
     textureMode: 0
     shadowBias: 0.5
     generateLightingData: 0
-  m_MinVertexDistance: 0.04
+  m_MinVertexDistance: 0
   m_Autodestruct: 0
   m_Emitting: 1
 --- !u!114 &1057114866215276234

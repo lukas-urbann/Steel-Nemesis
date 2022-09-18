@@ -18,7 +18,6 @@ namespace Other
 
         public void DeathEvent()
         {
-            
             if(!gameObject.CompareTag("Player"))
                 Instantiate(explosionPrefab, spawner.enemyShip.transform.position, Quaternion.identity);
             else

@@ -236,6 +236,7 @@ namespace Enemy
         
         protected void DropConsumable()
         {
+            /*
            int[] values = {0,0,1,0,4,0,0,3,0,6,0,0,7,0,0,5,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
            int selected = values[Random.Range(0, values.Length)];
 
@@ -243,6 +244,7 @@ namespace Enemy
 
            drop = Drops.Instance.GetDrop(selected);
            Instantiate(drop, transform.position, Quaternion.identity);
+           */
         }
 
         private void OnTriggerEnter2D(Collider2D col)
