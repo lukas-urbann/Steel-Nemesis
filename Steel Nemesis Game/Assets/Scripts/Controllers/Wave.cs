@@ -47,7 +47,7 @@ namespace Controllers
         }
 
         private int minEnemies = 3, maxEnemies = 5, actualEnemies, remainingToKill = 100;
-        private int level = 0;
+        private int level = 8;
 
         private void Update()
         {

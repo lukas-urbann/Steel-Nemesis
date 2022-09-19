@@ -66,6 +66,7 @@ namespace Enemy
         protected void SetSpeed(float spd)
         {
             speed += spd;
+            ChangeDirection(flyDirection);
         }
 
         protected virtual void ChangeDirection(FlyDirection side)
@@ -157,7 +158,7 @@ namespace Enemy
             {
                 LaserHit();
                 Instantiate(hitEffect, col.transform.position, Quaternion.identity);
-                SetSpeed(speed - (speed / 8));
+                SetSpeed(-(speed - (speed / 2)));
                 Destroy(col.gameObject);
             }
         }
