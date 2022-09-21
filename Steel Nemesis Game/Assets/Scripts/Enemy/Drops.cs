@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 
 namespace Enemy
 {
@@ -29,10 +30,20 @@ namespace Enemy
 
         public GameObject GetDrop(int index)
         {
-            GameObject drop = drops[index-1];
-            
-            return drop;
+            //TODO:tohle furt háže errory fix
+
+            try
+            {
+                GameObject drop = drops[index - 1];
+
+                return drop;
+            }
+            catch (Exception e)
+            {
+                Debug.LogWarning("ITEM ERROR > ŠPATNÝ INDEX: " + index + " | Drop error: " + e.StackTrace);
+
+            }
+            return null;
         }
-        
     }
 }

@@ -117,7 +117,7 @@ namespace Player
                     energy -= (int) fireCost;
                     GameObject projectile = Instantiate(laser, firePoint.position, firePoint.rotation);
                     //-------SCALE
-                    projectile.transform.localScale = new Vector3(3.75f + (0.125f * (fireDamage - 15)), 3.75f + (0.125f * (fireDamage - 15)), 1);
+                    projectile.transform.localScale = new Vector3(1.75f + (0.125f * (fireDamage - 15)), 1.75f + (0.125f * (fireDamage - 15)), 1);
                     //-------DAMAGE
                     projectile.GetComponent<Laser>().SetDamage(fireDamage);
                     //-------FORCE

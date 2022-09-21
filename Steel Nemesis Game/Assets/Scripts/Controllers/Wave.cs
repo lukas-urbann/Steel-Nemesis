@@ -145,7 +145,7 @@ namespace Controllers
                 if (en.GetMinLevel() <= level && en.GetMaxLevel() >= level)
                 {
                     selectedEnemies.Add(obj);
-                    Debug.Log(en.name + " | Min Level: " + en.GetMinLevel() + " | Max Level: " + en.GetMaxLevel());
+                    //Debug.Log(en.name + " | Min Level: " + en.GetMinLevel() + " | Max Level: " + en.GetMaxLevel());
                 }
             }
         }

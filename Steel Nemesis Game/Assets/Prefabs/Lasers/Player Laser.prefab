@@ -29,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1178998862013183786}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.41, y: 2.627, z: 0}
+  m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 5, y: 5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -77,8 +77,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: e1e98402647144d808699d77c77616ac, type: 3}
-  m_Color: {r: 0.23113209, g: 0.67048496, b: 1, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 6783bee8d388e4742989f7c9b0253b0e, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -134,14 +134,16 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -0.008455241, y: 0.02577765}
-      - {x: -0.018332496, y: 0.018414347}
-      - {x: -0.015242983, y: -0.0053657386}
-      - {x: -0.0072966823, y: -0.028718673}
-      - {x: 0.008800527, y: -0.02871868}
-      - {x: 0.015629156, y: -0.005629182}
-      - {x: 0.018332496, y: 0.018414332}
-      - {x: 0.008887036, y: 0.026332181}
+    - - {x: -0.025035525, y: 0.029916812}
+      - {x: -0.028382858, y: 0.01037406}
+      - {x: -0.019600082, y: -0.008892581}
+      - {x: -0.019765647, y: -0.03853192}
+      - {x: -0.0072966805, y: -0.049321905}
+      - {x: 0.0077954913, y: -0.048819397}
+      - {x: 0.020151818, y: -0.038795367}
+      - {x: 0.02037643, y: -0.009564981}
+      - {x: 0.028382858, y: 0.011379079}
+      - {x: 0.026113486, y: 0.029968822}
 --- !u!96 &6028458911016078980
 TrailRenderer:
   serializedVersion: 2
@@ -192,8 +194,8 @@ TrailRenderer:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0.30859372
-        value: 0.111493245
+        time: 0.17401701
+        value: 0.059544697
         inSlope: 0
         outSlope: 0
         tangentMode: 0

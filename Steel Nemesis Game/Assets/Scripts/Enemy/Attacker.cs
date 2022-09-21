@@ -21,7 +21,7 @@ namespace Enemy
             flyDirection = FlyDirection.Down;
             ChangeDirection(flyDirection);
             
-            InitMaxHP();
+            InitMaxHp();
         }
 
         private void Update()
@@ -30,10 +30,15 @@ namespace Enemy
 
             if (visible)
             {
-                Shoot(3);
-            
-                if(hp <= (maxHp / 2))
-                    FacePlayer(2); 
+                if (hp <= (maxHp / 2))
+                {
+                    FaceDown(3);
+                }
+                else
+                {
+                    FacePlayer(3); 
+                    Shoot(2.5f);
+                }
             }
         }
     }

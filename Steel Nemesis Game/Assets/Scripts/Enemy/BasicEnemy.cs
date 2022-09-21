@@ -29,25 +29,30 @@ namespace Enemy
 
    public class BasicEnemy : MonoBehaviour
    {
-       [HideInInspector] protected GameObject drop;
+        //Shared values
+        protected FlyDirection flyDirection;
         protected float speed;
         protected float hp;
         protected float maxHp;
         protected float damage;
         protected float reloadTimeLeft;
+        
         protected bool canShoot = true;
         protected bool isColliding = false;
-        [SerializeField] protected int minWave, maxWave;
-        protected bool visible = true;
         protected bool disabledBoundaries = false;
-        [SerializeField] protected AudioClip shootSound;
+        protected bool visible = true;
+
+        [SerializeField] protected int minWave;
+        [SerializeField] protected int maxWave;
+        protected int[] dropValues = {0};
         
-        protected FlyDirection flyDirection;
+        [SerializeField] protected AudioClip fireSound;
+        
+        [HideInInspector] protected GameObject drop;
         public GameObject hitEffect;
+        [SerializeField] protected GameObject laser;
         
         protected Vector3 movement = new Vector3(0, 0,0);
-
-        [SerializeField] protected GameObject laser;
         [SerializeField] protected List<Transform> barrelPoints = new List<Transform>();
 
         private Death deathScript;
@@ -58,7 +63,7 @@ namespace Enemy
             deathScript = transform.root.GetComponent<Death>();
         }
 
-        protected virtual void InitMaxHP()
+        protected virtual void InitMaxHp()
         {
             maxHp = hp;
         }
@@ -122,7 +127,7 @@ namespace Enemy
                 rb.AddForce(barrel.up * -1, ForceMode2D.Impulse);
             }
             
-            Audio.Instance.PlaySound(shootSound);
+            Audio.Instance.PlaySound(fireSound);
         }
 
         protected void Fly()
@@ -140,10 +145,13 @@ namespace Enemy
 
         protected void FacePlayer(float speed)
         {
+            if (!Player.Player.Instance.gameObject.activeSelf)
+                FaceDown(5);
+            
             Vector3 vectorToTarget;
             float angle;
             Quaternion qt;
-            
+
             vectorToTarget = Player.Player.Instance.transform.position - transform.position;
             angle = Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg;
             qt = Quaternion.AngleAxis(angle + 90, Vector3.forward);
@@ -192,7 +200,7 @@ namespace Enemy
                     break;
                 default:
                     Debug.Log("wtf");
-                    flyDirection = FlyDirection.Top;
+                    flyDirection = FlyDirection.Down;
                     break;
             }
             
@@ -219,6 +227,10 @@ namespace Enemy
                 Other.CameraShake.Instance.ShakeScreen(0.1f, 0);
                 Controllers.Game.Instance.AddKill();
                 Controllers.Wave.Instance.SetRemainingEnemies(-1);
+                
+                for (int i = 0; i < Random.Range(1, 6); i++)
+                    Instantiate(Controllers.Prefabs.Instance.scrap, transform.position, Quaternion.identity);
+                
                 CustomDeath();
                 DropConsumable();
                 deathScript.DeathEvent();
@@ -237,15 +249,16 @@ namespace Enemy
         
         protected void DropConsumable()
         {
-            /*
-           int[] values = {0,0,1,0,4,0,0,3,0,6,0,0,7,0,0,5,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
-           int selected = values[Random.Range(0, values.Length)];
+            int selected = dropValues[Random.Range(0, dropValues.Length)];
 
            if (selected == 0) return;
 
-           drop = Drops.Instance.GetDrop(selected);
+           drop = Drops.Instance.GetDrop(selected-1);
+
+           if (drop == null)
+               return;
+           
            Instantiate(drop, transform.position, Quaternion.identity);
-           */
         }
 
         private void OnTriggerEnter2D(Collider2D col)

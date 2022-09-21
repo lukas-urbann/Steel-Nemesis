@@ -15,7 +15,7 @@ C:/Users/lukas/Documents/GitHub/Steel-Nemesis/Steel Nemesis Game
 -logFile
 Logs/AssetImportWorker0.log
 -srvPort
-50469
+61720
 Successfully changed project path to: C:/Users/lukas/Documents/GitHub/Steel-Nemesis/Steel Nemesis Game
 C:/Users/lukas/Documents/GitHub/Steel-Nemesis/Steel Nemesis Game
 [UnityMemory] Configuration Parameters - Can be set up in boot.config
@@ -47,7 +47,7 @@ C:/Users/lukas/Documents/GitHub/Steel-Nemesis/Steel Nemesis Game
     "memorysetup-temp-allocator-size-cloud-worker=32768"
     "memorysetup-temp-allocator-size-gi-baking-worker=262144"
     "memorysetup-temp-allocator-size-gfx=262144"
-Refreshing native plugins compatible for Editor in 255.72 ms, found 3 plugins.
+Refreshing native plugins compatible for Editor in 276.82 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Initialize engine version: 2021.3.8f1 (b30333d56e81)
 [Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2021.3.8f1/Editor/Data/Resources/UnitySubsystems
@@ -63,7 +63,7 @@ Initialize mono
 Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2021.3.8f1/Editor/Data/Managed'
 Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2021.3.8f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
 Mono config path = 'C:/Program Files/Unity/Hub/Editor/2021.3.8f1/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56704
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56076
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
 Register platform support module: C:/Program Files/Unity/Hub/Editor/2021.3.8f1/Editor/Data/PlaybackEngines/WebGLSupport/UnityEditor.WebGL.Extensions.dll
@@ -71,42 +71,461 @@ Register platform support module: C:/Program Files/Unity/Hub/Editor/2021.3.8f1/E
 Register platform support module: C:/Program Files/Unity/Hub/Editor/2021.3.8f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
 Register platform support module: C:/Program Files/Unity/Hub/Editor/2021.3.8f1/Editor/Data/PlaybackEngines/LinuxStandaloneSupport/UnityEditor.LinuxStandalone.Extensions.dll
 Register platform support module: C:/Program Files/Unity/Hub/Editor/2021.3.8f1/Editor/Data/PlaybackEngines/MetroSupport/UnityEditor.UWP.Extensions.dll
-Registered in 0.021489 seconds.
+Registered in 0.010979 seconds.
 Native extension for UWP target not found
 Native extension for LinuxStandalone target not found
 Native extension for WindowsStandalone target not found
 Native extension for OSXStandalone target not found
 Native extension for WebGL target not found
-Refreshing native plugins compatible for Editor in 189.43 ms, found 3 plugins.
+Refreshing native plugins compatible for Editor in 120.64 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Mono: successfully reloaded assembly
-- Completed reload, in  2.393 seconds
+- Completed reload, in  1.269 seconds
 Domain Reload Profiling:
-	ReloadAssembly (2397ms)
-		BeginReloadAssembly (250ms)
+	ReloadAssembly (1270ms)
+		BeginReloadAssembly (137ms)
 			ExecutionOrderSort (0ms)
 			DisableScriptedObjects (0ms)
 			BackupInstance (0ms)
 			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (2ms)
-		EndReloadAssembly (1755ms)
-			LoadAssemblies (251ms)
+			CreateAndSetChildDomain (5ms)
+		EndReloadAssembly (928ms)
+			LoadAssemblies (130ms)
 			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (499ms)
+			SetupTypeCache (237ms)
 			ReleaseScriptCaches (0ms)
-			RebuildScriptCaches (104ms)
-			SetupLoadedEditorAssemblies (959ms)
+			RebuildScriptCaches (92ms)
+			SetupLoadedEditorAssemblies (505ms)
 				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (49ms)
+				InitializePlatformSupportModulesInManaged (31ms)
 				SetLoadedEditorAssemblies (0ms)
-				RefreshPlugins (190ms)
+				RefreshPlugins (121ms)
 				BeforeProcessingInitializeOnLoad (3ms)
-				ProcessInitializeOnLoadAttributes (495ms)
-				ProcessInitializeOnLoadMethodAttributes (221ms)
+				ProcessInitializeOnLoadAttributes (260ms)
+				ProcessInitializeOnLoadMethodAttributes (90ms)
 				AfterProcessingInitializeOnLoad (0ms)
-				EditorAssembliesLoaded (1ms)
+				EditorAssembliesLoaded (0ms)
 			ExecutionOrderSort2 (0ms)
 			AwakeInstancesAfterBackupRestoration (0ms)
 Platform modules already initialized, skipping
 Registering precompiled user dll's ...
-Registered in 0.019364 seconds.
+Registered in 0.006757 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory doesn't match image C:\Users\lukas\Documents\GitHub\Steel-Nemesis\Steel Nemesis Game\Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Users\lukas\Documents\GitHub\Steel-Nemesis\Steel Nemesis Game\Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Native extension for UWP target not found
+Native extension for LinuxStandalone target not found
+Native extension for WindowsStandalone target not found
+Native extension for OSXStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 0.71 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.767 seconds
+Domain Reload Profiling:
+	ReloadAssembly (1768ms)
+		BeginReloadAssembly (246ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (14ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (33ms)
+		EndReloadAssembly (1286ms)
+			LoadAssemblies (175ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (369ms)
+			ReleaseScriptCaches (1ms)
+			RebuildScriptCaches (97ms)
+			SetupLoadedEditorAssemblies (609ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (34ms)
+				SetLoadedEditorAssemblies (1ms)
+				RefreshPlugins (1ms)
+				BeforeProcessingInitializeOnLoad (127ms)
+				ProcessInitializeOnLoadAttributes (390ms)
+				ProcessInitializeOnLoadMethodAttributes (47ms)
+				AfterProcessingInitializeOnLoad (9ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (14ms)
+Platform modules already initialized, skipping
+========================================================================
+Worker process is ready to serve import requests
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.09 seconds
+Refreshing native plugins compatible for Editor in 1.09 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3506 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 36 unused Assets / (202.8 KB). Loaded Objects now: 3958.
+Memory consumption went from 128.5 MB to 128.3 MB.
+Total: 14.418200 ms (FindLiveObjects: 0.636600 ms CreateObjectMapping: 0.447900 ms MarkObjects: 13.188400 ms  DeleteObjects: 0.143500 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:video-codec-MediaFoundation-h265: 746d11721c4dcdbdad8f713fa42b33f4 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 176550.716333 seconds.
+  path: Assets/Textures/UI/button.png
+  artifactKey: Guid(c306bd60a6f600a4ebdee5b2ba75105e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/UI/button.png using Guid(c306bd60a6f600a4ebdee5b2ba75105e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f39550154090bbe839f2ef6ecf89309d') in 0.288885 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 1716.810695 seconds.
+  path: Assets/Textures/UI/shop_screen.png
+  artifactKey: Guid(09500bf211e635149b099c521895964b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/UI/shop_screen.png using Guid(09500bf211e635149b099c521895964b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2727a83ca25c213c2d90e579965e61a1') in 0.319213 seconds 
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.010738 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory doesn't match image C:\Users\lukas\Documents\GitHub\Steel-Nemesis\Steel Nemesis Game\Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Users\lukas\Documents\GitHub\Steel-Nemesis\Steel Nemesis Game\Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Native extension for UWP target not found
+Native extension for LinuxStandalone target not found
+Native extension for WindowsStandalone target not found
+Native extension for OSXStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 2.29 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  3.013 seconds
+Domain Reload Profiling:
+	ReloadAssembly (3018ms)
+		BeginReloadAssembly (1118ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (82ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (641ms)
+		EndReloadAssembly (1708ms)
+			LoadAssemblies (334ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (453ms)
+			ReleaseScriptCaches (2ms)
+			RebuildScriptCaches (110ms)
+			SetupLoadedEditorAssemblies (796ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (64ms)
+				SetLoadedEditorAssemblies (5ms)
+				RefreshPlugins (2ms)
+				BeforeProcessingInitializeOnLoad (159ms)
+				ProcessInitializeOnLoadAttributes (504ms)
+				ProcessInitializeOnLoadMethodAttributes (51ms)
+				AfterProcessingInitializeOnLoad (11ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (16ms)
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 6.04 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3460 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 29 unused Assets / (170.0 KB). Loaded Objects now: 3969.
+Memory consumption went from 128.6 MB to 128.5 MB.
+Total: 7.770500 ms (FindLiveObjects: 0.374400 ms CreateObjectMapping: 0.272100 ms MarkObjects: 7.026100 ms  DeleteObjects: 0.096200 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:video-codec-MediaFoundation-h265: 746d11721c4dcdbdad8f713fa42b33f4 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.008613 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory doesn't match image C:\Users\lukas\Documents\GitHub\Steel-Nemesis\Steel Nemesis Game\Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Users\lukas\Documents\GitHub\Steel-Nemesis\Steel Nemesis Game\Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Native extension for UWP target not found
+Native extension for LinuxStandalone target not found
+Native extension for WindowsStandalone target not found
+Native extension for OSXStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 0.71 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in 19.539 seconds
+Domain Reload Profiling:
+	ReloadAssembly (19543ms)
+		BeginReloadAssembly (5864ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (398ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (1465ms)
+		EndReloadAssembly (7893ms)
+			LoadAssemblies (3842ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (5916ms)
+			ReleaseScriptCaches (2ms)
+			RebuildScriptCaches (191ms)
+			SetupLoadedEditorAssemblies (619ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (44ms)
+				SetLoadedEditorAssemblies (1ms)
+				RefreshPlugins (1ms)
+				BeforeProcessingInitializeOnLoad (125ms)
+				ProcessInitializeOnLoadAttributes (393ms)
+				ProcessInitializeOnLoadMethodAttributes (46ms)
+				AfterProcessingInitializeOnLoad (8ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (15ms)
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 3.21 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3460 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 29 unused Assets / (170.0 KB). Loaded Objects now: 3972.
+Memory consumption went from 128.7 MB to 128.5 MB.
+Total: 5.414900 ms (FindLiveObjects: 0.392300 ms CreateObjectMapping: 0.280600 ms MarkObjects: 4.514600 ms  DeleteObjects: 0.225900 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:video-codec-MediaFoundation-h265: 746d11721c4dcdbdad8f713fa42b33f4 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 3293.361858 seconds.
+  path: Assets/Textures/Symbols/item_negative.png
+  artifactKey: Guid(8a9a57a8c33544030805069b90ddb895) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Symbols/item_negative.png using Guid(8a9a57a8c33544030805069b90ddb895) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '66ed96c251e6659b8fd73d1e024b8233') in 0.161387 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 55.460206 seconds.
+  path: Assets/Textures/Symbols/barrier_hp.png
+  artifactKey: Guid(b421ff600e1b24764a939e6dc240882a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Symbols/barrier_hp.png using Guid(b421ff600e1b24764a939e6dc240882a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '80aa025ae85535dcb794029596789153') in 0.029042 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 67.624540 seconds.
+  path: Assets/Textures/Symbols/barrier_hp.png
+  artifactKey: Guid(b421ff600e1b24764a939e6dc240882a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Symbols/barrier_hp.png using Guid(b421ff600e1b24764a939e6dc240882a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ff62a470abe4482a1bd082b327a769a7') in 0.100664 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 94.147937 seconds.
+  path: Assets/Textures/Symbols/ability_charge.png
+  artifactKey: Guid(4e40234935eb75642875fa88c17432e3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Symbols/ability_charge.png using Guid(4e40234935eb75642875fa88c17432e3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7c7c8fa92173265b5a4a7463f672c31c') in 0.385893 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 5.932937 seconds.
+  path: Assets/Textures/Symbols/ability_charge.png
+  artifactKey: Guid(4e40234935eb75642875fa88c17432e3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Symbols/ability_charge.png using Guid(4e40234935eb75642875fa88c17432e3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9a7b1482f38106e657e27c65380b80fb') in 0.029831 seconds 
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.011334 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory doesn't match image C:\Users\lukas\Documents\GitHub\Steel-Nemesis\Steel Nemesis Game\Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Users\lukas\Documents\GitHub\Steel-Nemesis\Steel Nemesis Game\Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Native extension for UWP target not found
+Native extension for LinuxStandalone target not found
+Native extension for WindowsStandalone target not found
+Native extension for OSXStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 11.73 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in 52.675 seconds
+Domain Reload Profiling:
+	ReloadAssembly (52687ms)
+		BeginReloadAssembly (41364ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (9ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (84ms)
+		EndReloadAssembly (9655ms)
+			LoadAssemblies (41587ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (3242ms)
+			ReleaseScriptCaches (9ms)
+			RebuildScriptCaches (542ms)
+			SetupLoadedEditorAssemblies (4283ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (344ms)
+				SetLoadedEditorAssemblies (4ms)
+				RefreshPlugins (13ms)
+				BeforeProcessingInitializeOnLoad (634ms)
+				ProcessInitializeOnLoadAttributes (2796ms)
+				ProcessInitializeOnLoadMethodAttributes (405ms)
+				AfterProcessingInitializeOnLoad (78ms)
+				EditorAssembliesLoaded (9ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (85ms)
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 31.41 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3460 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 29 unused Assets / (169.9 KB). Loaded Objects now: 3978.
+Memory consumption went from 128.7 MB to 128.5 MB.
+Total: 39.711000 ms (FindLiveObjects: 1.817200 ms CreateObjectMapping: 6.023800 ms MarkObjects: 29.155300 ms  DeleteObjects: 2.707800 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:video-codec-MediaFoundation-h265: 746d11721c4dcdbdad8f713fa42b33f4 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 632.858437 seconds.
+  path: Assets/Textures/Collectibles/shield.png
+  artifactKey: Guid(b95f425e82bbaa742ab8d36a1895294c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/Collectibles/shield.png using Guid(b95f425e82bbaa742ab8d36a1895294c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '37c3e1f00d9d6e0eec621d67dfa09c0e') in 0.108437 seconds 
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.010131 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory doesn't match image C:\Users\lukas\Documents\GitHub\Steel-Nemesis\Steel Nemesis Game\Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Users\lukas\Documents\GitHub\Steel-Nemesis\Steel Nemesis Game\Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Native extension for UWP target not found
+Native extension for LinuxStandalone target not found
+Native extension for WindowsStandalone target not found
+Native extension for OSXStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 1.21 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.454 seconds
+Domain Reload Profiling:
+	ReloadAssembly (1455ms)
+		BeginReloadAssembly (183ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (8ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (51ms)
+		EndReloadAssembly (1141ms)
+			LoadAssemblies (128ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (359ms)
+			ReleaseScriptCaches (2ms)
+			RebuildScriptCaches (71ms)
+			SetupLoadedEditorAssemblies (520ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (36ms)
+				SetLoadedEditorAssemblies (1ms)
+				RefreshPlugins (1ms)
+				BeforeProcessingInitializeOnLoad (87ms)
+				ProcessInitializeOnLoadAttributes (342ms)
+				ProcessInitializeOnLoadMethodAttributes (41ms)
+				AfterProcessingInitializeOnLoad (10ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (13ms)
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 3.13 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3460 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 29 unused Assets / (169.9 KB). Loaded Objects now: 3983.
+Memory consumption went from 128.7 MB to 128.5 MB.
+Total: 4.591800 ms (FindLiveObjects: 0.374600 ms CreateObjectMapping: 0.284700 ms MarkObjects: 3.858500 ms  DeleteObjects: 0.063500 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:video-codec-MediaFoundation-h265: 746d11721c4dcdbdad8f713fa42b33f4 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 225.860145 seconds.
+  path: Assets/Textures/UI/button.png
+  artifactKey: Guid(c306bd60a6f600a4ebdee5b2ba75105e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Textures/UI/button.png using Guid(c306bd60a6f600a4ebdee5b2ba75105e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1b8e954d9a8b77c066ee254a8adb3248') in 0.132342 seconds 
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.012167 seconds.
+Begin MonoManager ReloadAssembly
+Symbol file LoadedFromMemory doesn't match image C:\Users\lukas\Documents\GitHub\Steel-Nemesis\Steel Nemesis Game\Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
+Symbol file LoadedFromMemory doesn't match image C:\Users\lukas\Documents\GitHub\Steel-Nemesis\Steel Nemesis Game\Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
+Native extension for UWP target not found
+Native extension for LinuxStandalone target not found
+Native extension for WindowsStandalone target not found
+Native extension for OSXStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 3.89 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in 23.258 seconds
+Domain Reload Profiling:
+	ReloadAssembly (23271ms)
+		BeginReloadAssembly (256ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (11ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (68ms)
+		EndReloadAssembly (22857ms)
+			LoadAssemblies (185ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (6967ms)
+			ReleaseScriptCaches (41ms)
+			RebuildScriptCaches (1274ms)
+			SetupLoadedEditorAssemblies (10533ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (648ms)
+				SetLoadedEditorAssemblies (13ms)
+				RefreshPlugins (5ms)
+				BeforeProcessingInitializeOnLoad (1405ms)
+				ProcessInitializeOnLoadAttributes (5933ms)
+				ProcessInitializeOnLoadMethodAttributes (771ms)
+				AfterProcessingInitializeOnLoad (1753ms)
+				EditorAssembliesLoaded (5ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (209ms)
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 2.95 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3460 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 29 unused Assets / (170.0 KB). Loaded Objects now: 3988.
+Memory consumption went from 128.7 MB to 128.5 MB.
+Total: 7.057400 ms (FindLiveObjects: 0.506100 ms CreateObjectMapping: 1.564000 ms MarkObjects: 4.889500 ms  DeleteObjects: 0.095900 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:video-codec-MediaFoundation-h265: 746d11721c4dcdbdad8f713fa42b33f4 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 

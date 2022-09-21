@@ -13,9 +13,9 @@ namespace Enemy
             hp = 70 + (Controllers.Wave.Instance.GetLevel() * 1f);
 
             if(speed < 3.5f)
-                speed = 0.75f + (Controllers.Wave.Instance.GetLevel() * 0.005f);
+                speed = 2f + (Controllers.Wave.Instance.GetLevel() * 0.005f);
 
-            InitMaxHP();
+            InitMaxHp();
             StartCoroutine(ChangeDirections(2f));
         }
 
@@ -25,7 +25,7 @@ namespace Enemy
 
             if (visible)
             {
-                Shoot(6); 
+                Shoot(1.5f); 
                 FacePlayer(5);
             }
             else

@@ -579,9 +579,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe95c4f9573274a719d7a0c95692997d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minWave: 0
+  minWave: 100
   maxWave: 999999
-  shootSound: {fileID: 0}
+  fireSound: {fileID: 0}
   hitEffect: {fileID: 5052683511057602913, guid: bacd9643419f74431bdc93723c186629, type: 3}
   laser: {fileID: 0}
   barrelPoints: []

@@ -22,7 +22,7 @@ namespace Enemy
             flyDirection = FlyDirection.Down;
             ChangeDirection(flyDirection);
             
-            InitMaxHP();
+            InitMaxHp();
             StartCoroutine(AttackCooldown());
         }
 
