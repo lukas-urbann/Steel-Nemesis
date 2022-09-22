@@ -145,8 +145,8 @@ namespace Enemy
 
         protected void FacePlayer(float speed)
         {
-            if (!Player.Player.Instance.gameObject.activeSelf)
-                FaceDown(5);
+            if (Player.Player.Instance == null)
+                FaceDown(this.speed);
             
             Vector3 vectorToTarget;
             float angle;

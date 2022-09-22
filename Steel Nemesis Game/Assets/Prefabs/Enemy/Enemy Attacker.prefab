@@ -286,8 +286,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c402e7b963c2e1742a69252a54d8d6cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minWave: 0
-  maxWave: 999999
+  minWave: 10
+  maxWave: 999999999
   fireSound: {fileID: 8300000, guid: 073618d40f30a4cb28f3b9ea43758dfa, type: 3}
   hitEffect: {fileID: 5052683511057602913, guid: bacd9643419f74431bdc93723c186629, type: 3}
   laser: {fileID: 6198669016382031342, guid: f5983895b0f296941b1aaa77786fbaef, type: 3}

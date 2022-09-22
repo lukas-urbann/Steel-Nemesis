@@ -1,18 +1,33 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
-public class Credit : MonoBehaviour
+namespace Controllers
 {
-    // Start is called before the first frame update
-    void Start()
+    public class Credit : MonoBehaviour
     {
-        
-    }
+        public static Credit Instance;
 
-    // Update is called once per frame
-    void Update()
-    {
+        private int credit = 0;
+        public TMP_Text creditDisplay; //Dosadit z indicatoru ze scény
         
+        private void Awake()
+        {
+            if (Instance != null && Instance != this)
+                Destroy(gameObject);
+            else
+                Instance = this;
+        }
+        
+        private void Update()
+        {
+            creditDisplay.text = "Credit: " + credit;
+        }
+        
+        public void AddCredit(int amount)
+        {
+            credit += amount;
+        }
     }
 }

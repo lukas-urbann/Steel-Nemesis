@@ -6,6 +6,7 @@ using Controllers;
 using Enemy;
 using TMPro;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Player
 {
@@ -232,8 +233,16 @@ namespace Player
             
             if (col.gameObject.CompareTag("Collectible"))
             {
-                BasicCollectible collectible = col.gameObject.GetComponent<BasicCollectible>();
                 Controllers.Audio.Instance.PlaySound(pickupSfx);
+                
+                if (col.gameObject.layer == 13)
+                {
+                    Destroy(col.gameObject);
+                    CreditCollection();
+                    return;
+                }
+                
+                BasicCollectible collectible = col.gameObject.GetComponent<BasicCollectible>();
 
                 if (collectible.GetValue() > 0)
                 {
@@ -323,13 +332,27 @@ namespace Player
                         Debug.Log("the fuck");
                         break;
                 }
-                notificationText.transform.position = transform.position;
-                notificationText.GetComponent<Animator>().Play("NotificationText");
+                SpawnNotification();
                 SetProportions();
             }
             StartCoroutine(TriggerCollisionReset());
         }
 
+        private void CreditCollection()
+        {
+            Controllers.Credit.Instance.AddCredit(Random.Range(0, 50)); //Dodělat wave scaling
+            
+            notificationText.color = positive;
+            notificationText.text = "++ Credit";
+            SpawnNotification();
+        }
+
+        private void SpawnNotification()
+        {
+            notificationText.transform.position = transform.position;
+            notificationText.GetComponent<Animator>().Play("NotificationText");
+        }
+        
         private IEnumerator TriggerCollisionReset()
         {
             yield return new WaitForEndOfFrame();

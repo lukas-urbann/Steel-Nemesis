@@ -21,6 +21,9 @@ namespace Other
 
         private void Update()
         {
+            if (Controllers.Pause.Instance.GetPauseState())
+                return;
+            
             if(useController)
                 backgroundRenderer.material.mainTextureOffset += new Vector2(sideScrollSpeed, ((baseScrollSpeed + (incrementalScrollSpeed * Controllers.Wave.Instance.GetLevel())) * Time.deltaTime));
             else

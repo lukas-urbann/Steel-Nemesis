@@ -11,7 +11,7 @@ namespace Controllers
         public static Score Instance;
         
         private int score = 0;
-        public TMP_Text scoreDisplay;
+        public TMP_Text scoreDisplay;  //Dosadit z indicatoru ze scény
 
         private void Awake()
         {
@@ -49,11 +49,6 @@ namespace Controllers
         public void AddScore(int amount)
         {
             score += amount;
-        }
-
-        public void RemoveScore(int amount)
-        {
-            score -= amount;
         }
     }
 }
