@@ -21,7 +21,7 @@ namespace Crosshair
         
         private void Update()
         {
-            transform.position = Vector3.Lerp(transform.position, crosshair.position, Time.deltaTime * Player.Player.Instance.GetCrosshairSpeed());
+            transform.position = Vector3.Lerp(transform.position, crosshair.position, Time.deltaTime * Player.Controller.Instance.GetCrosshairSpeed());
             targetedLocation = new Vector3(transform.position.x, transform.position.y, transform.position.z);
         }
 

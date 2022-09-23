@@ -112,7 +112,7 @@ namespace Controllers
         private IEnumerator WavePostEnd()
         {
             yield return new WaitForSeconds(5.99f);
-            Player.Player.Instance.AddFireDamage(1);
+            Player.Controller.Instance.AddFireDamage(1);
             waveCountdown = 5.99f;
             ResetText();
             countdownActive = false;

@@ -8,26 +8,45 @@ using Random = UnityEngine.Random;
 
 namespace Player
 {
-    public class Player : MonoBehaviour
+    public class Controller : MonoBehaviour
     {
-        public static Player Instance;
+        public static Controller Instance;
+        
+        //Player Staty
+        private int xp = 0;
+        private int level = 1;
+        
         
         //Ship Staty
-        private float hp = 100;
-        private float maxHp = 100;
-        private float energy = 50;
-        private float maxEnergy = 50;
-        private float energyGain = 10;
+        private float hitPoints = 100;
+        private float maxHitPoints = 100;
+        
+        private float battery = 50;
+        private float maxBattery = 50;
+        
+        private float batteryRecharge = 10;
         private float fireCost = 10;
-        private float fireCooldown = 0.5f;
-        private float firePower = 1;
-        private float fireDamage = 25;
-        private float playerSpeed = 3;
-        private float crosshairSpeed = 5;
-        private float shipTurnSpeed = 5;
+        private float cooldown = 0.5f;
+        private float firepower = 1;
+        private float damage = 25;
+        private float enginePerformance = 3; 
+        private float aim = 5;
+        private float turn = 5;
+        private float scale = 5;
         
         private bool canFire = true; // 
         private bool isColliding = false; //Pro práci s kolizemi s triggery
+        
+        /*
+         * Upgradování statů funguje 0-10
+         * --------
+         * Jednotlivé staty časem "korodují", to ovšem neznamená
+         * že se horší přímo, ale jednoduše se časem stávají čím
+         * dal tím slabšími oproti ostatním statům. Pro příklad, čím
+         * více životů bude hráč mít, tím větší bude jeho lodď a tím
+         * pádem bude potřeba silnější motor a jeho vylepšení. Hráč
+         * bude muset kontrolovat dohromady s tím velikost jeho lodě.
+         */
         
         //Záleží na tom v rotaci za kurzorem, jinak ignorovat
         private Vector3 vectorToTarget;
@@ -60,19 +79,15 @@ namespace Player
 
         public float GetCrosshairSpeed()
         {
-            return crosshairSpeed;
+            return aim;
         }
         
         private void Awake()
         {
             if (Instance != null && Instance != this)
-            {
                 Destroy(gameObject);
-            }
             else
-            {
                 Instance = this;
-            }
         }
 
         private void Start()
@@ -90,19 +105,19 @@ namespace Player
 
         private void CheckStats()
         {
-            if (energy < maxEnergy)
-                energy += energyGain * Time.deltaTime;
+            if (battery < maxBattery)
+                battery += batteryRecharge * (Time.deltaTime * 1);
             else
-                energy = maxEnergy;
+                battery = maxBattery;
 
-            if (hp > maxHp)
-                hp = maxHp;
+            if (hitPoints > maxHitPoints)
+                hitPoints = maxHitPoints;
         }
 
         private void CheckMovement()
         {
             var move = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0);
-            transform.position += move * (Time.deltaTime * playerSpeed);
+            transform.position += move * (Time.deltaTime * enginePerformance);
         }
 
         private void RotatePlayer()
@@ -112,7 +127,7 @@ namespace Player
             qt = Quaternion.AngleAxis(angle - 90, Vector3.forward);
             
             if(!Controllers.Pause.Instance.GetPauseState())
-                transform.rotation = Quaternion.RotateTowards(transform.rotation, qt, shipTurnSpeed ); 
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, qt, turn ); 
         }
 
         private void CheckFire()
@@ -120,19 +135,19 @@ namespace Player
             if (Input.GetAxis("Fire") != 0 || Input.GetMouseButton(0))
                 if (canFire && !Controllers.Pause.Instance.GetPauseState())
                 {
-                    if(energy < fireCost)
+                    if(battery < fireCost)
                         return;
                     
-                    Controllers.Audio.Instance.PlaySound(playerHurt);
-                    energy -= (int) fireCost;
+                    Audio.Instance.PlaySound(playerHurt);
+                    battery -= (int) fireCost;
                     GameObject projectile = Instantiate(laser, firePoint.position, firePoint.rotation);
                     //-------SCALE
                     //projectile.transform.localScale = new Vector3(1.75f + (0.125f * (fireDamage - 15)), 1.75f + (0.125f * (fireDamage - 15)), 1);
                     //-------DAMAGE
-                    projectile.GetComponent<Laser>().SetDamage(fireDamage);
+                    projectile.GetComponent<Laser>().SetDamage(damage);
                     //-------FORCE
                     Rigidbody2D rb = projectile.GetComponent<Rigidbody2D>();
-                    rb.AddForce(firePoint.up * firePower, ForceMode2D.Impulse);
+                    rb.AddForce(firePoint.up * firepower, ForceMode2D.Impulse);
                     //------------
                     StartCoroutine(FireCooldown());
                 }
@@ -141,51 +156,51 @@ namespace Player
         private IEnumerator FireCooldown()
         {
             canFire = false;
-            yield return new WaitForSeconds(fireCooldown);
+            yield return new WaitForSeconds(cooldown);
             canFire = true;
         }
 
         public void RemoveHitpoints(float value)
         {
-            hp -= value;
+            hitPoints -= value;
             
             CheckHP();
         }
 
         private void CheckHP()
         {
-            if(hp <= 0)
+            if(hitPoints <= 0)
                 Controllers.Game.Instance.GameOver();
         }
 
         public void AddFireDamage(int value)
         {
-            fireDamage += value;
+            damage += value;
         }
         
         public float GetFireDamage()
         {
-            return fireDamage;
+            return damage;
         }
 
         public float GetEnergy()
         {
-            return energy;
+            return battery;
         }
 
         public float GetHitpoints()
         {
-            return hp;
+            return hitPoints;
         }
         
         public float GetMaxEnergy()
         {
-            return maxEnergy;
+            return maxBattery;
         }
 
         public float GetMaxHitpoints()
         {
-            return maxHp;
+            return maxHitPoints;
         }
 
         public void OnCollisionEnter2D(Collision2D col)
@@ -203,10 +218,10 @@ namespace Player
                     
                     col.gameObject.GetComponent<BasicEnemy>().InstaKill();
                 
-                    if (hp < (maxHp / 4))
-                        RemoveHitpoints(hp);
+                    if (hitPoints < (maxHitPoints / 4))
+                        RemoveHitpoints(hitPoints);
                     else
-                        hp -= hp / 2; 
+                        hitPoints -= hitPoints / 2; 
                     break;
                 case "Laser":
                     if (col.gameObject.layer != 8)
@@ -217,7 +232,7 @@ namespace Player
                     Instantiate(playerHurtEffect, col.transform.position, Quaternion.identity);
                     Instantiate(Prefabs.Instance.scrap, col.transform.position, Quaternion.identity);
                     Destroy(col.gameObject);
-                    hp -= 20 + (Controllers.Wave.Instance.GetLevel() * 0.5f);
+                    hitPoints -= 20 + (Controllers.Wave.Instance.GetLevel() * 0.5f);
                     CheckHP();
                     break;
                 default:
@@ -277,68 +292,68 @@ namespace Player
                         break;
                     
                     case CollectibleType.Cooldown:
-                        fireCooldown -= collectible.GetValue();
+                        cooldown -= collectible.GetValue();
                         collectible.Collect();
                         notificationText.text = collectibleType + " Cooldown";
 
-                        if (fireCooldown < 0.05f)
-                            fireCooldown = 0.05f;
-                        else if (fireCooldown > 2)
-                            fireCooldown = 2;
+                        if (cooldown < 0.05f)
+                            cooldown = 0.05f;
+                        else if (cooldown > 2)
+                            cooldown = 2;
                         break;
                     
                     case CollectibleType.Damage:
                         Debug.Log(collectibleType);
-                        fireDamage += collectible.GetValue();
+                        damage += collectible.GetValue();
                         collectible.Collect();
                         notificationText.text = collectibleType + " Damage";
                         
-                        if (fireDamage < 5f)
-                            fireDamage = 5;
+                        if (damage < 5f)
+                            damage = 5;
                         break;
                     
                     case CollectibleType.Energy:
-                        maxEnergy += collectible.GetValue();
+                        maxBattery += collectible.GetValue();
                         collectible.Collect();
                         notificationText.text = collectibleType + " Battery";
                         
-                        if (maxEnergy < 20)
-                            maxEnergy = 20;
-                        else if (maxEnergy > 1000)
-                            maxEnergy = 1000;
+                        if (maxBattery < 20)
+                            maxBattery = 20;
+                        else if (maxBattery > 1000)
+                            maxBattery = 1000;
                         break;
                     
                     case CollectibleType.Firepower:
-                        firePower += collectible.GetValue();
+                        firepower += collectible.GetValue();
                         collectible.Collect();
                         notificationText.text = collectibleType + " Firepower";
 
-                        if (firePower < 0.1f)
-                            firePower = 0.1f;
-                        else if (firePower > 5)
-                            firePower = 5;
+                        if (firepower < 0.1f)
+                            firepower = 0.1f;
+                        else if (firepower > 5)
+                            firepower = 5;
                         break;
                     
                     case CollectibleType.Speed:
-                        playerSpeed += collectible.GetValue();
+                        enginePerformance += collectible.GetValue();
                         collectible.Collect();
                         notificationText.text = collectibleType + " Speed";
 
-                        if (playerSpeed < 0.5f)
-                            playerSpeed = 0.5f;
-                        else if (playerSpeed > 10)
-                            playerSpeed = 10;
+                        if (enginePerformance < 0.5f)
+                            enginePerformance = 0.5f;
+                        else if (enginePerformance > 10)
+                            enginePerformance = 10;
                         break;
                     
                     case CollectibleType.HP:
-                        maxHp += collectible.GetValue();
+                        maxHitPoints += collectible.GetValue();
                         collectible.Collect();
                         notificationText.text = collectibleType + " HP";
                         
-                        if (maxHp < 20)
-                            maxHp = 20;
-                        else if (maxHp > 1000)
-                            maxHp = 1000;
+                        if (maxHitPoints < 20)
+                            maxHitPoints = 20;
+                        else if (maxHitPoints > 1000)
+                            maxHitPoints = 1000;
                         break;
                     
                     default:
@@ -370,6 +385,59 @@ namespace Player
         {
             yield return new WaitForEndOfFrame();
             isColliding = false;
+        }
+
+        public void UpgradeStatCall(ShipStats stat, int amount)
+        {
+            UpgradeStat(stat, amount);
+        }
+
+        private void UpgradeStat(ShipStats stat, int amount)
+        {
+            /*
+            string editedStat = stat.ToString();
+            char editChar = editedStat[0];
+            editedStat.Remove(0);
+            editedStat.Insert(0, editChar.ToString().ToLower());
+            
+            Debug.Log(editedStat);
+            */
+
+            switch (stat)
+            {
+                case ShipStats.Aim:
+                    aim += amount;
+                    break;
+                case ShipStats.Battery:
+                    battery += amount;
+                    break;
+                case ShipStats.BatteryRecharge:
+                    batteryRecharge += amount;
+                    break;
+                case ShipStats.Cooldown:
+                    cooldown += amount;
+                    break;
+                case ShipStats.Damage:
+                    damage += amount;
+                    break;
+                case ShipStats.Firepower:
+                    firepower += amount;
+                    break;
+                case ShipStats.Turn:
+                    turn += amount;
+                    break;
+                case ShipStats.Scale:
+                    scale += amount;
+                    break;
+                case ShipStats.EnginePerformance:
+                    enginePerformance += amount;
+                    break;
+                case ShipStats.HitPoints:
+                    hitPoints += amount;
+                    break;
+                default:
+                    break;
+            }
         }
     }
 } 

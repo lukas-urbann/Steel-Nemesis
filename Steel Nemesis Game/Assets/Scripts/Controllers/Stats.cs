@@ -15,6 +15,7 @@ namespace Controllers
         Scale,
         Aim,
         Turn,
+        EnginePerformance,
     }
 
     public enum PlayerStats

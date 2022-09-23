@@ -145,14 +145,14 @@ namespace Enemy
 
         protected void FacePlayer(float speed)
         {
-            if (Player.Player.Instance == null)
+            if (Player.Controller.Instance == null)
                 FaceDown(this.speed);
             
             Vector3 vectorToTarget;
             float angle;
             Quaternion qt;
 
-            vectorToTarget = Player.Player.Instance.transform.position - transform.position;
+            vectorToTarget = Player.Controller.Instance.transform.position - transform.position;
             angle = Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg;
             qt = Quaternion.AngleAxis(angle + 90, Vector3.forward);
             
@@ -210,7 +210,7 @@ namespace Enemy
         protected virtual void LaserHit()
         {
             Controllers.Audio.Instance.HitSound();
-            hp -= Player.Player.Instance.GetFireDamage();
+            hp -= Player.Controller.Instance.GetFireDamage();
             CheckHp();
         }
 

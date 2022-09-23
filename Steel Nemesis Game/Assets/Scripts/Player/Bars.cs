@@ -28,12 +28,12 @@ namespace Player
             switch (type)
             {
                 case BarType.Energy:
-                    slider.value = Player.Instance.GetEnergy();
-                    slider.maxValue = Player.Instance.GetMaxEnergy();
+                    slider.value = Controller.Instance.GetEnergy();
+                    slider.maxValue = Controller.Instance.GetMaxEnergy();
                     break;
                 case BarType.HitPoints:
-                    slider.value = Player.Instance.GetHitpoints();
-                    slider.maxValue = Player.Instance.GetMaxHitpoints();
+                    slider.value = Controller.Instance.GetHitpoints();
+                    slider.maxValue = Controller.Instance.GetMaxHitpoints();
                     break;
             }
         }
