@@ -13,6 +13,7 @@ namespace Other
         private Color spriteColor;
         private Vector3 movement;
         private float rotationSpeed;
+        public GameObject pickupEffect;
 
         private void OnEnable()
         {
@@ -43,6 +44,11 @@ namespace Other
         private void OnBecameInvisible()
         {
             Destroy(gameObject);
+        }
+
+        public void PickUp()
+        {
+            Instantiate(pickupEffect, transform.position, Quaternion.identity);
         }
     }
 }

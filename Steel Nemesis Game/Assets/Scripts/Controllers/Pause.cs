@@ -26,7 +26,7 @@ namespace Controllers
 
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.P))
+            if (Input.GetKeyDown(KeyCode.P) && !Game.Instance.GetGameOver())
                 CheckPause();
         }
 

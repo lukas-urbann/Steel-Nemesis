@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Controllers;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -39,6 +40,13 @@ namespace Other
 
             while (elapsedTime < duration)
             {
+                if (Pause.Instance.GetPauseState())
+                {
+                    ResetRotation();
+                    elapsedTime = 0;
+                    yield return null;
+                }
+                
                 float fovOffset = Random.Range(5f - magnitude, 5.35f);
                 float rotOffset = Random.Range(-(2 + magnitude ), 2 + magnitude);
 
@@ -49,6 +57,12 @@ namespace Other
                 
                 yield return null;
             }
+            gameCamera.orthographicSize = 5;
+            transform.localRotation = Quaternion.Euler(0,0,0);
+        }
+
+        private void ResetRotation()
+        {
             gameCamera.orthographicSize = 5;
             transform.localRotation = Quaternion.Euler(0,0,0);
         }

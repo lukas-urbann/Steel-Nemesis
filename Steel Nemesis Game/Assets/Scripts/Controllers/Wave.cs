@@ -15,15 +15,25 @@ namespace Controllers
 
         private Vector2 minSpawnDimension = new Vector2(-5.50f, 4.5f);
         private Vector2 maxSpawnDimension = new Vector2(5.50f, 2f);
-        public TMP_Text levelTitle, levelSeconds;
-        private bool waveEnd = false, wavePending = false;
+
+        private bool waveEnd = false;
+        private bool wavePending = false;
+        private bool interWaveBreak = false;
         private bool countdownActive = false;
+        
         private float waveCountdown = 5.99f;
         private float enemyCountdown = 1;
-        private float minSpawnDelay, maxSpawnDelay;
+        private float minSpawnDelay;
+        private float maxSpawnDelay;
 
-        private List<GameObject> enemyList = new List<GameObject>();
-        [SerializeField] private List<GameObject> selectedEnemies = new List<GameObject>();
+        private List<GameObject> enemyList = new List<GameObject>(); //Obsahuje list všech enemáků, loaduju ho ve Startu
+        private List<GameObject> selectedEnemies = new List<GameObject>();
+        //Obsahuje list enemáků, kteří splňují kritérium pro spawn v nté vlně.
+        //Všechny tyto staty jsou nastavené jednotlivě v každé enemy lodi v inspectoru, protože se to řídí
+        //z jejich základního skriptu BasicEnemy a je třeba to mít serializované už v něm.
+
+        public TMP_Text levelTitle;
+        public TMP_Text levelSeconds;
         
         public delegate void WaveChangeDelegate();
         public WaveChangeDelegate onWaveEnd;
@@ -38,6 +48,7 @@ namespace Controllers
 
         private void Start()
         {
+            //Idk proc to nedelam v inspectoru ale ok
             enemyList.Add(Prefabs.Instance.basicEnemy);
             enemyList.Add(Prefabs.Instance.attackerEnemy);
             enemyList.Add(Prefabs.Instance.fighterEnemy);
@@ -52,11 +63,7 @@ namespace Controllers
         private void Update()
         {
             if (waveEnd)
-            {
                 WaveEnd();
-                countdownActive = true;
-                waveEnd = false;
-            }
 
             if (wavePending)
                 WavePending();
@@ -86,10 +93,20 @@ namespace Controllers
 
         private void WaveEnd()
         {
+            if (Shop.Instance.PostWaveShopCall() && level != 0)
+            {
+                interWaveBreak = true;
+                return;
+            }
+            
             StartCoroutine(WavePostEnd());
             onWaveEnd.Invoke();
             level++;
             levelTitle.text = "Wave " + (level);
+            
+            //Dosazené z Updatu z nějakého důvodu
+            countdownActive = true;
+            waveEnd = false;
         }
 
         private IEnumerator WavePostEnd()
@@ -172,7 +189,7 @@ namespace Controllers
             remainingToKill += val;
         }
 
-        public void StartGame()
+        public void ResumeGame()
         {
             waveEnd = true;
         }

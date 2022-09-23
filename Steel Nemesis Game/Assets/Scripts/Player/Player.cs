@@ -1,6 +1,4 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using Collectible;
 using Controllers;
 using Enemy;
@@ -13,8 +11,8 @@ namespace Player
     public class Player : MonoBehaviour
     {
         public static Player Instance;
-        public GameObject hitEffect;
         
+        //Ship Staty
         private float hp = 100;
         private float maxHp = 100;
         private float energy = 50;
@@ -25,24 +23,35 @@ namespace Player
         private float firePower = 1;
         private float fireDamage = 25;
         private float playerSpeed = 3;
-
         private float crosshairSpeed = 5;
         private float shipTurnSpeed = 5;
         
-        private bool canFire = true;
+        private bool canFire = true; // 
+        private bool isColliding = false; //Pro práci s kolizemi s triggery
         
+        //Záleží na tom v rotaci za kurzorem, jinak ignorovat
         private Vector3 vectorToTarget;
         private float angle;
         private Quaternion qt;
 
-        private bool isColliding = false;
-        
-        [Header("Assignable")]
+        [Header("-- Assignable --")]
+        [Header("Game Objects")]
         public GameObject crosshair;
         public GameObject shipFlame;
-        public Transform firePoint;
         public GameObject laser;
-        public AudioClip laserSfx, pickupSfx, hitSfx;
+        public GameObject playerHurtEffect;
+
+        
+        [Header("Transforms")]
+        public Transform firePoint;
+        
+        [Header("AudioClips")]
+        public AudioClip fire;
+        public AudioClip pickup;
+        public AudioClip playerHurt;
+
+        
+
         
         [Header("Notification Pickup")]
         public TMP_Text notificationText;
@@ -114,11 +123,11 @@ namespace Player
                     if(energy < fireCost)
                         return;
                     
-                    Controllers.Audio.Instance.PlaySound(laserSfx);
+                    Controllers.Audio.Instance.PlaySound(playerHurt);
                     energy -= (int) fireCost;
                     GameObject projectile = Instantiate(laser, firePoint.position, firePoint.rotation);
                     //-------SCALE
-                    projectile.transform.localScale = new Vector3(1.75f + (0.125f * (fireDamage - 15)), 1.75f + (0.125f * (fireDamage - 15)), 1);
+                    //projectile.transform.localScale = new Vector3(1.75f + (0.125f * (fireDamage - 15)), 1.75f + (0.125f * (fireDamage - 15)), 1);
                     //-------DAMAGE
                     projectile.GetComponent<Laser>().SetDamage(fireDamage);
                     //-------FORCE
@@ -204,8 +213,9 @@ namespace Player
                         return;
                     
                     Other.CameraShake.Instance.ShakeScreen(0.2f, 0.2f);
-                    Controllers.Audio.Instance.PlaySound(hitSfx);
-                    Instantiate(hitEffect, col.transform.position, Quaternion.identity);
+                    Controllers.Audio.Instance.PlaySound(playerHurt);
+                    Instantiate(playerHurtEffect, col.transform.position, Quaternion.identity);
+                    Instantiate(Prefabs.Instance.scrap, col.transform.position, Quaternion.identity);
                     Destroy(col.gameObject);
                     hp -= 20 + (Controllers.Wave.Instance.GetLevel() * 0.5f);
                     CheckHP();
@@ -217,11 +227,14 @@ namespace Player
 
         private void SetProportions()
         {
+            //TODO: PŘEPSAT TEN CANCER, stavit stále jednotky
+            /*
             shipTurnSpeed = 2 + ((fireCooldown * 5));
             crosshairSpeed = 5 / firePower;
             fireCost = fireDamage - 15;
             shipFlame.transform.localScale = new Vector3(1 * (playerSpeed / 7.5f), 1 * (playerSpeed / 7.5f), 1);
             transform.localScale = new Vector3(5 + ((maxHp - 100) / 100), 5 + ((maxHp - 100) / 100), 1);
+            */
         }
 
         private void OnTriggerEnter2D(Collider2D col)
@@ -233,7 +246,7 @@ namespace Player
             
             if (col.gameObject.CompareTag("Collectible"))
             {
-                Controllers.Audio.Instance.PlaySound(pickupSfx);
+                Controllers.Audio.Instance.PlaySound(pickup);
                 
                 if (col.gameObject.layer == 13)
                 {
