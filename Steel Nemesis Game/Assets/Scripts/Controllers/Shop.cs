@@ -12,10 +12,13 @@ namespace Controllers
     {
         //Singleton
         public static Shop Instance;
-        private float chanceToAppear = 0;
+        public GameObject shopWindow; //Dosadit z inspectoru
+        private float chanceToAppear = 50;
         private int wavesWithoutShop = 0;
         private int upgradeCost;
-        
+
+        public List<GameObject> shopBreakObjects = new List<GameObject>();
+
         private void Awake()
         {
             if (Instance != null && Instance != this)
@@ -27,9 +30,49 @@ namespace Controllers
         public void OpenShop()
         {
             Debug.Log("Shop Emerging...");
+            shopWindow.SetActive(true);
             chanceToAppear = 0;
+
+            Wave.Instance.SetBreak(true);
+            shopWindow.GetComponent<Animator>().Play("ShopAppear");
             
-            //void na call
+            PostShopOpen();
+        }
+
+        public void CloseShop()
+        {
+            Debug.Log("Shop Disabling...");
+
+            Wave.Instance.SetBreak(false);
+            shopWindow.GetComponent<Animator>().Play("ShopDisappear");
+            
+            PostShopClose();
+        }
+
+        private void PostShopOpen()
+        {
+            Cursor.visible = true;
+
+            foreach (GameObject obj in shopBreakObjects)
+            {
+                if(obj.activeSelf)
+                    obj.SetActive(false);
+            }
+        }
+
+        private void PostShopClose()
+        {
+            Cursor.visible = false;
+            
+            foreach (GameObject obj in shopBreakObjects)
+            {
+                obj.SetActive(true);
+            }
+            
+            Player.Controller.Instance.PostShopAction();
+            
+            Wave.Instance.ResumeFromShop();
+            Wave.Instance.ResumeGame();
         }
 
         public bool PostWaveShopCall()
@@ -54,11 +97,6 @@ namespace Controllers
                 chanceToAppear = 100;
 
             chanceToAppear += (wavesWithoutShop * 2);
-        }
-
-        private void CloseShop()
-        {
-            Wave.Instance.ResumeGame();
         }
     }
 }

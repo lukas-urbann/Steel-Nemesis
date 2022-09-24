@@ -55,6 +55,7 @@ namespace Controllers
 
         public void GameOver()
         {
+            Shop.Instance.shopWindow.SetActive(false);
             gameover = true;
             
             TriggerType[] trigs;

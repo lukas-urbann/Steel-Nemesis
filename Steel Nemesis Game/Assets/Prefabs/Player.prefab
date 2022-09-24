@@ -148,7 +148,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 0.3
+  m_Time: 0.2
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
@@ -165,8 +165,8 @@ TrailRenderer:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 0.08474603
-        value: 0.2056472
+        time: 0.25898996
+        value: 0.1431472
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -359,14 +359,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b280dceeb1605498eb1e72bb197f1427, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitEffect: {fileID: 3053539486649149702, guid: 9c22355a5db99c441bab6478f07b50da, type: 3}
   crosshair: {fileID: 0}
   shipFlame: {fileID: 8543722761269611873}
   laser: {fileID: 1178998862013183786, guid: f539eb8736568485a88ac7fabc149306, type: 3}
+  playerHurtEffect: {fileID: 3053539486649149702, guid: 9c22355a5db99c441bab6478f07b50da, type: 3}
   firePoint: {fileID: 8545600765872383045}
-  laserSfx: {fileID: 8300000, guid: 9b450e5caa68440eb898893d0c5f01ed, type: 3}
-  pickupSfx: {fileID: 8300000, guid: 9a06a35dc2c9b4d689657ff866bc43b2, type: 3}
-  hitSfx: {fileID: 8300000, guid: ee31fcb5e504d4db684b65637fa6a8db, type: 3}
+  fire: {fileID: 8300000, guid: 9b450e5caa68440eb898893d0c5f01ed, type: 3}
+  pickup: {fileID: 8300000, guid: 9a06a35dc2c9b4d689657ff866bc43b2, type: 3}
+  playerHurt: {fileID: 8300000, guid: ee31fcb5e504d4db684b65637fa6a8db, type: 3}
   notificationText: {fileID: 0}
   positive: {r: 0.4850481, g: 0.9433962, b: 0.4889459, a: 1}
   negative: {r: 1, g: 0.3254717, b: 0.3935436, a: 1}

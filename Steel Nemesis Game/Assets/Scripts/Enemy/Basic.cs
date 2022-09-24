@@ -10,12 +10,12 @@ namespace Enemy
     {
         private void Start()
         {
-            dropValues = new int[] { 0, 13, 0, 0, 0, 1, 0, 0, 0, 0, 0, 12, 0, 0, 0, 0, 0, 12, 0, 0 };
+            dropValues = new int[] { 0, 0, 1, 0, 0};
 
             hp = 22.5f + (Controllers.Wave.Instance.GetLevel() * 0.5f);
 
             if(speed < 5.5f)
-                speed = 1 + (Controllers.Wave.Instance.GetLevel() * 0.05f);
+                speed = 0.75f + (Controllers.Wave.Instance.GetLevel() * 0.05f);
             
             flyDirection = FlyDirection.Down;
             ChangeDirection(flyDirection);

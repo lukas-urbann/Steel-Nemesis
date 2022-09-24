@@ -80,9 +80,24 @@ namespace Controllers
 
             if (remainingToKill == 0)
             {
-                remainingToKill = 69;
-                waveEnd = true;
+                if (Shop.Instance.PostWaveShopCall() && level != 0)
+                {
+                    interWaveBreak = true;
+                    return;
+                }
+
+                if (!interWaveBreak)
+                {
+                    remainingToKill = 69;
+                    waveEnd = true;
+                } 
             }
+        }
+
+        public void ResumeFromShop()
+        {
+            remainingToKill = 69;
+            waveEnd = true;
         }
 
         private void ResetText()
@@ -93,12 +108,6 @@ namespace Controllers
 
         private void WaveEnd()
         {
-            if (Shop.Instance.PostWaveShopCall() && level != 0)
-            {
-                interWaveBreak = true;
-                return;
-            }
-            
             StartCoroutine(WavePostEnd());
             onWaveEnd.Invoke();
             level++;
@@ -192,6 +201,11 @@ namespace Controllers
         public void ResumeGame()
         {
             waveEnd = true;
+        }
+
+        public void SetBreak(bool boolean)
+        {
+            interWaveBreak = boolean;
         }
     }
 }

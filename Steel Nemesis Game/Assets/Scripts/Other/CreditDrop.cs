@@ -12,7 +12,6 @@ namespace Other
         private SpriteRenderer sprite;
         private Color spriteColor;
         private Vector3 movement;
-        private float rotationSpeed;
         public GameObject pickupEffect;
 
         private void OnEnable()
@@ -23,7 +22,6 @@ namespace Other
         private void Start()
         {
             movement = new Vector3(Random.Range(-3, 3f), Random.Range(-3f, 3f),0);
-            rotationSpeed = Random.Range(-5f, 5f);
             spriteColor = sprite.color;
         }
 

@@ -44,7 +44,7 @@ namespace Enemy
 
         [SerializeField] protected int minWave;
         [SerializeField] protected int maxWave;
-        protected int[] dropValues = {0};
+        protected int[] dropValues;
         
         [SerializeField] protected AudioClip fireSound;
         
@@ -251,9 +251,9 @@ namespace Enemy
         {
             int selected = dropValues[Random.Range(0, dropValues.Length)];
 
-           if (selected == 0) return;
+           if (selected-1 == -1) return;
 
-           drop = Drops.Instance.GetDrop(selected-1);
+           drop = Drops.Instance.GetDrop(selected);
 
            if (drop == null)
                return;
