@@ -8,6 +8,7 @@ namespace Player
     public class Ship : ScriptableObject
     {
         public string shipName;
+        public Sprite shipSprite;
         
         [Header("Base Stats")]
         public float baseHitPoints = 20;

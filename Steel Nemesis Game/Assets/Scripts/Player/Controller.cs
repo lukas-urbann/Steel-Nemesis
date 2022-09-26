@@ -54,14 +54,14 @@ namespace Player
         private float batteryRecharge = 250;
 
         private float fireCost = 10;
-        private float cooldown = 0.2f;
+        private float cooldown = 0.08f;
         private float firepower = 1.5f;
         private float damage = 20;
         private float enginePerformance = 5f;
         private float aim = 5;
         private float turn = 5;
         private float scale = 5;
-        private float bulletSpread = 0.3f;
+        private float bulletSpread = 0f;
         
         
         private bool canFire = true;
@@ -169,7 +169,6 @@ namespace Player
 
                     foreach (Transform pos in firePoints)
                     {
-                        Debug.Log("asd");
                         GameObject projectile = Instantiate(laser, pos.position, pos.rotation);
                         //-------DAMAGE
                         projectile.GetComponent<Laser>().SetDamage(damage);
@@ -295,6 +294,7 @@ namespace Player
                     col.GetComponent<CreditDrop>().PickUp();
                     Destroy(col.gameObject);
                     CreditCollection();
+                    StartCoroutine(TriggerCollisionReset());
                     return;
                 }
 

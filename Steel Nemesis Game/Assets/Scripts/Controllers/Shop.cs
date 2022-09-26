@@ -55,6 +55,9 @@ namespace Controllers
 
             foreach (GameObject obj in shopBreakObjects)
             {
+                if (obj == null)
+                    continue;
+                
                 if(obj.activeSelf)
                     obj.SetActive(false);
             }
@@ -66,7 +69,8 @@ namespace Controllers
             
             foreach (GameObject obj in shopBreakObjects)
             {
-                obj.SetActive(true);
+                if(obj != null)
+                    obj.SetActive(true);
             }
             
             Player.Controller.Instance.PostShopAction();
