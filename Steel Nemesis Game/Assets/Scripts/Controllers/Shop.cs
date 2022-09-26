@@ -33,7 +33,7 @@ namespace Controllers
             shopWindow.SetActive(true);
             chanceToAppear = 0;
 
-            Wave.Instance.SetBreak(true);
+            //Wave.Instance.SetBreak(true);
             shopWindow.GetComponent<Animator>().Play("ShopAppear");
             
             PostShopOpen();
@@ -43,7 +43,7 @@ namespace Controllers
         {
             Debug.Log("Shop Disabling...");
 
-            Wave.Instance.SetBreak(false);
+            //Wave.Instance.SetBreak(false);
             shopWindow.GetComponent<Animator>().Play("ShopDisappear");
             
             PostShopClose();

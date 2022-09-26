@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Laser
@@ -10,7 +11,8 @@ namespace Laser
         public GameObject collisionEffect;
         public AudioClip laserCollisionSfx;
         
-        protected void OnBecameInvisible() {
+        protected void OnBecameInvisible()
+        {
             Destroy(gameObject);
         }
 
@@ -18,6 +20,9 @@ namespace Laser
         {
             if (col.gameObject.CompareTag("Laser"))
             {
+                if(col.gameObject.CompareTag(gameObject.tag) && col.gameObject.layer == gameObject.layer)
+                    return;
+                
                 Controllers.Audio.Instance.PlaySound(laserCollisionSfx);
                 Destroy(gameObject);
                 Instantiate(collisionEffect, transform.position, Quaternion.identity);
