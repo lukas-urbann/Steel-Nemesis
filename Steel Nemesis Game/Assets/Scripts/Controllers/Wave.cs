@@ -16,32 +16,39 @@ namespace Controllers
 
         private Vector2 minSpawnDimension = new Vector2(-5.50f, 4.5f);
         private Vector2 maxSpawnDimension = new Vector2(5.50f, 2f);
-        
-        private int minEnemies = 3, maxEnemies = 5, actualEnemies, remainingToKill = 100;
+
+        private int minEnemies = 3, maxEnemies = 5, actualEnemies;
+        private List<GameObject> spawnedEnemies = new List<GameObject>();
         private int level = 0;
 
-        private bool waveEnd = false;
-        private bool wavePending = false;
-        private bool countdownActive = false;
-        private bool canSpawn = true;
+        //private bool waveEnd = false;
+        //private bool wavePending = false;
+        //private bool countdownActive = false;
+        //private bool canSpawn = true;
         
-        private float waveCountdown = 5.99f;
+        private const float countdownTimeBase = 5.9999f;
+        private float countdownTime = 5.9999f;
         private float enemyCountdown = 1;
+        
         private float minSpawnDelay;
         private float maxSpawnDelay;
 
-        private List<GameObject> enemyList = new List<GameObject>(); //Obsahuje list všech enemáků, loaduju ho ve Startu
+        [Header("Spawnable Enemies")]
+        [SerializeField] private List<GameObject> enemyList = new List<GameObject>(); //Obsahuje list všech enemáků, loaduju ho ve Startu
         private List<GameObject> selectedEnemies = new List<GameObject>();
         
         //Obsahuje list enemáků, kteří splňují kritérium pro spawn v nté vlně.
         //Všechny tyto staty jsou nastavené jednotlivě v každé enemy lodi v inspectoru, protože se to řídí
         //z jejich základního skriptu BasicEnemy a je třeba to mít serializované už v něm.
 
+        [Header("Assignable")] 
         public TMP_Text levelTitle;
         public TMP_Text levelSeconds;
         
-        public delegate void WaveChangeDelegate();
-        public WaveChangeDelegate onWaveEnd; //Použít na shop
+        public delegate void WaveDelegate();
+        public WaveDelegate onWaveEnd; //Použít na shop
+        public WaveDelegate onWaveStart;
+        public WaveDelegate startEvent;
         
         private void Awake()
         {
@@ -53,17 +60,20 @@ namespace Controllers
 
         private void Start()
         {
+            startEvent += GameStart;
+            
             //Idk proc to nedelam v inspectoru ale ok
             enemyList.Add(Prefabs.Instance.basicEnemy);
             enemyList.Add(Prefabs.Instance.attackerEnemy);
             enemyList.Add(Prefabs.Instance.fighterEnemy);
             enemyList.Add(Prefabs.Instance.tankEnemy);
             
-            ResetText();
+            ResetCountdownText();
         }
         
         private void Update()
         {
+            /*
             if (waveEnd)
                 WaveEnd();
 
@@ -79,6 +89,9 @@ namespace Controllers
                 if (waveCountdown <= 0.1f)
                     waveCountdown = 0.1f;
             }
+            */
+            
+            /*
 
             if (remainingToKill == 0)
             {
@@ -94,99 +107,87 @@ namespace Controllers
                     waveEnd = true;
                 } 
             }
+            
+            */
         }
 
-        public void ResumeFromShop()
+        private IEnumerator WaveProcess()
         {
-            remainingToKill = 69;
-            waveEnd = true;
+
+            yield return new WaitForNextFrameUnit();
+
         }
 
-        private void ResetText()
+        private void WaveStart()
+        {
+//          onWaveStart.Invoke();
+            Debug.Log("Wave Start");
+            
+            GenerateEnemiesForWave(); // Vygeneruje počet nepřátel + typy nepřátel
+            GenerateSpawnDelays(); // Vygeneruje minimální a maximální časy pro spawn
+            StartCoroutine(StartWaveCountdown()); // Odpočítá a spustí waveku
+        }
+        
+
+
+
+
+        private IEnumerator StartWaveCountdown()
+        {
+            IncreaseLevel();
+            ResetCountdownText();
+            DisplayCountdownText();
+            StartCoroutine(CountToZero());
+            IncreaseEnemyCount();
+            yield return new WaitForSeconds(countdownTimeBase);
+            StartCoroutine(WaveProcess());
+        }
+
+        private IEnumerator CountToZero()
+        {
+            yield return new WaitForSeconds(1);
+
+            if (countdownTime < 1)
+            {
+                ResetCountdownText();
+                yield break;
+            }
+            
+            countdownTime -= 1;
+            DisplayCountdownText();
+            StartCoroutine(CountToZero());
+        }
+
+        private void DisplayCountdownText()
+        {
+            levelTitle.text = "Wave " + level;
+            levelSeconds.text = Mathf.FloorToInt(countdownTime).ToString();
+        }
+        
+        private void ResetCountdownText()
         {
             levelTitle.text = "";
             levelSeconds.text = "";
         }
 
-        private void WaveEnd()
+        private void ResetCountdownTimer()
         {
-            onWaveEnd.Invoke();
-            KillAllHostiles();
-            
-            levelTitle.text = "Wave " + (level);
-            
-            //Dosazené z Updatu z nějakého důvodu
-            countdownActive = true;
-            waveEnd = false;
-            
-            StartCoroutine(WavePostEnd());
+            countdownTime = countdownTimeBase;
         }
 
+        private void IncreaseEnemyCount()
+        {
+            minEnemies++;
+            maxEnemies = maxEnemies + 2 + (level / 2);
+        }
+        
         private void KillAllHostiles()
         {
-            List<GameObject> enemyList = new List<GameObject>();
-            enemyList.AddRange(FindObjectsOfType<BasicEnemy>());
+            List<GameObject> enemyListToDestroy = new List<GameObject>();
+            enemyListToDestroy.AddRange(FindObjectsOfType<BasicEnemy>());
 
             for(int i = 0; i < enemyList.Count; i++)
                 Destroy(enemyList[i]);
-        }
-
-        private void IncreaseLevel()
-        {
-            level++;
-        }
-
-        private void DisableSpawning()
-        {
-            
-        }
-
-        private IEnumerator WavePostEnd()
-        {
-            yield return new WaitForSeconds(5.99f);
-            Player.Controller.Instance.AddFireDamage(1);
-            waveCountdown = 5.99f;
-            ResetText();
-            countdownActive = false;
-            minEnemies++;
-            maxEnemies = maxEnemies + 2 + (level / 2);
-            WaveStart();
-        }
-
-        private void WaveStart()
-        {
-            Debug.Log("Wave Start");
-            Debug.Log("Enemies for level " + level + ". Remaining to kill: " + actualEnemies);
-
-            GenerateEnemiesForWave();
-            GenerateSpawnDelays();
-            wavePending = true;
-        }
-
-        private void GenerateEnemiesForWave()
-        {
-            SelectEligibleEnemies();
-            actualEnemies = Random.Range(minEnemies, maxEnemies);
-            remainingToKill = actualEnemies;
-        }
-
-        private void GenerateSpawnDelays()
-        {
-            if(minSpawnDelay > 0.1f)
-                minSpawnDelay = (0.5f - (level * 0.002f));
-
-            if (maxSpawnDelay < 1)
-                maxSpawnDelay = (6 - (level * 0.03f));
-        }
-        
-        private void WavePending()
-        {
-            enemyCountdown -= 1 * Time.deltaTime;
-
-            if (enemyCountdown < 0 && actualEnemies > 0)
-                SpawnEnemy();
-
-            enemyCountdown = Random.Range(minSpawnDelay, 5);
         }
 
         private void SelectEligibleEnemies()
@@ -199,36 +200,57 @@ namespace Controllers
                 
                 if (en.GetMinLevel() <= level && en.GetMaxLevel() >= level)
                     selectedEnemies.Add(obj);
-                
-                //Debug.Log(en.name + " | Min Level: " + en.GetMinLevel() + " | Max Level: " + en.GetMaxLevel());
             }
         }
 
+        private void IncreaseLevel()
+        {
+            level++;
+        }
+        
         private void SpawnEnemy()
         {
-            --actualEnemies;
-            
             float x = Random.Range(minSpawnDimension.x, maxSpawnDimension.x);
             float y = Random.Range(minSpawnDimension.y, maxSpawnDimension.y);
             Vector2 spawnLocation = new Vector2(x, y);
             
             int enemyIndex = Random.Range(0, selectedEnemies.Count);
-                            actualEnemies++;
-                            
-            Instantiate(selectedEnemies[enemyIndex].gameObject, spawnLocation, Quaternion.identity);
-        }
-        
-        public void SetRemainingEnemies(int val)
-        {
-            remainingToKill += val;
+
+            GameObject spawnedEnemy = Instantiate(selectedEnemies[enemyIndex].gameObject, spawnLocation, Quaternion.identity);
+            
+            spawnedEnemies.Add(spawnedEnemy);
+            actualEnemies--;
         }
 
-        public void ResumeGame()
+        private void GenerateEnemiesForWave()
         {
-            if(!doNotStart)
-                waveEnd = false; //Triggerne začátek hry tím že ukončí wave 0, dokud bude waveEnd false, tak hra nikdy nezačne.
+            SelectEligibleEnemies();
+            actualEnemies = Random.Range(minEnemies, maxEnemies);
+        }
+
+        private void GenerateSpawnDelays()
+        {
+            if(minSpawnDelay > 0.1f)
+                minSpawnDelay = (0.5f - (level * 0.002f));
+
+            if (maxSpawnDelay < 1)
+                maxSpawnDelay = (6 - (level * 0.03f));
         }
         
+        private void GameStart()
+        {
+            if (doNotStart)
+                return;
+
+            WaveStart();
+        }
+
+        public void GameStartTrigger()
+        {
+            startEvent.Invoke();
+            Debug.Log("Game Start Trigger");
+        }
+
         //GET
         public int GetLevel()
         {

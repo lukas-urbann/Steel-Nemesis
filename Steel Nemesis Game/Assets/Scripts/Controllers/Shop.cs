@@ -10,6 +10,7 @@ namespace Controllers
     
     public class Shop : MonoBehaviour
     {
+        /*
         //Singleton
         public static Shop Instance;
         public GameObject shopWindow; //Dosadit z inspectoru
@@ -102,5 +103,6 @@ namespace Controllers
 
             chanceToAppear += (wavesWithoutShop * 2);
         }
+        */
     }
 }

@@ -27,7 +27,6 @@ namespace Player
         private int level = 1;
 
         //Ship Staty
-        /*
         private float hitPoints = 20;
         private float maxHitPoints = 20;
 
@@ -44,26 +43,7 @@ namespace Player
         private float turn = 4;
         private float scale = 5;
         private float bulletSpread = 0.15f;
-*/
-        
-        private float hitPoints = 2000;
-        private float maxHitPoints = 2000;
 
-        private float battery = 1000;
-        private float maxBattery = 1000;
-        private float batteryRecharge = 250;
-
-        private float fireCost = 10;
-        private float cooldown = 0.08f;
-        private float firepower = 1.5f;
-        private float damage = 20;
-        private float enginePerformance = 5f;
-        private float aim = 5;
-        private float turn = 5;
-        private float scale = 5;
-        private float bulletSpread = 0f;
-        
-        
         private bool canFire = true;
         private bool isColliding = false; //Pro práci s kolizemi s triggery
 

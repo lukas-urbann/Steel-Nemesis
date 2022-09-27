@@ -226,7 +226,7 @@ namespace Enemy
             {
                 Other.CameraShake.Instance.ShakeScreen(0.1f, 0);
                 Controllers.Game.Instance.AddKill();
-                Controllers.Wave.Instance.SetRemainingEnemies(-1);
+                //Controllers.Wave.Instance.SetRemainingEnemies(-1);
                 
                 for (int i = 0; i < Random.Range(1, 6); i++)
                     Instantiate(Controllers.Prefabs.Instance.scrap, transform.position, Quaternion.identity);
@@ -288,7 +288,7 @@ namespace Enemy
                             case 3:
                                 CameraShake.Instance.ShakeScreen(0.5f, 1.2f);
                                 Controllers.Barrier.Instance.ChangeHitpoints(-1);
-                                Controllers.Wave.Instance.SetRemainingEnemies(-1);
+                                //Controllers.Wave.Instance.SetRemainingEnemies(-1);
                                 deathScript.DeathEvent();
                                 break;
                             case 10:
