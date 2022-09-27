@@ -26,7 +26,7 @@ namespace Controllers
         //private bool countdownActive = false;
         //private bool canSpawn = true;
         
-        private const float countdownTimeBase = 5.9999f;
+        private const float CountdownTimeBase = 5.9999f;
         private float countdownTime = 5.9999f;
         private float enemyCountdown = 1;
         
@@ -49,6 +49,9 @@ namespace Controllers
         public WaveDelegate onWaveEnd; //Použít na shop
         public WaveDelegate onWaveStart;
         public WaveDelegate startEvent;
+        public float neconeco = 1000;
+
+        private Coroutine pendingWave;
         
         private void Awake()
         {
@@ -73,49 +76,26 @@ namespace Controllers
         
         private void Update()
         {
-            /*
-            if (waveEnd)
-                WaveEnd();
-
-            if (wavePending)
-                WavePending();
-
-            if (countdownActive)
-            {
-                waveCountdown -= 1 * Time.deltaTime;
-                float flooredCountdown = Mathf.FloorToInt(waveCountdown);
-                levelSeconds.text = flooredCountdown.ToString("F0");
-                
-                if (waveCountdown <= 0.1f)
-                    waveCountdown = 0.1f;
-            }
-            */
             
-            /*
-
-            if (remainingToKill == 0)
-            {
-                if (Shop.Instance.PostWaveShopCall() && level != 0)
-                {
-                    interWaveBreak = true;
-                    return;
-                }
-
-                if (!interWaveBreak)
-                {
-                    remainingToKill = 69;
-                    waveEnd = true;
-                } 
-            }
-            
-            */
         }
 
         private IEnumerator WaveProcess()
         {
+            while (true)
+            {
+                Debug.Log("debil");
+                yield return new WaitForSeconds(0.1f);
+                Debug.Log("debil");
+            }
+        }
 
-            yield return new WaitForNextFrameUnit();
-
+        private void WaveEnd()
+        {
+            StopCoroutine(pendingWave);
+            onWaveEnd.Invoke();
+            KillAllHostiles();
+            
+            WaveStart(); // Přejda do dalšího kola a postará se o správnou inicializaci
         }
 
         private void WaveStart()
@@ -128,10 +108,6 @@ namespace Controllers
             StartCoroutine(StartWaveCountdown()); // Odpočítá a spustí waveku
         }
         
-
-
-
-
         private IEnumerator StartWaveCountdown()
         {
             IncreaseLevel();
@@ -139,8 +115,8 @@ namespace Controllers
             DisplayCountdownText();
             StartCoroutine(CountToZero());
             IncreaseEnemyCount();
-            yield return new WaitForSeconds(countdownTimeBase);
-            StartCoroutine(WaveProcess());
+            yield return new WaitForSeconds(CountdownTimeBase);
+            pendingWave = StartCoroutine(WaveProcess());
         }
 
         private IEnumerator CountToZero()
@@ -150,6 +126,7 @@ namespace Controllers
             if (countdownTime < 1)
             {
                 ResetCountdownText();
+                ResetCountdownTimer();
                 yield break;
             }
             
@@ -172,7 +149,7 @@ namespace Controllers
 
         private void ResetCountdownTimer()
         {
-            countdownTime = countdownTimeBase;
+            countdownTime = CountdownTimeBase;
         }
 
         private void IncreaseEnemyCount()
