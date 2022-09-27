@@ -248,8 +248,8 @@ namespace Enemy
         }
         
         protected void DropConsumable()
-        {
-            int selected = dropValues[Random.Range(0, dropValues.Length)];
+        { 
+           int selected = dropValues[Random.Range(0, dropValues.Length)];
 
            if (selected-1 == -1) return;
 
