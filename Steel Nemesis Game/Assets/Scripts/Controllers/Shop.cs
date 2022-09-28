@@ -10,15 +10,16 @@ namespace Controllers
     
     public class Shop : MonoBehaviour
     {
-        /*
         //Singleton
         public static Shop Instance;
+        private bool shopOpen = false;
         public GameObject shopWindow; //Dosadit z inspectoru
-        private float chanceToAppear = 50;
+        private float chanceToAppear = 100;
         private int wavesWithoutShop = 0;
-        private int upgradeCost;
 
-        public List<GameObject> shopBreakObjects = new List<GameObject>();
+        public delegate void ShopDelegate();
+        public ShopDelegate onClose;
+        public ShopDelegate onOpen;
 
         private void Awake()
         {
@@ -28,61 +29,54 @@ namespace Controllers
                 Instance = this;
         }
 
+        public bool SignalShop()
+        {
+            shopOpen = TryToOpenShop();
+            
+            IncreaseChance();
+            return shopOpen;
+        }
+
         public void OpenShop()
         {
             Debug.Log("Shop Emerging...");
-            shopWindow.SetActive(true);
-            chanceToAppear = 0;
-
-            //Wave.Instance.SetBreak(true);
-            shopWindow.GetComponent<Animator>().Play("ShopAppear");
             
-            PostShopOpen();
+            if(!shopWindow.activeSelf)
+                shopWindow.SetActive(true);
+            
+            SetCursorVisible(true);
+            onOpen.Invoke();
+            
+            shopWindow.SetActive(true);
+            ResetChanceValues();
+
+            shopWindow.GetComponent<Animator>().Play("ShopAppear");
+        }
+
+        private void ResetChanceValues()
+        {
+            chanceToAppear = 0;
+            wavesWithoutShop = 0;
         }
 
         public void CloseShop()
         {
             Debug.Log("Shop Disabling...");
-
-            //Wave.Instance.SetBreak(false);
-            shopWindow.GetComponent<Animator>().Play("ShopDisappear");
             
-            PostShopClose();
-        }
-
-        private void PostShopOpen()
-        {
-            Cursor.visible = true;
-
-            foreach (GameObject obj in shopBreakObjects)
-            {
-                if (obj == null)
-                    continue;
-                
-                if(obj.activeSelf)
-                    obj.SetActive(false);
-            }
-        }
-
-        private void PostShopClose()
-        {
-            Cursor.visible = false;
-            
-            foreach (GameObject obj in shopBreakObjects)
-            {
-                if(obj != null)
-                    obj.SetActive(true);
-            }
-            
+            SetCursorVisible(false);
             Player.Controller.Instance.PostShopAction();
-            
-            Wave.Instance.ResumeFromShop();
-            Wave.Instance.ResumeGame();
+            onClose.Invoke();
+
+            shopWindow.GetComponent<Animator>().Play("ShopDisappear");
         }
 
-        public bool PostWaveShopCall()
+        private void SetCursorVisible(bool boolean)
         {
-            IncreaseChance();
+            Cursor.visible = boolean;
+        }
+        
+        public bool TryToOpenShop()
+        {
             float chance = Random.Range(0f, 100f);
 
             if (chance <= chanceToAppear)
@@ -101,8 +95,7 @@ namespace Controllers
             if (chanceToAppear >= 100)
                 chanceToAppear = 100;
 
-            chanceToAppear += (wavesWithoutShop * 2);
+            chanceToAppear += (wavesWithoutShop * 1.4f);
         }
-        */
     }
 }

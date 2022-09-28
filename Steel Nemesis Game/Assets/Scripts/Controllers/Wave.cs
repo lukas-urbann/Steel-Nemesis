@@ -19,7 +19,7 @@ namespace Controllers
 
         public int minEnemies = 3, maxEnemies = 5, actualEnemies;
         public List<GameObject> spawnedEnemies = new List<GameObject>();
-        private int level = 40;
+        private int level = 0;
 
         private bool waveStop = false; // Nešahat, legacy kod - asi se to bez toho rozbije nevim
         
@@ -61,6 +61,7 @@ namespace Controllers
         private void Start()
         {
             startEvent += GameStart;
+            Shop.Instance.onClose += SignalWaveStart;
             
             //Idk proc to nedelam v inspectoru ale ok
             enemyList.Add(Prefabs.Instance.basicEnemy);
@@ -113,20 +114,25 @@ namespace Controllers
             waveStop = false;
         }
 
+        private void SignalWaveStart()
+        {
+            WaveStart();
+        }
+
         private void WaveEnd()
         {
             waveStop = false; //Legacy kod, nešahat, asi se to bez toho rozbije nevim
-            
             StopCoroutine(pendingWave);
-            onWaveEnd.Invoke();
+            //onWaveEnd.Invoke();
             KillAllHostiles();
-            
-            WaveStart(); // Přejda do dalšího kola a postará se o správnou inicializaci
+
+            if (!Shop.Instance.SignalShop())
+                WaveStart(); // Přejda do dalšího kola a postará se o správnou inicializaci
         }
 
         private void WaveStart()
         {
-//          onWaveStart.Invoke();
+            onWaveStart.Invoke();
             Debug.Log("Wave Start");
             
             GenerateEnemiesForWave(); // Vygeneruje počet nepřátel + typy nepřátel

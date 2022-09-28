@@ -16,7 +16,7 @@ namespace Other
         {
             anim = GetComponent<Animator>();
             //background.sprite = backgrounds[Random.Range(0, backgrounds.Count)]; wtf
-            Controllers.Wave.Instance.onWaveEnd += () => StartBackgroundChangeAnimation(); // Checkne jestli je pozadí správné každý konec kola
+            Controllers.Wave.Instance.onWaveStart += () => StartBackgroundChangeAnimation(); // Checkne jestli je pozadí správné každý konec kola
         }
 
         public void OnEnable()

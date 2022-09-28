@@ -401,6 +401,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   changeTextColor: 1
+  buttonImageHover: {fileID: 0}
+  buttonImageNormal: {fileID: 0}
   inactiveTextColor: {r: 1, g: 1, b: 1, a: 1}
   activeTextColor: {r: 0, g: 0, b: 0, a: 0}
   hoverSound: {fileID: 0}
@@ -1291,6 +1293,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   changeTextColor: 0
+  buttonImageHover: {fileID: 0}
+  buttonImageNormal: {fileID: 0}
   inactiveTextColor: {r: 1, g: 1, b: 1, a: 1}
   activeTextColor: {r: 0, g: 0, b: 0, a: 0}
   hoverSound: {fileID: 0}
@@ -3384,6 +3388,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   changeTextColor: 0
+  buttonImageHover: {fileID: 0}
+  buttonImageNormal: {fileID: 0}
   inactiveTextColor: {r: 1, g: 1, b: 1, a: 1}
   activeTextColor: {r: 0, g: 0, b: 0, a: 0}
   hoverSound: {fileID: 0}
@@ -3811,6 +3817,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   changeTextColor: 0
+  buttonImageHover: {fileID: 0}
+  buttonImageNormal: {fileID: 0}
   inactiveTextColor: {r: 1, g: 1, b: 1, a: 1}
   activeTextColor: {r: 0, g: 0, b: 0, a: 0}
   hoverSound: {fileID: 0}
@@ -10319,6 +10327,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   changeTextColor: 0
+  buttonImageHover: {fileID: 0}
+  buttonImageNormal: {fileID: 0}
   inactiveTextColor: {r: 1, g: 1, b: 1, a: 1}
   activeTextColor: {r: 0, g: 0, b: 0, a: 0}
   hoverSound: {fileID: 0}
@@ -10821,7 +10831,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 0}
   m_FillRect: {fileID: 1585473459}
   m_HandleRect: {fileID: 0}
@@ -12230,6 +12240,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   changeTextColor: 0
+  buttonImageHover: {fileID: 0}
+  buttonImageNormal: {fileID: 0}
   inactiveTextColor: {r: 1, g: 1, b: 1, a: 1}
   activeTextColor: {r: 0, g: 0, b: 0, a: 0}
   hoverSound: {fileID: 0}
@@ -12586,6 +12598,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   changeTextColor: 0
+  buttonImageHover: {fileID: 0}
+  buttonImageNormal: {fileID: 0}
   inactiveTextColor: {r: 1, g: 1, b: 1, a: 1}
   activeTextColor: {r: 0, g: 0, b: 0, a: 0}
   hoverSound: {fileID: 0}
@@ -13467,6 +13481,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   changeTextColor: 0
+  buttonImageHover: {fileID: 0}
+  buttonImageNormal: {fileID: 0}
   inactiveTextColor: {r: 1, g: 1, b: 1, a: 1}
   activeTextColor: {r: 0, g: 0, b: 0, a: 0}
   hoverSound: {fileID: 0}
@@ -14593,6 +14609,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   changeTextColor: 0
+  buttonImageHover: {fileID: 0}
+  buttonImageNormal: {fileID: 0}
   inactiveTextColor: {r: 1, g: 1, b: 1, a: 1}
   activeTextColor: {r: 0, g: 0, b: 0, a: 0}
   hoverSound: {fileID: 0}
@@ -14772,6 +14790,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   changeTextColor: 0
+  buttonImageHover: {fileID: 0}
+  buttonImageNormal: {fileID: 0}
   inactiveTextColor: {r: 1, g: 1, b: 1, a: 1}
   activeTextColor: {r: 0, g: 0, b: 0, a: 0}
   hoverSound: {fileID: 0}
@@ -15962,6 +15982,7 @@ GameObject:
   - component: {fileID: 829383092}
   - component: {fileID: 829383094}
   - component: {fileID: 829383093}
+  - component: {fileID: 829383095}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -16086,6 +16107,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 829383091}
   m_CullTransparentMesh: 1
+--- !u!114 &829383095
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 829383091}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecebe9d26cf69426486ac73ce194e5e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &850708029
 GameObject:
   m_ObjectHideFlags: 0
@@ -16848,6 +16881,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   changeTextColor: 0
+  buttonImageHover: {fileID: 0}
+  buttonImageNormal: {fileID: 0}
   inactiveTextColor: {r: 1, g: 1, b: 1, a: 1}
   activeTextColor: {r: 0, g: 0, b: 0, a: 0}
   hoverSound: {fileID: 0}
@@ -16988,6 +17023,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   changeTextColor: 0
+  buttonImageHover: {fileID: 0}
+  buttonImageNormal: {fileID: 0}
   inactiveTextColor: {r: 1, g: 1, b: 1, a: 1}
   activeTextColor: {r: 0, g: 0, b: 0, a: 0}
   hoverSound: {fileID: 0}
@@ -17205,6 +17242,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   changeTextColor: 0
+  buttonImageHover: {fileID: 0}
+  buttonImageNormal: {fileID: 0}
   inactiveTextColor: {r: 1, g: 1, b: 1, a: 1}
   activeTextColor: {r: 0, g: 0, b: 0, a: 0}
   hoverSound: {fileID: 0}
@@ -18226,6 +18265,7 @@ GameObject:
   - component: {fileID: 999378877}
   - component: {fileID: 999378876}
   - component: {fileID: 999378875}
+  - component: {fileID: 999378878}
   m_Layer: 5
   m_Name: Cancel
   m_TagString: Untagged
@@ -18273,7 +18313,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 2
+  m_Transition: 0
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -18301,6 +18341,18 @@ MonoBehaviour:
       - m_Target: {fileID: 1593707414}
         m_TargetAssemblyTypeName: Controllers.Shop, Assembly-CSharp
         m_MethodName: CloseShop
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 999378878}
+        m_TargetAssemblyTypeName: GameUI.ButtonInteractor, Assembly-CSharp
+        m_MethodName: PlayClickSound
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -18348,6 +18400,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 999378873}
   m_CullTransparentMesh: 1
+--- !u!114 &999378878
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 999378873}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ead6050b62630a348b7f0e1ce51a19ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  changeTextColor: 1
+  buttonImageHover: {fileID: 21300000, guid: 8802463ca171a4540b0b8a233b0200eb, type: 3}
+  buttonImageNormal: {fileID: 21300000, guid: c306bd60a6f600a4ebdee5b2ba75105e, type: 3}
+  inactiveTextColor: {r: 1, g: 1, b: 1, a: 1}
+  activeTextColor: {r: 0, g: 0, b: 0, a: 0}
+  hoverSound: {fileID: 8300000, guid: 29d330c8481f84ebbbb5eba03fd8e188, type: 3}
+  clickSound: {fileID: 8300000, guid: 954485096b6c846218d49fa223b5e841, type: 3}
 --- !u!1 &1003903676
 GameObject:
   m_ObjectHideFlags: 0
@@ -19023,6 +19094,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   changeTextColor: 1
+  buttonImageHover: {fileID: 0}
+  buttonImageNormal: {fileID: 0}
   inactiveTextColor: {r: 1, g: 1, b: 1, a: 1}
   activeTextColor: {r: 0, g: 0, b: 0, a: 0}
   hoverSound: {fileID: 0}
@@ -19415,6 +19488,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   changeTextColor: 1
+  buttonImageHover: {fileID: 0}
+  buttonImageNormal: {fileID: 0}
   inactiveTextColor: {r: 1, g: 1, b: 1, a: 1}
   activeTextColor: {r: 0, g: 0, b: 0, a: 0}
   hoverSound: {fileID: 0}
@@ -20673,6 +20748,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doNotStart: 0
+  minEnemies: 3
+  maxEnemies: 5
+  actualEnemies: 0
+  spawnedEnemies: []
   enemyList: []
   levelTitle: {fileID: 1564237491}
   levelSeconds: {fileID: 329234121}
@@ -21415,6 +21494,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   changeTextColor: 0
+  buttonImageHover: {fileID: 0}
+  buttonImageNormal: {fileID: 0}
   inactiveTextColor: {r: 1, g: 1, b: 1, a: 1}
   activeTextColor: {r: 0, g: 0, b: 0, a: 0}
   hoverSound: {fileID: 0}
@@ -24117,6 +24198,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   changeTextColor: 0
+  buttonImageHover: {fileID: 0}
+  buttonImageNormal: {fileID: 0}
   inactiveTextColor: {r: 1, g: 1, b: 1, a: 1}
   activeTextColor: {r: 0, g: 0, b: 0, a: 0}
   hoverSound: {fileID: 0}
@@ -24841,9 +24924,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39449921c7073499abca27acaa208a48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseScrollSpeed: 0.1
-  incrementalScrollSpeed: 0.01
-  sideScrollSpeed: 0
+  baseScrollSpeed: 0.02
+  incrementalScrollSpeed: 0.005
+  sideScrollSpeed: 0.00001
   backgroundRenderer: {fileID: 1362808738}
 --- !u!23 &1362808738
 MeshRenderer:
@@ -25116,6 +25199,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   changeTextColor: 0
+  buttonImageHover: {fileID: 0}
+  buttonImageNormal: {fileID: 0}
   inactiveTextColor: {r: 1, g: 1, b: 1, a: 1}
   activeTextColor: {r: 0, g: 0, b: 0, a: 0}
   hoverSound: {fileID: 0}
@@ -26488,6 +26573,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   changeTextColor: 0
+  buttonImageHover: {fileID: 0}
+  buttonImageNormal: {fileID: 0}
   inactiveTextColor: {r: 1, g: 1, b: 1, a: 1}
   activeTextColor: {r: 0, g: 0, b: 0, a: 0}
   hoverSound: {fileID: 0}
@@ -27351,6 +27438,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d0865d731414697a7f0ad85067d10c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shopWindow: {fileID: 351032666}
 --- !u!1 &1599747597
 GameObject:
   m_ObjectHideFlags: 0
@@ -28020,6 +28108,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   changeTextColor: 0
+  buttonImageHover: {fileID: 0}
+  buttonImageNormal: {fileID: 0}
   inactiveTextColor: {r: 1, g: 1, b: 1, a: 1}
   activeTextColor: {r: 0, g: 0, b: 0, a: 0}
   hoverSound: {fileID: 0}
@@ -34752,6 +34842,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   changeTextColor: 0
+  buttonImageHover: {fileID: 0}
+  buttonImageNormal: {fileID: 0}
   inactiveTextColor: {r: 1, g: 1, b: 1, a: 1}
   activeTextColor: {r: 0, g: 0, b: 0, a: 0}
   hoverSound: {fileID: 0}
@@ -38272,6 +38364,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   changeTextColor: 0
+  buttonImageHover: {fileID: 0}
+  buttonImageNormal: {fileID: 0}
   inactiveTextColor: {r: 1, g: 1, b: 1, a: 1}
   activeTextColor: {r: 0, g: 0, b: 0, a: 0}
   hoverSound: {fileID: 0}
@@ -38801,6 +38895,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   changeTextColor: 0
+  buttonImageHover: {fileID: 0}
+  buttonImageNormal: {fileID: 0}
   inactiveTextColor: {r: 1, g: 1, b: 1, a: 1}
   activeTextColor: {r: 0, g: 0, b: 0, a: 0}
   hoverSound: {fileID: 0}
@@ -39157,6 +39253,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   changeTextColor: 1
+  buttonImageHover: {fileID: 0}
+  buttonImageNormal: {fileID: 0}
   inactiveTextColor: {r: 1, g: 1, b: 1, a: 1}
   activeTextColor: {r: 0, g: 0, b: 0, a: 0}
   hoverSound: {fileID: 8300000, guid: 76de20aed45d8884e919b6f830012d31, type: 3}

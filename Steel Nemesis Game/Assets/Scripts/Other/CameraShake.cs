@@ -40,13 +40,6 @@ namespace Other
 
             while (elapsedTime < duration)
             {
-                if (Pause.Instance.GetPauseState())
-                {
-                    ResetRotation();
-                    elapsedTime = 0;
-                    yield return null;
-                }
-                
                 float fovOffset = Random.Range(5f - magnitude, 5.35f);
                 float rotOffset = Random.Range(-(2 + magnitude ), 2 + magnitude);
 
