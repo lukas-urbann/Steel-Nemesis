@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Collectible;
@@ -83,11 +84,6 @@ namespace Player
 
         [SerializeField] private Color positive, negative;
 
-        public float GetCrosshairSpeed()
-        {
-            return aim;
-        }
-
         private void Awake()
         {
             if (Instance != null && Instance != this)
@@ -98,7 +94,7 @@ namespace Player
 
         private void Start()
         {
-            SetProportions();
+            Controllers.Shop.Instance.onClose += ShopCloseAction;
         }
 
         private void Update()
@@ -144,24 +140,25 @@ namespace Player
                     if (battery < fireCost)
                         return;
 
-                    Audio.Instance.PlaySound(fire);
-                    battery -= (int)fireCost;
-
-                    foreach (Transform pos in firePoints)
-                    {
-                        GameObject projectile = Instantiate(laser, pos.position, pos.rotation);
-                        //-------DAMAGE
-                        projectile.GetComponent<Laser>().SetDamage(damage);
-                        //-------FORCE
-                        Rigidbody2D rb = projectile.GetComponent<Rigidbody2D>();
-                        Vector2 aimPosition =
-                            new Vector2(Random.Range(pos.up.x - bulletSpread, pos.up.x + bulletSpread),
-                                pos.up.y); // dodělat random spread
-                        rb.AddForce(aimPosition * firepower, ForceMode2D.Impulse);
-                        //------------
-                        StartCoroutine(FireCooldown());
-                    }
+                    Fire();
                 }
+        }
+
+        private void Fire()
+        {
+            Audio.Instance.PlaySound(fire);
+            battery -= (int)fireCost;
+
+            foreach (Transform pos in firePoints)
+            {
+                GameObject projectile = Instantiate(laser, pos.position, pos.rotation);
+                projectile.GetComponent<Laser>().SetDamage(damage);
+                Rigidbody2D rb = projectile.GetComponent<Rigidbody2D>();
+                Vector2 aimPosition =
+                    new Vector2(Random.Range(pos.up.x - bulletSpread, pos.up.x + bulletSpread), pos.up.y); // dodělat random spread
+                rb.AddForce(aimPosition * firepower, ForceMode2D.Impulse);
+                StartCoroutine(FireCooldown());
+            }
         }
 
         private IEnumerator FireCooldown()
@@ -184,11 +181,7 @@ namespace Player
                 Controllers.Game.Instance.GameOver();
         }
 
-        public void AddFireDamage(int value)
-        {
-            damage += value;
-        }
-
+        //GETY
         public float GetFireDamage()
         {
             return damage;
@@ -213,6 +206,7 @@ namespace Player
         {
             return maxHitPoints;
         }
+        // !GETY
 
         public void OnCollisionEnter2D(Collision2D col)
         {
@@ -244,18 +238,6 @@ namespace Player
                 default:
                     break;
             }
-        }
-
-        private void SetProportions()
-        {
-            //TODO: PŘEPSAT TEN CANCER, stavit stále jednotky
-            /*
-            shipTurnSpeed = 2 + ((fireCooldown * 5));
-            crosshairSpeed = 5 / firePower;
-            fireCost = fireDamage - 15;
-            shipFlame.transform.localScale = new Vector3(1 * (playerSpeed / 7.5f), 1 * (playerSpeed / 7.5f), 1);
-            transform.localScale = new Vector3(5 + ((maxHp - 100) / 100), 5 + ((maxHp - 100) / 100), 1);
-            */
         }
 
         private void OnTriggerEnter2D(Collider2D col)
@@ -368,11 +350,8 @@ namespace Player
                         Debug.Log("the fuck");
                         break;
                 }
-
                 SpawnNotification();
-                SetProportions();
             }
-
             StartCoroutine(TriggerCollisionReset());
         }
 
@@ -470,7 +449,12 @@ namespace Player
             return 0;
         }
 
-        public void PostShopAction()
+        public float GetCrosshairSpeed()
+        {
+            return aim;
+        }
+        
+        private void ShopCloseAction()
         {
             transform.localPosition = new Vector3(0, -2.5f, 0);
             canFire = true;

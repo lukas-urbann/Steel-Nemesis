@@ -64,7 +64,6 @@ namespace Controllers
             Debug.Log("Shop Disabling...");
             
             SetCursorVisible(false);
-            Player.Controller.Instance.PostShopAction();
             onClose.Invoke();
 
             shopWindow.GetComponent<Animator>().Play("ShopDisappear");
