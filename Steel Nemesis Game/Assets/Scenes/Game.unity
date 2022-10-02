@@ -12539,6 +12539,141 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 588247720}
   m_CullTransparentMesh: 1
+--- !u!1 &591860639
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 591860640}
+  - component: {fileID: 591860642}
+  - component: {fileID: 591860641}
+  m_Layer: 5
+  m_Name: Ship Name
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &591860640
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 591860639}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1302313950}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -16.495, y: 86.51}
+  m_SizeDelta: {x: 94.491, y: 17.554}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &591860641
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 591860639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: shipname
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 13446f7ba2afd486d9c2421f18af262f, type: 2}
+  m_sharedMaterial: {fileID: 732966362866566488, guid: 13446f7ba2afd486d9c2421f18af262f, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 14.8
+  m_fontSizeBase: 14.8
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 4
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_enableWordWrapping: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 1
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &591860642
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 591860639}
+  m_CullTransparentMesh: 1
 --- !u!1 &595245994 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4969452813190747524, guid: a02f4c1278373ae4ab056f5c06cab802, type: 3}
@@ -12598,12 +12733,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   changeTextColor: 0
-  buttonImageHover: {fileID: 0}
-  buttonImageNormal: {fileID: 0}
+  buttonImageHover: {fileID: 21300000, guid: 8802463ca171a4540b0b8a233b0200eb, type: 3}
+  buttonImageNormal: {fileID: 21300000, guid: c306bd60a6f600a4ebdee5b2ba75105e, type: 3}
   inactiveTextColor: {r: 1, g: 1, b: 1, a: 1}
   activeTextColor: {r: 0, g: 0, b: 0, a: 0}
-  hoverSound: {fileID: 0}
-  clickSound: {fileID: 0}
+  hoverSound: {fileID: 8300000, guid: 29d330c8481f84ebbbb5eba03fd8e188, type: 3}
+  clickSound: {fileID: 8300000, guid: 954485096b6c846218d49fa223b5e841, type: 3}
 --- !u!114 &595290899
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12623,7 +12758,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 2
+  m_Transition: 0
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -12647,7 +12782,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 595290900}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1185467148}
+        m_TargetAssemblyTypeName: Shop.Attribute, Assembly-CSharp
+        m_MethodName: Decrease
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &595290900
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21494,12 +21641,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   changeTextColor: 0
-  buttonImageHover: {fileID: 0}
-  buttonImageNormal: {fileID: 0}
+  buttonImageHover: {fileID: 21300000, guid: 8802463ca171a4540b0b8a233b0200eb, type: 3}
+  buttonImageNormal: {fileID: 21300000, guid: c306bd60a6f600a4ebdee5b2ba75105e, type: 3}
   inactiveTextColor: {r: 1, g: 1, b: 1, a: 1}
   activeTextColor: {r: 0, g: 0, b: 0, a: 0}
-  hoverSound: {fileID: 0}
-  clickSound: {fileID: 0}
+  hoverSound: {fileID: 8300000, guid: 29d330c8481f84ebbbb5eba03fd8e188, type: 3}
+  clickSound: {fileID: 8300000, guid: 954485096b6c846218d49fa223b5e841, type: 3}
 --- !u!114 &1168488732
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21519,7 +21666,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 2
+  m_Transition: 0
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -21543,7 +21690,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1168488733}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1185467148}
+        m_TargetAssemblyTypeName: Shop.Attribute, Assembly-CSharp
+        m_MethodName: Increase
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1168488733
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22072,7 +22231,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   statType: 0
   attributeType: 0
-  slots: {fileID: 1322370533}
+  increaseValue: 0
   takenIndicator: {fileID: 21300000, guid: 00a60305351bc77498d0177f13726107, type: 3}
   openIndicator: {fileID: 21300000, guid: 66f9d2d6eaa547448b8f065f0e2408c5, type: 3}
   plusButton: {fileID: 1168488732}
@@ -22117,7 +22276,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 1820.4, y: -0.049804688}
+  m_AnchoredPosition: {x: 1280, y: 0.000002861}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &1195179842
@@ -24033,6 +24192,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1005744479}
+  - {fileID: 591860640}
   m_Father: {fileID: 1647469098}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -34492,6 +34652,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b280dceeb1605498eb1e72bb197f1427, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shipType: {fileID: 0}
   crosshair: {fileID: 671991444}
   laser: {fileID: 1178998862013183786, guid: f539eb8736568485a88ac7fabc149306, type: 3}
   playerHurtEffect: {fileID: 3053539486649149702, guid: 9c22355a5db99c441bab6478f07b50da, type: 3}
@@ -34504,6 +34665,9 @@ MonoBehaviour:
   notificationText: {fileID: 825259352}
   positive: {r: 0.4850481, g: 0.9433962, b: 0.4889459, a: 1}
   negative: {r: 1, g: 0.3254717, b: 0.3935436, a: 1}
+  asd:
+  - damage
+  - firepower
 --- !u!212 &1773145220
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -39805,6 +39969,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b280dceeb1605498eb1e72bb197f1427, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shipType: {fileID: 0}
   crosshair: {fileID: 671991444}
   laser: {fileID: 1178998862013183786, guid: f539eb8736568485a88ac7fabc149306, type: 3}
   playerHurtEffect: {fileID: 3053539486649149702, guid: 9c22355a5db99c441bab6478f07b50da, type: 3}
@@ -39816,6 +39981,9 @@ MonoBehaviour:
   notificationText: {fileID: 825259352}
   positive: {r: 0.4850481, g: 0.9433962, b: 0.4889459, a: 1}
   negative: {r: 1, g: 0.3254717, b: 0.3935436, a: 1}
+  asd:
+  - damage
+  - firepower
 --- !u!114 &212007111774112670
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 571f34d9d91b54083a4be235be6cc98a, type: 3}
   m_Name: Cadet
   m_EditorClassIdentifier: 
-  shipName: 
+  shipName: Cadet
   shipSprite: {fileID: 0}
   baseHitPoints: 20
   baseMaxHitPoints: 20

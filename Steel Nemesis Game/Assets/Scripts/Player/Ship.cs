@@ -12,13 +12,13 @@ namespace Player
         
         [Header("Base Stats")]
         public float baseHitPoints = 20;
-        public float baseMaxHitPoints = 20;
+        public float baseMaxHitPoints = 20; //
         public float baseBattery = 10;
-        public float baseMaxBattery = 10;
-        public float baseBatteryRecharge = 25;
-        public float baseFireCost = 10;
-        public float baseCooldown = 0.5f;
-        public float baseFirepower = 0.75f;
+        public float baseMaxBattery = 10; //
+        public float baseBatteryRecharge = 25; //
+        public float baseFireCost = 10; //
+        public float baseCooldown = 0.5f; //
+        public float baseFirepower = 0.75f; //
         public float baseDamage = 12;
         public float baseEnginePerformance = 2f;
         public float baseAim = 2;
@@ -27,7 +27,13 @@ namespace Player
         public float baseBulletSpread = 0.15f;
         
         [Header("Stat Multipliers")]
-        public float baseDamageMultiplier = 20;
-
+        public float maxHitPointsMultiplier = 1;
+        public float maxBatteryMultiplier = 1;
+        public float batteryRechargeMultiplier = 1;
+        public float fireCostMultiplier = 1;
+        public float firepowerMultiplier = 1;
+        public float cooldownMultiplier = 1;
+        public float damageMultiplier = 1;
+        public float enginePerformanceMultiplier = 1;
     }
 }

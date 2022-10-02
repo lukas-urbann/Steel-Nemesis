@@ -16,45 +16,107 @@ namespace Shop
     {
         [SerializeField] protected ShipStats statType;
         [SerializeField] protected AttributeType attributeType;
-        public GameObject slots;
+        [SerializeField] protected float increaseValue;
+        private GameObject slots;
         protected List<Image> upgradeIndicators = new List<Image>();
         [SerializeField] protected Sprite takenIndicator, openIndicator;
         protected int statLevel = 0;
 
         public Button plusButton, minusButton;
-
+        
         private void Start()
         {
+            slots = transform.Find("Slots").gameObject;
+            
             foreach (Transform child in slots.transform)
                 upgradeIndicators.Add(child.GetComponent<Image>());
             
             CheckLevel();
         }
 
-        protected void DisableButton()
+        protected void DisableButton(bool isPositive)
         {
-            
+            switch (isPositive)
+            {
+                case true:
+                    plusButton.interactable = false;
+                    break;
+                case false:
+                    minusButton.interactable = false;
+                    break;
+            }
         }
         
-        protected void EnableButton()
+        protected void EnableButton(bool isPositive)
+        {
+            switch (isPositive)
+            {
+                case true:
+                    plusButton.interactable = true;
+                    break;
+                case false:
+                    minusButton.interactable = true;
+                    break;
+            }
+        }
+
+        public void UpdateLabel()
         {
             
         }
 
-        protected void Increase()
+        public void Increase()
         {
+            switch (attributeType)
+            {
+                case AttributeType.Player:
+                    Player.Controller.StatsInstance.UpgradeStatCall(statType, increaseValue);
+                    break;
+                case AttributeType.Ship:
+                    Player.Controller.Instance.UpgradeStatCall(statType, increaseValue); //vyřešit zpřerozdělení shipu a hráče
+                    break;
+                default:
+                    Debug.LogError("Unknown Attribute Type");
+                    break;
+            }
             statLevel++;
             CheckLevel();
         }
 
-        protected void Decrease()
+        public void Decrease()
         {
+            switch (attributeType)
+            {
+                case AttributeType.Player:
+                    Player.Controller.StatsInstance.UpgradeStatCall(statType, -increaseValue);
+                    break;
+                case AttributeType.Ship:
+                    Player.Controller.Instance.UpgradeStatCall(statType, -increaseValue); //vyřešit zpřerozdělení shipu a hráče
+                    break;
+                default:
+                    Debug.LogError("Unknown Attribute Type");
+                    break;
+            }
             statLevel--;
             CheckLevel();
         }
 
+        protected void CalculatePrice()
+        {
+            
+        }
+
         protected void CheckLevel()
         {
+            EnableButton(true);
+            EnableButton(false);
+            
+            if(statLevel <= 0)
+                DisableButton(false);
+            
+            if(statLevel >= 10)
+                DisableButton(true);
+                
             for (int i = 0; i < upgradeIndicators.Count; i++)
             {
                 upgradeIndicators[i].sprite = openIndicator;

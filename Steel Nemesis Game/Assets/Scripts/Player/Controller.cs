@@ -22,32 +22,37 @@ namespace Player
     public class Controller : MonoBehaviour
     {
         public static Controller Instance;
+        public static Stats StatsInstance;
 
-        //Player Staty
+        //Ship Staty
         private int xp = 0;
         private int level = 1;
 
         //Ship Staty
-        private float hitPoints = 20;
-        private float maxHitPoints = 20;
+        [SerializeField] private float hitPoints = 20;
+        [SerializeField]private float maxHitPoints = 20;
 
-        private float battery = 10;
-        private float maxBattery = 10;
-        private float batteryRecharge = 25;
+        [SerializeField] private float battery = 10;
+        [SerializeField] private float maxBattery = 10;
+        [SerializeField] private float batteryRecharge = 25;
 
-        private float fireCost = 10;
-        private float cooldown = 0.5f;
-        private float firepower = 0.75f;
-        private float damage = 12;
-        private float enginePerformance = 2f;
-        private float aim = 2;
-        private float turn = 4;
-        private float scale = 5;
-        private float bulletSpread = 0.15f;
+        [SerializeField] private float fireCost = 10;
+        [SerializeField] private float cooldown = 0.5f;
+        [SerializeField] private float firepower = 0.75f;
+        [SerializeField] private float damage = 12;
+        [SerializeField] private float enginePerformance = 2f;
+        [SerializeField] private float aim = 2;
+        [SerializeField] private float turn = 4;
+        [SerializeField] private float scale = 5;
+        [SerializeField] private float bulletSpread = 0.15f;
 
         private bool canFire = true;
         private bool isColliding = false; //Pro práci s kolizemi s triggery
+        public Ship shipType;
 
+        public delegate void OnShipUpgrade();
+        public OnShipUpgrade statUpgrade;
+            
         /*
          * Upgradování statů funguje 0-10
          * --------
@@ -70,14 +75,12 @@ namespace Player
         public GameObject laser;
         public GameObject playerHurtEffect;
 
-
         [Header("Transforms")]
         public List<Transform> firePoints = new List<Transform>();
 
         [Header("AudioClips")] public AudioClip fire;
         public AudioClip pickup;
         public AudioClip playerHurt;
-
 
         [Header("Notification Pickup")]
         public TMP_Text notificationText;
@@ -89,12 +92,21 @@ namespace Player
             if (Instance != null && Instance != this)
                 Destroy(gameObject);
             else
+            {
                 Instance = this;
+                StatsInstance = GetComponent<Player.Stats>();
+            }
         }
 
         private void Start()
         {
             Controllers.Shop.Instance.onClose += ShopCloseAction;
+            statUpgrade += CalculateUpgrades;
+        }
+
+        private void OnEnable()
+        {
+            CalculateUpgrades();
         }
 
         private void Update()
@@ -148,14 +160,16 @@ namespace Player
         {
             Audio.Instance.PlaySound(fire);
             battery -= (int)fireCost;
+            Vector3 positionUp;
 
             foreach (Transform pos in firePoints)
             {
+                positionUp = pos.up;
                 GameObject projectile = Instantiate(laser, pos.position, pos.rotation);
                 projectile.GetComponent<Laser>().SetDamage(damage);
                 Rigidbody2D rb = projectile.GetComponent<Rigidbody2D>();
                 Vector2 aimPosition =
-                    new Vector2(Random.Range(pos.up.x - bulletSpread, pos.up.x + bulletSpread), pos.up.y); // dodělat random spread
+                    new Vector2(Random.Range(positionUp.x - bulletSpread,positionUp.x + bulletSpread), pos.up.y); // dodělat random spread
                 rb.AddForce(aimPosition * firepower, ForceMode2D.Impulse);
                 StartCoroutine(FireCooldown());
             }
@@ -172,13 +186,13 @@ namespace Player
         {
             hitPoints -= value;
 
-            CheckHP();
+            CheckHp();
         }
 
-        private void CheckHP()
+        private void CheckHp()
         {
             if (hitPoints <= 0)
-                Controllers.Game.Instance.GameOver();
+                Game.Instance.GameOver();
         }
 
         //GETY
@@ -233,7 +247,7 @@ namespace Player
                     Instantiate(Prefabs.Instance.scrap, col.transform.position, Quaternion.identity);
                     Destroy(col.gameObject);
                     hitPoints -= 20 + (Controllers.Wave.Instance.GetLevel() * 0.5f);
-                    CheckHP();
+                    CheckHp();
                     break;
                 default:
                     break;
@@ -357,8 +371,7 @@ namespace Player
 
         private void CreditCollection()
         {
-            Controllers.Credit.Instance.AddCredit(Random.Range(0, 50)); //Dodělat wave scaling
-
+            Credit.Instance.AddCredit(Random.Range(0, 50)); //Dodělat wave scaling
             notificationText.color = positive;
             notificationText.text = "++ Credit";
             SpawnNotification();
@@ -376,12 +389,12 @@ namespace Player
             isColliding = false;
         }
 
-        public void UpgradeStatCall(ShipStats stat, int amount)
+        public void UpgradeStatCall(ShipStats stat, float amount)
         {
             UpgradeStat(stat, amount);
         }
 
-        private void UpgradeStat(ShipStats stat, int amount)
+        private void UpgradeStat(ShipStats stat, float amount)
         {
             switch (stat)
             {
@@ -415,38 +428,24 @@ namespace Player
                 case ShipStats.HitPoints:
                     hitPoints += amount;
                     break;
-                default:
-                    break;
             }
         }
 
-        public float GetStat(ShipStats stat)
+        public void CalculateUpgrades()
         {
-            switch (stat)
-            {
-                case ShipStats.Aim:
-                    return aim;
-                case ShipStats.Battery:
-                    return battery;
-                case ShipStats.BatteryRecharge:
-                    return batteryRecharge;
-                case ShipStats.Cooldown:
-                    return cooldown;
-                case ShipStats.Damage:
-                    return damage;
-                case ShipStats.Firepower:
-                    return firepower;
-                case ShipStats.Turn:
-                    return turn;
-                case ShipStats.Scale:
-                    return scale;
-                case ShipStats.EnginePerformance:
-                    return enginePerformance;
-                case ShipStats.HitPoints:
-                    return hitPoints;
-            }
-
-            return 0;
+            //TODO: Fixnout cancer
+            maxHitPoints = (shipType.baseMaxHitPoints + maxHitPoints) * shipType.maxBatteryMultiplier;
+            maxBattery = (shipType.baseMaxBattery + maxBattery) * shipType.maxBatteryMultiplier;
+            batteryRecharge = (shipType.baseBatteryRecharge + batteryRecharge) * shipType.batteryRechargeMultiplier;
+            fireCost = (shipType.baseFireCost + fireCost) * shipType.fireCostMultiplier;
+            cooldown = (shipType.baseCooldown + cooldown) * shipType.cooldownMultiplier; 
+            firepower = (shipType.baseFirepower + firepower) * shipType.firepowerMultiplier;
+            damage = (shipType.baseDamage + damage) * shipType.damageMultiplier;
+            enginePerformance = (shipType.baseEnginePerformance + enginePerformance) * shipType.enginePerformanceMultiplier;
+            aim = shipType.baseAim;
+            turn = shipType.baseTurn;
+            scale = shipType.baseScale;
+            bulletSpread = shipType.baseBulletSpread;
         }
 
         public float GetCrosshairSpeed()
