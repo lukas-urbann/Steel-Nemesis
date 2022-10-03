@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Controllers;
 using UnityEngine;
 
@@ -6,6 +7,8 @@ namespace Player
 {
     public class Stats : MonoBehaviour
     {
+        private string asd = "4.4";
+    
         private float maxHitPoints = 0;
         private float maxBattery = 0;
         private float batteryRecharge = 0;

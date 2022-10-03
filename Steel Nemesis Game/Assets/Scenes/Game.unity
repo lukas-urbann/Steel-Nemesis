@@ -1830,7 +1830,7 @@ Transform:
   - {fileID: 1156494085}
   - {fileID: 1233945560}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &156861308
 GameObject:
@@ -22276,7 +22276,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 1280, y: 0.000002861}
+  m_AnchoredPosition: {x: 1280, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &1195179842
@@ -24858,7 +24858,7 @@ Transform:
   - {fileID: 1878271664}
   - {fileID: 1593707413}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1348928231
 GameObject:
@@ -25637,7 +25637,7 @@ RectTransform:
   m_Children:
   - {fileID: 825259351}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -26657,7 +26657,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1525024238
 GameObject:
@@ -27244,7 +27244,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1576045705
 GameObject:
@@ -27728,7 +27728,7 @@ Transform:
   - {fileID: 1624150004}
   - {fileID: 2070591317}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1618521024
 GameObject:
@@ -34652,6 +34652,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b280dceeb1605498eb1e72bb197f1427, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hitPoints: 20
+  maxHitPoints: 20
+  battery: 10
+  maxBattery: 10
+  batteryRecharge: 25
+  fireCost: 10
+  cooldown: 0.5
+  firepower: 0.75
+  damage: 12
+  enginePerformance: 2
+  aim: 2
+  turn: 4
+  scale: 5
+  bulletSpread: 0.15
   shipType: {fileID: 0}
   crosshair: {fileID: 671991444}
   laser: {fileID: 1178998862013183786, guid: f539eb8736568485a88ac7fabc149306, type: 3}
@@ -34665,9 +34679,6 @@ MonoBehaviour:
   notificationText: {fileID: 825259352}
   positive: {r: 0.4850481, g: 0.9433962, b: 0.4889459, a: 1}
   negative: {r: 1, g: 0.3254717, b: 0.3935436, a: 1}
-  asd:
-  - damage
-  - firepower
 --- !u!212 &1773145220
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -34738,7 +34749,7 @@ Transform:
   - {fileID: 1178847974}
   - {fileID: 1928741391}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1790798713
 GameObject:
@@ -39814,7 +39825,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1312275390467074}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: -2.5, z: 0}
   m_LocalScale: {x: 4, y: 4, z: 5}
   m_ConstrainProportionsScale: 0
@@ -39823,7 +39834,7 @@ Transform:
   - {fileID: 4268094821992156}
   - {fileID: 1762935867}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4087717262790204
 Transform:
@@ -39969,7 +39980,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b280dceeb1605498eb1e72bb197f1427, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shipType: {fileID: 0}
+  hitPoints: 0
+  maxHitPoints: 0
+  battery: 0
+  maxBattery: 0
+  batteryRecharge: 0
+  fireCost: 0
+  cooldown: 0
+  firepower: 0
+  damage: 0
+  enginePerformance: 0
+  aim: 0
+  turn: 0
+  scale: 0
+  bulletSpread: 0
+  shipType: {fileID: 11400000, guid: b5772db4f98354ab68daf37265079c45, type: 2}
   crosshair: {fileID: 671991444}
   laser: {fileID: 1178998862013183786, guid: f539eb8736568485a88ac7fabc149306, type: 3}
   playerHurtEffect: {fileID: 3053539486649149702, guid: 9c22355a5db99c441bab6478f07b50da, type: 3}
@@ -39981,9 +40006,6 @@ MonoBehaviour:
   notificationText: {fileID: 825259352}
   positive: {r: 0.4850481, g: 0.9433962, b: 0.4889459, a: 1}
   negative: {r: 1, g: 0.3254717, b: 0.3935436, a: 1}
-  asd:
-  - damage
-  - firepower
 --- !u!114 &212007111774112670
 MonoBehaviour:
   m_ObjectHideFlags: 0

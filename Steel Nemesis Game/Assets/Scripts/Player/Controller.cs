@@ -29,22 +29,22 @@ namespace Player
         private int level = 1;
 
         //Ship Staty
-        [SerializeField] private float hitPoints = 20;
-        [SerializeField]private float maxHitPoints = 20;
+        [SerializeField] private float hitPoints;
+        [SerializeField]private float maxHitPoints;
 
-        [SerializeField] private float battery = 10;
-        [SerializeField] private float maxBattery = 10;
-        [SerializeField] private float batteryRecharge = 25;
+        [SerializeField] private float battery;
+        [SerializeField] private float maxBattery;
+        [SerializeField] private float batteryRecharge;
 
-        [SerializeField] private float fireCost = 10;
-        [SerializeField] private float cooldown = 0.5f;
-        [SerializeField] private float firepower = 0.75f;
-        [SerializeField] private float damage = 12;
-        [SerializeField] private float enginePerformance = 2f;
-        [SerializeField] private float aim = 2;
-        [SerializeField] private float turn = 4;
-        [SerializeField] private float scale = 5;
-        [SerializeField] private float bulletSpread = 0.15f;
+        [SerializeField] private float fireCost;
+        [SerializeField] private float cooldown;
+        [SerializeField] private float firepower;
+        [SerializeField] private float damage;
+        [SerializeField] private float enginePerformance;
+        [SerializeField] private float aim;
+        [SerializeField] private float turn;
+        [SerializeField] private float scale;
+        [SerializeField] private float bulletSpread;
 
         private bool canFire = true;
         private bool isColliding = false; //Pro práci s kolizemi s triggery

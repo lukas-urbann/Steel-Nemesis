@@ -14,13 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shipName: Cadet
   shipSprite: {fileID: 0}
-  baseHitPoints: 20
+  baseHitPoints: 100
   baseMaxHitPoints: 20
-  baseBattery: 10
+  baseBattery: 100
   baseMaxBattery: 10
-  baseBatteryRecharge: 25
+  baseBatteryRecharge: 100
   baseFireCost: 10
-  baseCooldown: 0.5
+  baseCooldown: 0.1
   baseFirepower: 0.75
   baseDamage: 12
   baseEnginePerformance: 2
@@ -28,4 +28,11 @@ MonoBehaviour:
   baseTurn: 4
   baseScale: 5
   baseBulletSpread: 0.15
-  baseDamageMultiplier: 20
+  maxHitPointsMultiplier: 1
+  maxBatteryMultiplier: 1
+  batteryRechargeMultiplier: 1
+  fireCostMultiplier: 1
+  firepowerMultiplier: 1
+  cooldownMultiplier: 1
+  damageMultiplier: 1
+  enginePerformanceMultiplier: 1

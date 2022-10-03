@@ -45,7 +45,7 @@ namespace Controllers
                 shopWindow.SetActive(true);
             
             SetCursorVisible(true);
-            onOpen.Invoke();
+            //onOpen.Invoke();
             
             shopWindow.SetActive(true);
             ResetChanceValues();
