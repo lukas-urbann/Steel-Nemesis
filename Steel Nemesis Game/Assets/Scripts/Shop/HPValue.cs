@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Controllers;
 using UnityEngine;
 using TMPro;
 
@@ -23,7 +24,7 @@ namespace Shop
 
         private void UpdateText()
         {
-            valueText.text = Player.Controller.Instance.GetHitpoints() + " / " + Player.Controller.Instance.GetMaxHitpoints();
+            valueText.text = Player.Controller.Instance.GetHP() + " / " + Player.Controller.StatsInstance.GetShipStats(ShipStats.MaxHitPoints);
         }
     }
 }

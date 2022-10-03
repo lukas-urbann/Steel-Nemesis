@@ -70,10 +70,8 @@ namespace Shop
             switch (attributeType)
             {
                 case AttributeType.Player:
-                    //Player.Controller.StatsInstance.UpgradeStatCall(statType, increaseValue);
                     break;
                 case AttributeType.Ship:
-                    Player.Controller.Instance.UpgradeStatCall(statType, increaseValue); //vyřešit zpřerozdělení shipu a hráče
                     break;
                 default:
                     Debug.LogError("Unknown Attribute Type");
@@ -88,10 +86,8 @@ namespace Shop
             switch (attributeType)
             {
                 case AttributeType.Player:
-                    //Player.Controller.StatsInstance.UpgradeStatCall(statType, -increaseValue);
                     break;
                 case AttributeType.Ship:
-                    Player.Controller.Instance.UpgradeStatCall(statType, -increaseValue); //vyřešit zpřerozdělení shipu a hráče
                     break;
                 default:
                     Debug.LogError("Unknown Attribute Type");

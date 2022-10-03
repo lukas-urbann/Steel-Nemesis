@@ -210,7 +210,7 @@ namespace Enemy
         protected virtual void LaserHit()
         {
             Controllers.Audio.Instance.HitSound();
-            hp -= Player.Controller.Instance.GetFireDamage();
+            hp -= Player.Controller.StatsInstance.GetShipStats(ShipStats.Damage);
             CheckHp();
         }
 

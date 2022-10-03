@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Controllers;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -28,12 +29,12 @@ namespace Player
             switch (type)
             {
                 case BarType.Energy:
-                    slider.value = Controller.Instance.GetEnergy();
-                    slider.maxValue = Controller.Instance.GetMaxEnergy();
+                    slider.value = Controller.Instance.GetBattery();
+                    slider.maxValue = Controller.StatsInstance.GetShipStats(ShipStats.MaxBattery);
                     break;
                 case BarType.HitPoints:
-                    slider.value = Controller.Instance.GetHitpoints();
-                    slider.maxValue = Controller.Instance.GetMaxHitpoints();
+                    slider.value = Controller.Instance.GetHP();
+                    slider.maxValue = Controller.StatsInstance.GetShipStats(ShipStats.MaxHitPoints);
                     break;
             }
         }

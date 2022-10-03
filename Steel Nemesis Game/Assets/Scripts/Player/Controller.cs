@@ -23,24 +23,10 @@ namespace Player
     {
         public static Controller Instance;
         public static Stats StatsInstance;
-        
-        //Ship Staty
-        [SerializeField] private float hitPoints;
-        [SerializeField]private float maxHitPoints;
 
+        [SerializeField] private float hp;
         [SerializeField] private float battery;
-        [SerializeField] private float maxBattery;
-        [SerializeField] private float batteryRecharge;
-
         [SerializeField] private float fireCost;
-        [SerializeField] private float cooldown;
-        [SerializeField] private float firepower;
-        [SerializeField] private float damage;
-        [SerializeField] private float enginePerformance;
-        [SerializeField] private float aim;
-        [SerializeField] private float turn;
-        [SerializeField] private float scale;
-        [SerializeField] private float bulletSpread;
 
         private bool canFire = true;
         private bool isColliding = false; //Pro práci s kolizemi s triggery
@@ -97,12 +83,7 @@ namespace Player
         private void Start()
         {
             Controllers.Shop.Instance.onClose += ShopCloseAction;
-            statUpgrade += CalculateUpgrades;
-        }
-
-        private void OnEnable()
-        {
-            CalculateUpgrades();
+            //statUpgrade += CalculateUpgrades;
         }
 
         private void Update()
@@ -115,19 +96,19 @@ namespace Player
 
         private void CheckStats()
         {
-            if (battery < maxBattery)
-                battery += batteryRecharge * (Time.deltaTime * 1);
+            if (battery < StatsInstance.GetShipStats(ShipStats.MaxBattery))
+                battery += StatsInstance.GetShipStats(ShipStats.BatteryRecharge) * (Time.deltaTime * 1);
             else
-                battery = maxBattery;
+                battery = StatsInstance.GetShipStats(ShipStats.MaxBattery);
 
-            if (hitPoints > maxHitPoints)
-                hitPoints = maxHitPoints;
+            if (hp > StatsInstance.GetShipStats(ShipStats.MaxHitPoints))
+                hp = StatsInstance.GetShipStats(ShipStats.MaxHitPoints);
         }
 
         private void CheckMovement()
         {
             var move = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0);
-            transform.position += move * (Time.deltaTime * enginePerformance);
+            transform.position += move * (Time.deltaTime * StatsInstance.GetShipStats(ShipStats.EnginePerformance));
         }
 
         private void RotatePlayer()
@@ -137,7 +118,7 @@ namespace Player
             qt = Quaternion.AngleAxis(angle - 90, Vector3.forward);
 
             if (!Controllers.Pause.Instance.GetPauseState())
-                transform.rotation = Quaternion.RotateTowards(transform.rotation, qt, turn);
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, qt, StatsInstance.GetShipStats(ShipStats.Turn));
         }
 
         private void CheckFire()
@@ -162,11 +143,11 @@ namespace Player
             {
                 positionUp = pos.up;
                 GameObject projectile = Instantiate(laser, pos.position, pos.rotation);
-                projectile.GetComponent<Laser>().SetDamage(damage);
+                projectile.GetComponent<Laser>().SetDamage(StatsInstance.GetShipStats(ShipStats.Damage));
                 Rigidbody2D rb = projectile.GetComponent<Rigidbody2D>();
                 Vector2 aimPosition =
-                    new Vector2(Random.Range(positionUp.x - bulletSpread,positionUp.x + bulletSpread), pos.up.y); // dodělat random spread
-                rb.AddForce(aimPosition * firepower, ForceMode2D.Impulse);
+                    new Vector2(Random.Range(positionUp.x - 0,positionUp.x + 0), pos.up.y); // dodělat random spread
+                rb.AddForce(aimPosition * StatsInstance.GetShipStats(ShipStats.Firepower), ForceMode2D.Impulse);
                 StartCoroutine(FireCooldown());
             }
         }
@@ -174,49 +155,22 @@ namespace Player
         private IEnumerator FireCooldown()
         {
             canFire = false;
-            yield return new WaitForSeconds(cooldown);
+            yield return new WaitForSeconds(StatsInstance.GetShipStats(ShipStats.Cooldown));
             canFire = true;
         }
 
         public void RemoveHitpoints(float value)
         {
-            hitPoints -= value;
+            hp -= value;
 
             CheckHp();
         }
 
         private void CheckHp()
         {
-            if (hitPoints <= 0)
+            if (hp <= 0)
                 Game.Instance.GameOver();
         }
-
-        //GETY
-        public float GetFireDamage()
-        {
-            return damage;
-        }
-
-        public float GetEnergy()
-        {
-            return battery;
-        }
-
-        public float GetHitpoints()
-        {
-            return hitPoints;
-        }
-
-        public float GetMaxEnergy()
-        {
-            return maxBattery;
-        }
-
-        public float GetMaxHitpoints()
-        {
-            return maxHitPoints;
-        }
-        // !GETY
 
         public void OnCollisionEnter2D(Collision2D col)
         {
@@ -228,10 +182,10 @@ namespace Player
 
                     col.gameObject.GetComponent<BasicEnemy>().InstaKill();
 
-                    if (hitPoints < (maxHitPoints / 4))
-                        RemoveHitpoints(hitPoints);
+                    if (hp < (StatsInstance.GetShipStats(ShipStats.MaxHitPoints) / 4))
+                        RemoveHitpoints(hp);
                     else
-                        hitPoints -= hitPoints / 2;
+                        hp -= hp / 2;
                     break;
                 case "Laser":
                     if (col.gameObject.layer != 8)
@@ -242,7 +196,7 @@ namespace Player
                     Instantiate(playerHurtEffect, col.transform.position, Quaternion.identity);
                     Instantiate(Prefabs.Instance.scrap, col.transform.position, Quaternion.identity);
                     Destroy(col.gameObject);
-                    hitPoints -= 20 + (Controllers.Wave.Instance.GetLevel() * 0.5f);
+                    hp -= 20; // TODO: Enemy dmg
                     CheckHp();
                     break;
                 default:
@@ -284,7 +238,7 @@ namespace Player
                 }
 
                 switch (collectible.pickupType)
-                {
+                {/*
                     case CollectibleType.Barrier:
                         Controllers.Barrier.Instance.ChangeHitpoints(1);
                         collectible.Collect();
@@ -295,11 +249,6 @@ namespace Player
                         cooldown -= collectible.GetValue();
                         collectible.Collect();
                         notificationText.text = collectibleType + " Cooldown";
-
-                        if (cooldown < 0.05f)
-                            cooldown = 0.05f;
-                        else if (cooldown > 2)
-                            cooldown = 2;
                         break;
 
                     case CollectibleType.Damage:
@@ -307,59 +256,36 @@ namespace Player
                         damage += collectible.GetValue();
                         collectible.Collect();
                         notificationText.text = collectibleType + " Damage";
-
-                        if (damage < 5f)
-                            damage = 5;
                         break;
 
                     case CollectibleType.Energy:
                         maxBattery += collectible.GetValue();
                         collectible.Collect();
                         notificationText.text = collectibleType + " Battery";
-
-                        if (maxBattery < 20)
-                            maxBattery = 20;
-                        else if (maxBattery > 1000)
-                            maxBattery = 1000;
                         break;
 
                     case CollectibleType.Firepower:
                         firepower += collectible.GetValue();
                         collectible.Collect();
                         notificationText.text = collectibleType + " Firepower";
-
-                        if (firepower < 0.1f)
-                            firepower = 0.1f;
-                        else if (firepower > 5)
-                            firepower = 5;
                         break;
 
                     case CollectibleType.Speed:
                         enginePerformance += collectible.GetValue();
                         collectible.Collect();
                         notificationText.text = collectibleType + " Speed";
-
-                        if (enginePerformance < 0.5f)
-                            enginePerformance = 0.5f;
-                        else if (enginePerformance > 10)
-                            enginePerformance = 10;
                         break;
 
                     case CollectibleType.HP:
                         maxHitPoints += collectible.GetValue();
                         collectible.Collect();
                         notificationText.text = collectibleType + " HP";
-
-                        if (maxHitPoints < 20)
-                            maxHitPoints = 20;
-                        else if (maxHitPoints > 1000)
-                            maxHitPoints = 1000;
                         break;
 
                     default:
                         Debug.Log("the fuck");
                         break;
-                }
+                */}
                 SpawnNotification();
             }
             StartCoroutine(TriggerCollisionReset());
@@ -390,32 +316,21 @@ namespace Player
             
         }
 
-        public void CalculateUpgrades()
+        public float GetHP()
         {
-            maxHitPoints = (shipType.baseMaxHitPoints + StatsInstance.GetShipStats()) * shipType.maxBatteryMultiplier;
-            // maxBattery = (shipType.baseMaxBattery + maxBattery) * shipType.maxBatteryMultiplier;
-            // batteryRecharge = (shipType.baseBatteryRecharge + batteryRecharge) * shipType.batteryRechargeMultiplier;
-            // fireCost = (shipType.baseFireCost + fireCost) * shipType.fireCostMultiplier;
-            // cooldown = (shipType.baseCooldown + cooldown) * shipType.cooldownMultiplier; 
-            // firepower = (shipType.baseFirepower + firepower) * shipType.firepowerMultiplier;
-            // damage = (shipType.baseDamage + damage) * shipType.damageMultiplier;
-            // enginePerformance = (shipType.baseEnginePerformance + enginePerformance) * shipType.enginePerformanceMultiplier;
-            // aim = shipType.baseAim;
-            // turn = shipType.baseTurn;
-            // scale = shipType.baseScale;
-            // bulletSpread = shipType.baseBulletSpread;
+            return hp;
         }
 
-        public float GetCrosshairSpeed()
+        public float GetBattery()
         {
-            return aim;
+            return battery;
         }
-        
+
         private void ShopCloseAction()
         {
             transform.localPosition = new Vector3(0, -2.5f, 0);
             canFire = true;
-            battery = maxBattery;
+            battery = StatsInstance.GetShipStats(ShipStats.MaxBattery);
         }
     }
 } 
