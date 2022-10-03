@@ -39774,6 +39774,7 @@ GameObject:
   - component: {fileID: 212007111774112672}
   - component: {fileID: 212007111774112673}
   - component: {fileID: 212007111774112674}
+  - component: {fileID: 212007111774112675}
   m_Layer: 7
   m_Name: Player Cadet
   m_TagString: Player
@@ -40100,6 +40101,18 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
+--- !u!114 &212007111774112675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1312275390467074}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfb5d5f354d949fb80050e83fac55cd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &212735957618594224
 SpriteRenderer:
   m_ObjectHideFlags: 0

@@ -23,11 +23,7 @@ namespace Player
     {
         public static Controller Instance;
         public static Stats StatsInstance;
-
-        //Ship Staty
-        private int xp = 0;
-        private int level = 1;
-
+        
         //Ship Staty
         [SerializeField] private float hitPoints;
         [SerializeField]private float maxHitPoints;
@@ -389,63 +385,25 @@ namespace Player
             isColliding = false;
         }
 
-        public void UpgradeStatCall(ShipStats stat, float amount)
+        private void AssignStats()
         {
-            UpgradeStat(stat, amount);
-        }
-
-        private void UpgradeStat(ShipStats stat, float amount)
-        {
-            switch (stat)
-            {
-                case ShipStats.Aim:
-                    aim += amount;
-                    break;
-                case ShipStats.Battery:
-                    battery += amount;
-                    break;
-                case ShipStats.BatteryRecharge:
-                    batteryRecharge += amount;
-                    break;
-                case ShipStats.Cooldown:
-                    cooldown += amount;
-                    break;
-                case ShipStats.Damage:
-                    damage += amount;
-                    break;
-                case ShipStats.Firepower:
-                    firepower += amount;
-                    break;
-                case ShipStats.Turn:
-                    turn += amount;
-                    break;
-                case ShipStats.Scale:
-                    scale += amount;
-                    break;
-                case ShipStats.EnginePerformance:
-                    enginePerformance += amount;
-                    break;
-                case ShipStats.HitPoints:
-                    hitPoints += amount;
-                    break;
-            }
+            
         }
 
         public void CalculateUpgrades()
         {
-            //TODO: Fixnout cancer
-            maxHitPoints = (shipType.baseMaxHitPoints + maxHitPoints) * shipType.maxBatteryMultiplier;
-            maxBattery = (shipType.baseMaxBattery + maxBattery) * shipType.maxBatteryMultiplier;
-            batteryRecharge = (shipType.baseBatteryRecharge + batteryRecharge) * shipType.batteryRechargeMultiplier;
-            fireCost = (shipType.baseFireCost + fireCost) * shipType.fireCostMultiplier;
-            cooldown = (shipType.baseCooldown + cooldown) * shipType.cooldownMultiplier; 
-            firepower = (shipType.baseFirepower + firepower) * shipType.firepowerMultiplier;
-            damage = (shipType.baseDamage + damage) * shipType.damageMultiplier;
-            enginePerformance = (shipType.baseEnginePerformance + enginePerformance) * shipType.enginePerformanceMultiplier;
-            aim = shipType.baseAim;
-            turn = shipType.baseTurn;
-            scale = shipType.baseScale;
-            bulletSpread = shipType.baseBulletSpread;
+            maxHitPoints = (shipType.baseMaxHitPoints + StatsInstance.GetShipStats()) * shipType.maxBatteryMultiplier;
+            // maxBattery = (shipType.baseMaxBattery + maxBattery) * shipType.maxBatteryMultiplier;
+            // batteryRecharge = (shipType.baseBatteryRecharge + batteryRecharge) * shipType.batteryRechargeMultiplier;
+            // fireCost = (shipType.baseFireCost + fireCost) * shipType.fireCostMultiplier;
+            // cooldown = (shipType.baseCooldown + cooldown) * shipType.cooldownMultiplier; 
+            // firepower = (shipType.baseFirepower + firepower) * shipType.firepowerMultiplier;
+            // damage = (shipType.baseDamage + damage) * shipType.damageMultiplier;
+            // enginePerformance = (shipType.baseEnginePerformance + enginePerformance) * shipType.enginePerformanceMultiplier;
+            // aim = shipType.baseAim;
+            // turn = shipType.baseTurn;
+            // scale = shipType.baseScale;
+            // bulletSpread = shipType.baseBulletSpread;
         }
 
         public float GetCrosshairSpeed()

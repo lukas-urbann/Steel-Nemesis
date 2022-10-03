@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shipName: 
   shipSprite: {fileID: 0}
-  baseHitPoints: 20
-  baseMaxHitPoints: 20
+  baseHitPoints: 10000
+  baseMaxHitPoints: 1000000
   baseBattery: 10
   baseMaxBattery: 10
   baseBatteryRecharge: 25
@@ -28,4 +28,11 @@ MonoBehaviour:
   baseTurn: 4
   baseScale: 5
   baseBulletSpread: 0.15
-  baseDamageMultiplier: 20
+  maxHitPointsMultiplier: 1
+  maxBatteryMultiplier: 1
+  batteryRechargeMultiplier: 1
+  fireCostMultiplier: 1
+  firepowerMultiplier: 1
+  cooldownMultiplier: 1
+  damageMultiplier: 1
+  enginePerformanceMultiplier: 1

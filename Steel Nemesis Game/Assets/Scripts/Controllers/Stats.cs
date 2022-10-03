@@ -6,8 +6,8 @@ namespace Controllers
 {
     public enum ShipStats
     {
-        HitPoints,
-        Battery,
+        MaxHitPoints,
+        MaxBattery,
         BatteryRecharge,
         Cooldown,
         Firepower,

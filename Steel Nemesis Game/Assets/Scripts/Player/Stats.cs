@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Controllers;
 using UnityEngine;
 
@@ -7,88 +8,44 @@ namespace Player
 {
     public class Stats : MonoBehaviour
     {
-        private string asd = "4.4";
-    
-        private float maxHitPoints = 0;
-        private float maxBattery = 0;
-        private float batteryRecharge = 0;
-        private float fireCost = 0;
-        private float cooldown = 0;
-        private float firepower = 0;
-        private float damage = 0;
-        private float enginePerformance = 0;
-        private float aim = 0;
-        private float turn = 0;
-        private float scale = 0;
-        private float bulletSpread = 0;
         
-        public void UpgradeStatCall(ShipStats stat, float amount)
-        {
-            UpgradeStat(stat, amount);
-        }
+        private List<ShipStats> shipStatsList = new List<ShipStats>();
+        private List<float> shipStatsValueList = new List<float>();
+        
+        private List<PlayerStats> playerStatsList = new List<PlayerStats>();
+        private List<float> playerStatsValueList = new List<float>();
 
-        private void UpgradeStat(ShipStats stat, float amount)
+        private void Start()
         {
-            switch (stat)
+            shipStatsList.AddRange(Enum.GetValues(typeof(ShipStats)).Cast<ShipStats>());
+
+            foreach (ShipStats asd in shipStatsList)
             {
-                case ShipStats.Aim:
-                    aim += amount;
-                    break;
-                case ShipStats.Battery:
-                    maxBattery += amount;
-                    break;
-                case ShipStats.BatteryRecharge:
-                    batteryRecharge += amount;
-                    break;
-                case ShipStats.Cooldown:
-                    cooldown += amount;
-                    break;
-                case ShipStats.Damage:
-                    damage += amount;
-                    break;
-                case ShipStats.Firepower:
-                    firepower += amount;
-                    break;
-                case ShipStats.Turn:
-                    turn += amount;
-                    break;
-                case ShipStats.Scale:
-                    scale += amount;
-                    break;
-                case ShipStats.EnginePerformance:
-                    enginePerformance += amount;
-                    break;
-                case ShipStats.HitPoints:
-                    maxHitPoints += amount;
-                    break;
+                Debug.Log("Loaded Ship Stat: " + asd);
             }
         }
 
-        public float GetSkillpointStat(ShipStats stat)
+        public List<ShipStats> GetShipStats()
         {
-            switch (stat)
-            {
-                case ShipStats.Aim:
-                    return aim;
-                case ShipStats.Battery:
-                    return maxBattery;
-                case ShipStats.Cooldown:
-                    return cooldown;
-                case ShipStats.Damage:
-                    return damage;
-                case ShipStats.Firepower:
-                    return firepower;
-                case ShipStats.Scale:
-                    return scale;
-                case ShipStats.Turn:
-                    return turn;
-                case ShipStats.BatteryRecharge:
-                    return batteryRecharge;
-                case ShipStats.EnginePerformance:
-                    return enginePerformance;
-                case ShipStats.HitPoints:
-                    return maxHitPoints;
-            }
+        }
+
+        public void AssignShipStats()
+        {
+            
+        }
+
+        public void UpgradeShipStat(ShipStats stat, float amount)
+        {
+            for (int i = 0; i < shipStatsList.Count; i++)
+                if (shipStatsList[i] == stat)
+                    shipStatsValueList[i] += amount;
+        }
+        
+        public float GetShipStats(ShipStats stat)
+        {
+            for (int i = 0; i < shipStatsList.Count; i++)
+                if (shipStatsList[i] == stat)
+                    return shipStatsValueList[i];
 
             return 0;
         }
