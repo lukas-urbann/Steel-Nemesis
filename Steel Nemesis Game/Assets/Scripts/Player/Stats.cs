@@ -28,7 +28,7 @@ namespace Player
         private List<PlayerStats> playerStatsList = new List<PlayerStats>();
         private List<float> playerStatsValueList = new List<float>();
 
-        private void Start()
+        private void OnEnable()
         {
             shipStatsList.AddRange(Enum.GetValues(typeof(ShipStats)).Cast<ShipStats>());
 
@@ -36,6 +36,11 @@ namespace Player
                 Debug.Log("Loaded Ship Stat: " + stat);
             
             AssignShipStats();
+        }
+
+        private void Start()
+        {
+            
         }
 
         public void AssignShipStats()
@@ -70,20 +75,18 @@ namespace Player
                 }
             ;
 
-            for (int i = 0; i < 10; i++)
-                skillpointStatsValueList[i] = 0;
+            for (int i = 0; i < shipStatsList.Count; i++)
+                skillpointStatsValueList.Add(0);
                 
-            for (int i = 0; i < shipStatsList.Count; i++)
-                shipBaseStatsValueList.AddRange(baseStats);
+            shipBaseStatsValueList.AddRange(baseStats);
             
-            for (int i = 0; i < shipStatsList.Count; i++)
-                statMultiplierValueList.AddRange(shipMultipliers);
+            statMultiplierValueList.AddRange(shipMultipliers);
 
             for (int i = 0; i < shipStatsList.Count; i++)
-                shipStatsValueList[i] = ;
+                shipStatsValueList.Add(shipBaseStatsValueList[i]);
             
             for (int i = 0; i < shipStatsList.Count; i++)
-                activeStatsValueList[i] = shipBaseStatsValueList[i] + ((shipStatsValueList[i] * statMultiplierValueList[i]) - shipBaseStatsValueList[i]) + (skillpointStatsValueList[i] * statMultiplierValueList[i]);
+                activeStatsValueList.Add(shipBaseStatsValueList[i] + ((shipStatsValueList[i] * statMultiplierValueList[i]) - shipBaseStatsValueList[i]) + (skillpointStatsValueList[i] * statMultiplierValueList[i]));
         }
 
         // public void UpgradeShipStat(ShipStats stat, float amount)
