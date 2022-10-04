@@ -82,6 +82,8 @@ namespace Player
 
         private void Start()
         {
+            hp = shipType.baseHitPoints;
+            battery = shipType.baseBattery;
             Controllers.Shop.Instance.onClose += ShopCloseAction;
             //statUpgrade += CalculateUpgrades;
         }

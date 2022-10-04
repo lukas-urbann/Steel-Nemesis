@@ -59,15 +59,31 @@ namespace Player
                 {
                     Controller.Instance.shipType.maxHitPointsMultiplier,
                     Controller.Instance.shipType.maxBatteryMultiplier,
-                    Controller
+                    Controller.Instance.shipType.batteryRechargeMultiplier,
+                    Controller.Instance.shipType.cooldownMultiplier,
+                    Controller.Instance.shipType.firepowerMultiplier,
+                    Controller.Instance.shipType.damageMultiplier,
+                    1, // Scale
+                    1, // Aim
+                    1, // Turn
+                    Controller.Instance.shipType.enginePerformanceMultiplier
                 }
             ;
 
+            for (int i = 0; i < 10; i++)
+                skillpointStatsValueList[i] = 0;
+                
             for (int i = 0; i < shipStatsList.Count; i++)
                 shipBaseStatsValueList.AddRange(baseStats);
             
             for (int i = 0; i < shipStatsList.Count; i++)
-                activeStatsValueList[i] = shipBaseStatsValueList[i] + (skillpointStatsValueList[i] * statMultiplierValueList[i]) + shipStatsValueList[i];
+                statMultiplierValueList.AddRange(shipMultipliers);
+
+            for (int i = 0; i < shipStatsList.Count; i++)
+                shipStatsValueList[i] = ;
+            
+            for (int i = 0; i < shipStatsList.Count; i++)
+                activeStatsValueList[i] = shipBaseStatsValueList[i] + ((shipStatsValueList[i] * statMultiplierValueList[i]) - shipBaseStatsValueList[i]) + (skillpointStatsValueList[i] * statMultiplierValueList[i]);
         }
 
         // public void UpgradeShipStat(ShipStats stat, float amount)

@@ -16,7 +16,6 @@ namespace Player
         public float baseBattery = 10;
         public float baseMaxBattery = 10; //
         public float baseBatteryRecharge = 25; //
-        public float baseFireCost = 10; //
         public float baseCooldown = 0.5f; //
         public float baseFirepower = 0.75f; //
         public float baseDamage = 12;
@@ -24,13 +23,11 @@ namespace Player
         public float baseAim = 2;
         public float baseTurn = 4;
         public float baseScale = 5;
-        public float baseBulletSpread = 0.15f;
         
         [Header("Stat Multipliers")]
         public float maxHitPointsMultiplier = 1;
         public float maxBatteryMultiplier = 1;
         public float batteryRechargeMultiplier = 1;
-        public float fireCostMultiplier = 1;
         public float firepowerMultiplier = 1;
         public float cooldownMultiplier = 1;
         public float damageMultiplier = 1;
