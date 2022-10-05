@@ -19,6 +19,8 @@ namespace Shop
         private void Start()
         {
             Controllers.Shop.Instance.onOpen += UpdateText;
+            Player.Controller.StatsInstance.onShipUpgrade += UpdateText;
+            
             UpdateText();
         }
 

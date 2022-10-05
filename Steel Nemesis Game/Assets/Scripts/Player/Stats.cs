@@ -18,16 +18,19 @@ namespace Player
     {
         public List<ShipStats> shipStatsList = new List<ShipStats>();
         
+        [Tooltip("Staty:\n1. Max HP\n2. Max Battery\n3. Battery Recharge\n4. Cooldown\n5. Firepower\n6. Damage\n7. Scale\n8. Aim\n9. Turn\n10.Engine Perf.")]
         [SerializeField] private List<float> activeStatsValueList = new List<float>(); // Tohle je to co používá hráč aktivně, jsou v tom všecky sečtené
-        [SerializeField] private List<float> shipStatsValueList = new List<float>(); // Tohle je pouze loď
-        [SerializeField] private List<float> shipBaseStatsValueList = new List<float>(); // Tohle jsou pouze base staty lodě
-        [SerializeField] private List<float> skillpointStatsValueList = new List<float>(); // Tohle jsou pouze hráčovy skillpointy
-        [SerializeField] private List<float> statMultiplierValueList = new List<float>(); // Tohle je multiplikátor lodě
-        
+        private List<float> shipStatsValueList = new List<float>(); // Tohle je pouze loď
+        private List<float> shipBaseStatsValueList = new List<float>(); // Tohle jsou pouze base staty lodě
+        private List<float> skillpointStatsValueList = new List<float>(); // Tohle jsou pouze hráčovy skillpointy
+        private List<float> statMultiplierValueList = new List<float>(); // Tohle je multiplikátor lodě
         
         private List<PlayerStats> playerStatsList = new List<PlayerStats>();
         private List<float> playerStatsValueList = new List<float>();
 
+        public delegate void AttributeDelegate(); // volat na shop pro update labelu
+        public AttributeDelegate onShipUpgrade;
+        
         private void OnEnable()
         {
             shipStatsList.AddRange(Enum.GetValues(typeof(ShipStats)).Cast<ShipStats>());
@@ -36,11 +39,6 @@ namespace Player
                 Debug.Log("Loaded Ship Stat: " + stat);
             
             AssignShipStats();
-        }
-
-        private void Start()
-        {
-            
         }
 
         public void AssignShipStats()
@@ -85,8 +83,16 @@ namespace Player
             for (int i = 0; i < shipStatsList.Count; i++)
                 shipStatsValueList.Add(shipBaseStatsValueList[i]);
             
+            UpdateShipStats();
+        }
+
+        public void UpdateShipStats()
+        {
+            onShipUpgrade.Invoke();
+            
             for (int i = 0; i < shipStatsList.Count; i++)
-                activeStatsValueList.Add(shipBaseStatsValueList[i] + ((shipStatsValueList[i] * statMultiplierValueList[i]) - shipBaseStatsValueList[i]) + (skillpointStatsValueList[i] * statMultiplierValueList[i]));
+                activeStatsValueList.Add(shipBaseStatsValueList[i] +
+                                         ((shipStatsValueList[i] * statMultiplierValueList[i]) - shipBaseStatsValueList[i]) + (skillpointStatsValueList[i] * statMultiplierValueList[i]));
         }
 
         // public void UpgradeShipStat(ShipStats stat, float amount)
@@ -132,6 +138,8 @@ namespace Player
             
             if (origin == StatOrigin.Multiplicator)
                 return;
+            
+            onShipUpgrade.Invoke(); // Nevim jestli je dobrej napad to sem davat
                 
             for (int i = 0; i < shipStatsList.Count; i++)
                 if (shipStatsList[i] == stat)

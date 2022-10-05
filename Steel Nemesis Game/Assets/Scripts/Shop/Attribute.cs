@@ -1,29 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
 using Controllers;
+using Player;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Shop
 {
-    public enum AttributeType
-    {
-        Ship,
-        Player,
-    }
-    
     public class Attribute : MonoBehaviour
     {
         [SerializeField] protected ShipStats statType;
-        [SerializeField] protected AttributeType attributeType;
+        [SerializeField] protected Player.StatOrigin statOrigin;
         [SerializeField] protected float increaseValue;
         private GameObject slots;
         protected List<Image> upgradeIndicators = new List<Image>();
         [SerializeField] protected Sprite takenIndicator, openIndicator;
-        protected int statLevel = 0;
+        protected int statLevel = 0, maxStatLevel = 10;
 
         public Button plusButton, minusButton;
-        
+
         private void Start()
         {
             slots = transform.Find("Slots").gameObject;
@@ -67,27 +62,29 @@ namespace Shop
 
         public void Increase()
         {
-            switch (attributeType)
+            switch (statOrigin)
             {
-                case AttributeType.Player:
+                case StatOrigin.Skillpoint:
                     break;
-                case AttributeType.Ship:
+                case StatOrigin.Upgrade:
+                    Player.Controller.StatsInstance.UpgradeShipStats(statType, statOrigin, 10);
                     break;
                 default:
                     Debug.LogError("Unknown Attribute Type");
                     break;
             }
             statLevel++;
+            Player.Controller.StatsInstance.UpdateShipStats();
             CheckLevel();
         }
 
         public void Decrease()
         {
-            switch (attributeType)
+            switch (statOrigin)
             {
-                case AttributeType.Player:
+                case StatOrigin.Skillpoint:
                     break;
-                case AttributeType.Ship:
+                case StatOrigin.Upgrade:
                     break;
                 default:
                     Debug.LogError("Unknown Attribute Type");
@@ -104,13 +101,15 @@ namespace Shop
 
         protected void CheckLevel()
         {
+            CustomButtonAction();
+            
             EnableButton(true);
             EnableButton(false);
             
             if(statLevel <= 0)
                 DisableButton(false);
             
-            if(statLevel >= 10)
+            if(statLevel >= maxStatLevel)
                 DisableButton(true);
                 
             for (int i = 0; i < upgradeIndicators.Count; i++)
@@ -123,5 +122,7 @@ namespace Shop
                 upgradeIndicators[i].sprite = takenIndicator;
             }
         }
+
+        protected virtual void CustomButtonAction() {}
     }
 }

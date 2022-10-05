@@ -312,12 +312,7 @@ namespace Player
             yield return new WaitForEndOfFrame();
             isColliding = false;
         }
-
-        private void AssignStats()
-        {
-            
-        }
-
+        
         public float GetHP()
         {
             return hp;
