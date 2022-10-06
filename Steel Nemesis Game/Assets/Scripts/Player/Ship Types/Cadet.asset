@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Cadet
   m_EditorClassIdentifier: 
   shipName: Cadet
-  shipSprite: {fileID: 0}
+  shipSprite: {fileID: 21300000, guid: b28a6a54a24844ae6a6dd6fdd478aa09, type: 3}
   baseHitPoints: 100
   baseMaxHitPoints: 20
   baseBattery: 100
@@ -33,3 +33,4 @@ MonoBehaviour:
   cooldownMultiplier: 1
   damageMultiplier: 1
   enginePerformanceMultiplier: 1
+  maxHpStat: 20

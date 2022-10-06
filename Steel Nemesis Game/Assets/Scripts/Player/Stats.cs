@@ -88,7 +88,7 @@ namespace Player
 
         public void UpdateShipStats()
         {
-            onShipUpgrade.Invoke();
+            // onShipUpgrade.Invoke();
             
             for (int i = 0; i < shipStatsList.Count; i++)
                 activeStatsValueList.Add(shipBaseStatsValueList[i] +
@@ -139,7 +139,7 @@ namespace Player
             if (origin == StatOrigin.Multiplicator)
                 return;
             
-            onShipUpgrade.Invoke(); // Nevim jestli je dobrej napad to sem davat
+            //onShipUpgrade.Invoke(); // Nevim jestli je dobrej napad to sem davat
                 
             for (int i = 0; i < shipStatsList.Count; i++)
                 if (shipStatsList[i] == stat)

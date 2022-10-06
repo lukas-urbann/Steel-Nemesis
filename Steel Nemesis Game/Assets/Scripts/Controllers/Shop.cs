@@ -59,6 +59,14 @@ namespace Controllers
             wavesWithoutShop = 0;
         }
 
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.M))
+            {
+                onOpen.Invoke();
+            }
+        }
+
         public void CloseShop()
         {
             Debug.Log("Shop Disabling...");

@@ -8710,6 +8710,7 @@ GameObject:
   - component: {fileID: 591860640}
   - component: {fileID: 591860642}
   - component: {fileID: 591860641}
+  - component: {fileID: 591860643}
   m_Layer: 5
   m_Name: Ship Name
   m_TagString: Untagged
@@ -8834,6 +8835,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 591860639}
   m_CullTransparentMesh: 1
+--- !u!114 &591860643
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 591860639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92d739bf629d94f47b3845ecb78b80a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &595245994 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4969452813190747524, guid: a02f4c1278373ae4ab056f5c06cab802, type: 3}
@@ -11464,6 +11477,7 @@ GameObject:
   - component: {fileID: 1005744479}
   - component: {fileID: 1005744481}
   - component: {fileID: 1005744480}
+  - component: {fileID: 1005744482}
   m_Layer: 5
   m_Name: Ship
   m_TagString: Untagged
@@ -11529,6 +11543,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1005744478}
   m_CullTransparentMesh: 1
+--- !u!114 &1005744482
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1005744478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55643d57580cfb94d8885f80c499ed6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1019644661
 GameObject:
   m_ObjectHideFlags: 0
@@ -12141,7 +12167,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1078019863
 RectTransform:
   m_ObjectHideFlags: 0
