@@ -7,6 +7,14 @@ namespace Crosshair
 {
     public class Crosshair : MonoBehaviour
     {
+        private SpriteRenderer crosshairSprite;
+
+        private void Start()
+        {
+            crosshairSprite = GetComponent<SpriteRenderer>();
+            Controllers.Shop.Instance.onClose += ChangeVisibility;
+            Controllers.Shop.Instance.onOpen += ChangeVisibility;
+        }
 
         private void Update()
         {
@@ -15,6 +23,11 @@ namespace Crosshair
             
             if(!Controllers.Pause.Instance.GetPauseState())
                 transform.position = mousePosition;
+        }
+        
+        private void ChangeVisibility()
+        {
+            crosshairSprite.enabled = !crosshairSprite.enabled;
         }
     }
 }

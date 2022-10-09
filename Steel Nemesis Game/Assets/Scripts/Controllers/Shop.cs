@@ -6,8 +6,6 @@ using Random = UnityEngine.Random;
 
 namespace Controllers
 {
-    
-    
     public class Shop : MonoBehaviour
     {
         //Singleton

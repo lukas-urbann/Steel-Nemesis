@@ -27,9 +27,11 @@ namespace Player
         [SerializeField] private float battery;
         [SerializeField] private float fireCost;
 
-        private bool canFire = true;
+        [SerializeField] private bool canMove = true;
+        [SerializeField] private bool canFire = true;
         private bool isColliding = false; //Pro práci s kolizemi s triggery
         public Ship shipType;
+        private Coroutine fireDelay;
 
         public delegate void OnShipUpgrade();
         public OnShipUpgrade statUpgrade;
@@ -84,6 +86,7 @@ namespace Player
             hp = shipType.baseHitPoints;
             battery = shipType.baseBattery;
             Controllers.Shop.Instance.onClose += ShopCloseAction;
+            Controllers.Shop.Instance.onOpen += ShopOpenAction;
             //statUpgrade += CalculateUpgrades;
         }
 
@@ -108,6 +111,9 @@ namespace Player
 
         private void CheckMovement()
         {
+            if (!canMove)
+                return;
+            
             var move = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0);
             transform.position += move * (Time.deltaTime * StatsInstance.GetShipStats(ShipStats.EnginePerformance));
         }
@@ -125,9 +131,12 @@ namespace Player
         private void CheckFire()
         {
             if (Input.GetAxis("Fire") != 0 || Input.GetMouseButton(0))
-                if (canFire && !Controllers.Pause.Instance.GetPauseState())
+                if (!Controllers.Pause.Instance.GetPauseState())
                 {
                     if (battery < fireCost)
+                        return;
+
+                    if (!canFire)
                         return;
 
                     Fire();
@@ -149,7 +158,8 @@ namespace Player
                 Vector2 aimPosition =
                     new Vector2(Random.Range(positionUp.x - 0,positionUp.x + 0), pos.up.y); // dodělat random spread
                 rb.AddForce(aimPosition * StatsInstance.GetShipStats(ShipStats.Firepower), ForceMode2D.Impulse);
-                StartCoroutine(FireCooldown());
+                
+                fireDelay = StartCoroutine(FireCooldown());
             }
         }
 
@@ -321,11 +331,21 @@ namespace Player
         {
             return battery;
         }
+        
+        private void ShopOpenAction()
+        {
+            canMove = false;
+            canFire = false;
+            Cursor.visible = true;
+            transform.localPosition = new Vector3(0, 0, 0);
+            StopCoroutine(fireDelay);
+        }
 
         private void ShopCloseAction()
         {
-            transform.localPosition = new Vector3(0, -2.5f, 0);
+            canMove = true;
             canFire = true;
+            transform.localPosition = new Vector3(0, -2.5f, 0);
             battery = StatsInstance.GetShipStats(ShipStats.MaxBattery);
         }
     }
