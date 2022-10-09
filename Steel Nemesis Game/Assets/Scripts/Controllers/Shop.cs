@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Shop;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -12,6 +13,7 @@ namespace Controllers
         public static Shop Instance;
         private bool shopOpen = false;
         public GameObject shopWindow; //Dosadit z inspectoru
+        public StationShip stationShip; //Dosadit z inspectoru
         private float chanceToAppear = 100;
         private int wavesWithoutShop = 0;
 
@@ -35,10 +37,14 @@ namespace Controllers
             return shopOpen;
         }
 
+        public void CallShopStation()
+        {
+            Debug.Log("Shop Station Emerging...");
+            stationShip.FlyInCall();
+        }
+
         public void OpenShop()
         {
-            Debug.Log("Shop Emerging...");
-            
             if(!shopWindow.activeSelf)
                 shopWindow.SetActive(true);
             
@@ -50,7 +56,7 @@ namespace Controllers
 
             shopWindow.GetComponent<Animator>().Play("ShopAppear");
         }
-
+        
         private void ResetChanceValues()
         {
             chanceToAppear = 0;
@@ -61,7 +67,8 @@ namespace Controllers
         {
             if (Input.GetKeyDown(KeyCode.M))
             {
-                onOpen.Invoke();
+                chanceToAppear = 100;
+                TryToOpenShop();
             }
         }
 
@@ -86,7 +93,7 @@ namespace Controllers
 
             if (chance <= chanceToAppear)
             {
-                OpenShop();
+                CallShopStation();
                 return true;
             }
 

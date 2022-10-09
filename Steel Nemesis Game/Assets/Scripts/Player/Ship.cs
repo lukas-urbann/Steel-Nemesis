@@ -35,7 +35,5 @@ namespace Player
         
         [Header("Stat Max Levels")]
         public float maxHpStat = 20;
-
-
     }
 }

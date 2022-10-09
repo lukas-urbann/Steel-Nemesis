@@ -199,6 +199,90 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9902573}
   m_CullTransparentMesh: 1
+--- !u!1 &27739045
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 27739046}
+  - component: {fileID: 27739047}
+  m_Layer: 0
+  m_Name: Trading spot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &27739046
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 27739045}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.429, y: -0.451, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1801606521}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &27739047
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 27739045}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 200
+  m_Sprite: {fileID: 21300000, guid: e9f4560889725454fba589cb62b1eded, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 0.16, y: 0.16}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
 --- !u!1 &30104196
 GameObject:
   m_ObjectHideFlags: 0
@@ -12936,7 +13020,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5216874e4fd0b4eaa974b8ef6986af78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  doNotStart: 0
+  doNotStart: 1
   minEnemies: 3
   maxEnemies: 5
   actualEnemies: 0
@@ -16838,6 +16922,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shopWindow: {fileID: 351032666}
+  stationShip: {fileID: 1801606523}
 --- !u!1 &1601586754
 GameObject:
   m_ObjectHideFlags: 0
@@ -23369,6 +23454,8 @@ GameObject:
   - component: {fileID: 1801606521}
   - component: {fileID: 1801606520}
   - component: {fileID: 1801606522}
+  - component: {fileID: 1801606523}
+  - component: {fileID: 1801606524}
   m_Layer: 0
   m_Name: Station
   m_TagString: Untagged
@@ -23439,7 +23526,8 @@ Transform:
   m_LocalPosition: {x: 13.1, y: 1.52, z: 0}
   m_LocalScale: {x: 3.385, y: 3.385, z: 3.385}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 27739046}
   m_Father: {fileID: 0}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -23463,6 +23551,45 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1801606523
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1801606519}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cf29841aabb1b690b9dc3b7a2b39c2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tradingSpotCircle: {fileID: 27739045}
+--- !u!61 &1801606524
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1801606519}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.4178556, y: -0.5018687}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.28, y: 1.28}
+    newSize: {x: 1.28, y: 1.28}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.2143578, y: 0.27626252}
+  m_EdgeRadius: 0
 --- !u!1 &1819092807
 GameObject:
   m_ObjectHideFlags: 0
@@ -25912,6 +26039,7 @@ GameObject:
   - component: {fileID: 212007111774112673}
   - component: {fileID: 212007111774112674}
   - component: {fileID: 212007111774112675}
+  - component: {fileID: 212007111774112676}
   m_Layer: 7
   m_Name: Player Cadet
   m_TagString: Player
@@ -26243,6 +26371,41 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shipStatsList: 
   activeStatsValueList: []
+--- !u!60 &212007111774112676
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1312275390467074}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.16, y: 0.16}
+    newSize: {x: 0.16, y: 0.16}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: -0.009706711, y: 0.030139148}
+      - {x: -0.03840582, y: -0.004796587}
+      - {x: -0.059851915, y: -0.0014184862}
+      - {x: -0.031997476, y: -0.039428502}
+      - {x: 0.0003886614, y: -0.009194024}
+      - {x: 0.032372106, y: -0.040114313}
+      - {x: 0.05769584, y: -0.0025132447}
+      - {x: 0.037794534, y: -0.004528107}
+      - {x: 0.008240057, y: 0.03110677}
+      - {x: 0.0006011531, y: 0.03919497}
 --- !u!212 &212735957618594224
 SpriteRenderer:
   m_ObjectHideFlags: 0
