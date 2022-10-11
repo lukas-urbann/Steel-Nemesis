@@ -173,7 +173,6 @@ namespace Player
         public void RemoveHitpoints(float value)
         {
             hp -= value;
-
             CheckHp();
         }
 

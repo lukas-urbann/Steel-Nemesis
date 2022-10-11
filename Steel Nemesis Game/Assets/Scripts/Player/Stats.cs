@@ -20,28 +20,29 @@ namespace Player
         
         [Tooltip("Staty:\n1. Max HP\n2. Max Battery\n3. Battery Recharge\n4. Cooldown\n5. Firepower\n6. Damage\n7. Scale\n8. Aim\n9. Turn\n10.Engine Perf.")]
         [SerializeField] private List<float> activeStatsValueList = new List<float>(); // Tohle je to co používá hráč aktivně, jsou v tom všecky sečtené
-        [SerializeField]private List<float> shipStatsValueList = new List<float>(); // Tohle je pouze loď
-        [SerializeField]private List<float> shipBaseStatsValueList = new List<float>(); // Tohle jsou pouze base staty lodě
-        [SerializeField]private List<float> skillpointStatsValueList = new List<float>(); // Tohle jsou pouze hráčovy skillpointy
-        [SerializeField]private List<float> statMultiplierValueList = new List<float>(); // Tohle je multiplikátor lodě
-        
-        private List<PlayerStats> playerStatsList = new List<PlayerStats>();
-        private List<float> playerStatsValueList = new List<float>();
+        private List<float> shipStatsValueList = new List<float>(); // Tohle je pouze loď
+        private List<float> shipBaseStatsValueList = new List<float>(); // Tohle jsou pouze base staty lodě
+        private List<float> skillpointStatsValueList = new List<float>(); // Tohle jsou pouze hráčovy skillpointy
+        private List<float> statMultiplierValueList = new List<float>(); // Tohle je multiplikátor lodě
 
         public delegate void AttributeDelegate(); // volat na shop pro update labelu
         public AttributeDelegate onShipUpgrade;
         
         private void OnEnable()
         {
-            shipStatsList.AddRange(Enum.GetValues(typeof(ShipStats)).Cast<ShipStats>());
-
-            foreach (ShipStats stat in shipStatsList)
-                Debug.Log("Loaded Ship Stat: " + stat);
-            
+            LoadStats();            
             AssignShipStats();
         }
 
-        public void AssignShipStats()
+        private void LoadStats()
+        {
+            shipStatsList.AddRange(Enum.GetValues(typeof(ShipStats)).Cast<ShipStats>());
+            
+            foreach (ShipStats stat in shipStatsList)
+                Debug.Log("Loaded Ship Stat: " + stat);
+        }
+
+        private void ManuallyAssignBaseShipStats()
         {
             float[] baseStats =
                 {
@@ -56,7 +57,7 @@ namespace Player
                     Controller.Instance.shipType.baseTurn,
                     Controller.Instance.shipType.baseEnginePerformance
                 }
-            ;
+                ;
 
             float[] shipMultipliers =
                 {
@@ -71,18 +72,25 @@ namespace Player
                     1, // Turn
                     Controller.Instance.shipType.enginePerformanceMultiplier
                 }
-            ;
+                ;
+            
+            shipBaseStatsValueList.AddRange(baseStats);
+            statMultiplierValueList.AddRange(shipMultipliers);
+        }
 
+        private void LoadStatsIntoLists()
+        {
             for (int i = 0; i < shipStatsList.Count; i++)
                 skillpointStatsValueList.Add(0);
-                
-            shipBaseStatsValueList.AddRange(baseStats);
-            
-            statMultiplierValueList.AddRange(shipMultipliers);
 
             for (int i = 0; i < shipStatsList.Count; i++)
                 shipStatsValueList.Add(shipBaseStatsValueList[i]);
-            
+        }
+        
+        public void AssignShipStats()
+        {
+            ManuallyAssignBaseShipStats();
+            LoadStatsIntoLists();
             UpdateShipStats();
         }
 
@@ -90,12 +98,22 @@ namespace Player
         {
             if (activeStatsValueList.Count == shipStatsList.Count)
             {
-                for (int i = 0; i < shipStatsList.Count; i++)
-                    activeStatsValueList[i] = (shipBaseStatsValueList[i] +
-                                             ((shipStatsValueList[i] * statMultiplierValueList[i]) - shipBaseStatsValueList[i]) + (skillpointStatsValueList[i] * statMultiplierValueList[i]));
+                UpdateActiveSlots();
                 return;
             }
             
+            AssignActiveSlots();
+        }
+
+        private void UpdateActiveSlots()
+        {
+            for (int i = 0; i < shipStatsList.Count; i++)
+                activeStatsValueList[i] = (shipBaseStatsValueList[i] +
+                                           ((shipStatsValueList[i] * statMultiplierValueList[i]) - shipBaseStatsValueList[i]) + (skillpointStatsValueList[i] * statMultiplierValueList[i]));
+        }
+
+        private void AssignActiveSlots()
+        {
             for (int i = 0; i < shipStatsList.Count; i++)
                 activeStatsValueList.Add(shipBaseStatsValueList[i] +
                                          ((shipStatsValueList[i] * statMultiplierValueList[i]) - shipBaseStatsValueList[i]) + (skillpointStatsValueList[i] * statMultiplierValueList[i]));
@@ -128,7 +146,6 @@ namespace Player
 
             return 0;
         }
-        
         
         public void UpgradeShipStats(ShipStats stat, StatOrigin origin, float value)
         {

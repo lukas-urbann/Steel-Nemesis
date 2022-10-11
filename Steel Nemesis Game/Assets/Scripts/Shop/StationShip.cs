@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Shop
@@ -40,25 +39,23 @@ namespace Shop
             TradeZoneSwitcher();
             yield return new WaitForSeconds(3);
             TradeZoneSwitcher();
-            PrepareShop();
+            BeginTrade();
         }
 
-        private void PrepareShop()
+        private void BeginTrade()
         {
             if(playerInShop)
                 Controllers.Shop.Instance.OpenShop();
             else
-            {
-                FlyOut();
-                Controllers.Wave.Instance.SignalWaveStart();
-            }
+                LeaveWithoutTrading();
         }
 
-        private void AnimationPlayer(string animationName)
+        private void LeaveWithoutTrading()
         {
-            anim.Play(animationName);
+            FlyOut();
+            Controllers.Wave.Instance.SignalWaveStart();
         }
-
+        
         private void TradeZoneSwitcher()
         {
             tradingSpotCircle.SetActive(!tradingSpotCircle.activeSelf);
@@ -66,8 +63,13 @@ namespace Shop
         
         private void FlyOut()
         {
-            anim.PlayInFixedTime("StationLeave");
+            AnimationPlayer("StationLeave");
             playerInShop = false;
+        }
+        
+        private void AnimationPlayer(string animationName)
+        {
+            anim.Play(animationName);
         }
         
         private void OnTriggerEnter2D(Collider2D col)

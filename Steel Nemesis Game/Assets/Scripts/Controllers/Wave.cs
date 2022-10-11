@@ -1,9 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Enemy;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -192,8 +192,9 @@ namespace Controllers
         
         private void KillAllHostiles()
         {
-            List<GameObject> enemyListToDestroy = new List<GameObject>();
-            enemyListToDestroy.AddRange(FindObjectsOfType<BasicEnemy>());
+            //TODO: NEVIM JESTLI FUNGUJE, JSOU TU POTIZE
+            var enemyListToDestroy = new List<BasicEnemy>();
+            enemyListToDestroy.AddRange(FindObjectsOfType<BasicEnemy>().ToList());
 
             for (int i = 0; i < enemyListToDestroy.Count; i++)
             {
