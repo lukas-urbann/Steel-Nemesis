@@ -67,14 +67,13 @@ namespace Shop
                 case StatOrigin.Skillpoint:
                     break;
                 case StatOrigin.Upgrade:
-                    Player.Controller.StatsInstance.UpgradeShipStats(statType, statOrigin, 10);
+                    Player.Controller.StatsInstance.UpgradeShipStats(statType, statOrigin, increaseValue);
                     break;
                 default:
                     Debug.LogError("Unknown Attribute Type");
                     break;
             }
             statLevel++;
-            Player.Controller.StatsInstance.UpdateShipStats();
             CheckLevel();
         }
 
@@ -85,6 +84,7 @@ namespace Shop
                 case StatOrigin.Skillpoint:
                     break;
                 case StatOrigin.Upgrade:
+                    Player.Controller.StatsInstance.UpgradeShipStats(statType, statOrigin, -increaseValue);
                     break;
                 default:
                     Debug.LogError("Unknown Attribute Type");

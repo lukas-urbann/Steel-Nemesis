@@ -7,10 +7,17 @@ namespace Shop.UI
     {
         private TMP_Text shipName;
 
-        private void Start()
+        private void OnEnable()
         {
             shipName = GetComponent<TMP_Text>();
+        }
+        
+        private void Start()
+        {
             Controllers.Shop.Instance.onOpen += UpdateLabel;
+            Player.Controller.StatsInstance.onShipUpgrade += UpdateLabel;
+            
+            UpdateLabel();
         }
 
         private void UpdateLabel()

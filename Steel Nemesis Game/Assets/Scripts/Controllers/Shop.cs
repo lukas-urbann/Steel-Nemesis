@@ -49,27 +49,18 @@ namespace Controllers
                 shopWindow.SetActive(true);
             
             SetCursorVisible(true);
-            onOpen.Invoke();
             
             shopWindow.SetActive(true);
             ResetChanceValues();
 
             shopWindow.GetComponent<Animator>().Play("ShopAppear");
+            onOpen.Invoke();
         }
         
         private void ResetChanceValues()
         {
             chanceToAppear = 0;
             wavesWithoutShop = 0;
-        }
-
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.M))
-            {
-                chanceToAppear = 100;
-                TryToOpenShop();
-            }
         }
 
         public void CloseShop()

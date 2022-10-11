@@ -25,14 +25,21 @@ namespace Shop
 
         private void FlyIn()
         {
-            anim.Play("StationFlyBy");
-            StartCoroutine(FlyBy());
+            AnimationPlayer("StationFlyBy");
+            StartCoroutine(FlyInCoroutine(300));
         }
         
-        private IEnumerator FlyBy()
+        private IEnumerator FlyInCoroutine(int miliseconds)
         {
-            tradingSpotCircle.SetActive(true);
-            yield return new WaitForSeconds(12);
+            yield return new WaitForSeconds(miliseconds / 60);
+            StartCoroutine(StayCoroutine());
+        }
+
+        private IEnumerator StayCoroutine()
+        {
+            TradeZoneSwitcher();
+            yield return new WaitForSeconds(3);
+            TradeZoneSwitcher();
             PrepareShop();
         }
 
@@ -41,15 +48,26 @@ namespace Shop
             if(playerInShop)
                 Controllers.Shop.Instance.OpenShop();
             else
+            {
                 FlyOut();
-            
-            tradingSpotCircle.SetActive(false);
+                Controllers.Wave.Instance.SignalWaveStart();
+            }
+        }
+
+        private void AnimationPlayer(string animationName)
+        {
+            anim.Play(animationName);
+        }
+
+        private void TradeZoneSwitcher()
+        {
+            tradingSpotCircle.SetActive(!tradingSpotCircle.activeSelf);
         }
         
         private void FlyOut()
         {
-            Debug.Log("Shop Station off");
             anim.PlayInFixedTime("StationLeave");
+            playerInShop = false;
         }
         
         private void OnTriggerEnter2D(Collider2D col)

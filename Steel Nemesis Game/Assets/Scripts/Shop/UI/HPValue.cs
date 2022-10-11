@@ -18,13 +18,13 @@ namespace Shop
 
         private void Start()
         {
-            Controllers.Shop.Instance.onOpen += UpdateText;
-            Player.Controller.StatsInstance.onShipUpgrade += UpdateText;
+            Controllers.Shop.Instance.onOpen += UpdateLabel;
+            Player.Controller.StatsInstance.onShipUpgrade += UpdateLabel;
             
-            UpdateText();
+            UpdateLabel();
         }
 
-        private void UpdateText()
+        private void UpdateLabel()
         {
             valueText.text = Player.Controller.Instance.GetHP() + " / " + Player.Controller.StatsInstance.GetShipStats(ShipStats.MaxHitPoints);
         }

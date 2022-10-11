@@ -114,7 +114,7 @@ namespace Controllers
             waveStop = false;
         }
 
-        private void SignalWaveStart()
+        public void SignalWaveStart()
         {
             WaveStart();
         }

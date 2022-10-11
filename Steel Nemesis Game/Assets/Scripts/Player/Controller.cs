@@ -337,7 +337,6 @@ namespace Player
             canMove = false;
             canFire = false;
             Cursor.visible = true;
-            transform.localPosition = new Vector3(0, 0, 0);
             StopCoroutine(fireDelay);
         }
 
@@ -345,7 +344,7 @@ namespace Player
         {
             canMove = true;
             canFire = true;
-            transform.localPosition = new Vector3(0, -2.5f, 0);
+            transform.localPosition = new Vector3(0, -1.25f, 0);
             battery = StatsInstance.GetShipStats(ShipStats.MaxBattery);
         }
     }

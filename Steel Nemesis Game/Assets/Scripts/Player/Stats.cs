@@ -20,10 +20,10 @@ namespace Player
         
         [Tooltip("Staty:\n1. Max HP\n2. Max Battery\n3. Battery Recharge\n4. Cooldown\n5. Firepower\n6. Damage\n7. Scale\n8. Aim\n9. Turn\n10.Engine Perf.")]
         [SerializeField] private List<float> activeStatsValueList = new List<float>(); // Tohle je to co používá hráč aktivně, jsou v tom všecky sečtené
-        private List<float> shipStatsValueList = new List<float>(); // Tohle je pouze loď
-        private List<float> shipBaseStatsValueList = new List<float>(); // Tohle jsou pouze base staty lodě
-        private List<float> skillpointStatsValueList = new List<float>(); // Tohle jsou pouze hráčovy skillpointy
-        private List<float> statMultiplierValueList = new List<float>(); // Tohle je multiplikátor lodě
+        [SerializeField]private List<float> shipStatsValueList = new List<float>(); // Tohle je pouze loď
+        [SerializeField]private List<float> shipBaseStatsValueList = new List<float>(); // Tohle jsou pouze base staty lodě
+        [SerializeField]private List<float> skillpointStatsValueList = new List<float>(); // Tohle jsou pouze hráčovy skillpointy
+        [SerializeField]private List<float> statMultiplierValueList = new List<float>(); // Tohle je multiplikátor lodě
         
         private List<PlayerStats> playerStatsList = new List<PlayerStats>();
         private List<float> playerStatsValueList = new List<float>();
@@ -88,20 +88,19 @@ namespace Player
 
         public void UpdateShipStats()
         {
-            // onShipUpgrade.Invoke();
+            if (activeStatsValueList.Count == shipStatsList.Count)
+            {
+                for (int i = 0; i < shipStatsList.Count; i++)
+                    activeStatsValueList[i] = (shipBaseStatsValueList[i] +
+                                             ((shipStatsValueList[i] * statMultiplierValueList[i]) - shipBaseStatsValueList[i]) + (skillpointStatsValueList[i] * statMultiplierValueList[i]));
+                return;
+            }
             
             for (int i = 0; i < shipStatsList.Count; i++)
                 activeStatsValueList.Add(shipBaseStatsValueList[i] +
                                          ((shipStatsValueList[i] * statMultiplierValueList[i]) - shipBaseStatsValueList[i]) + (skillpointStatsValueList[i] * statMultiplierValueList[i]));
         }
 
-        // public void UpgradeShipStat(ShipStats stat, float amount)
-        // {
-        //     for (int i = 0; i < shipStatsList.Count; i++)
-        //         if (shipStatsList[i] == stat)
-        //             activeStatsValueList[i] += amount;
-        // }
-        
         public float GetShipStats(ShipStats stat)
         {
             for (int i = 0; i < shipStatsList.Count; i++)
@@ -139,8 +138,6 @@ namespace Player
             if (origin == StatOrigin.Multiplicator)
                 return;
             
-            //onShipUpgrade.Invoke(); // Nevim jestli je dobrej napad to sem davat
-                
             for (int i = 0; i < shipStatsList.Count; i++)
                 if (shipStatsList[i] == stat)
                     switch (origin)
@@ -151,7 +148,10 @@ namespace Player
                         case StatOrigin.Upgrade:
                             shipStatsValueList[i] += value;
                             break;
-                    }                    
+                    }
+
+            UpdateShipStats();
+            onShipUpgrade.Invoke(); // Nevim jestli je dobrej napad to sem davat
         }
     }
 }
