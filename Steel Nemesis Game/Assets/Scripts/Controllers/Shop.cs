@@ -27,6 +27,9 @@ namespace Controllers
                 Destroy(gameObject);
             else
                 Instance = this;
+            
+            if(gameObject.activeSelf)
+                gameObject.SetActive(false);
         }
 
         public bool SignalShop()

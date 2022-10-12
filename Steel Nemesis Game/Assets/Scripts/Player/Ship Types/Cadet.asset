@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Cadet
   m_EditorClassIdentifier: 
   shipName: Cadet
-  shipSprite: {fileID: 21300000, guid: 2ea7a5d73b9c74605b4953fc4b44d016, type: 3}
+  shipSprite: {fileID: 21300000, guid: b28a6a54a24844ae6a6dd6fdd478aa09, type: 3}
   baseHitPoints: 20
   baseMaxHitPoints: 20
   baseBattery: 10

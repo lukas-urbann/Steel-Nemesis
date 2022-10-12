@@ -13,6 +13,8 @@ namespace Shop.UI
         {
             Controllers.Shop.Instance.onOpen += UpdateLabel;
             shipSprite = GetComponent<Image>();
+            
+            UpdateLabel();
         }
 
         private void UpdateLabel()
