@@ -121,12 +121,9 @@ namespace Shop
             }
 
 
-            float points = (Player.Controller.StatsInstance.GetShipStats(statType, StatOrigin.Upgrade) / (maxStatLevel / 10)) * 2;
+            float points = Player.Controller.StatsInstance.GetShipStats(statType, StatOrigin.Upgrade) /
+                           ((maxStatLevel * increaseValue) / 100);
             
-            //Debug.Log("getstat:" + Player.Controller.StatsInstance.GetShipStats(statType, StatOrigin.Upgrade));
-            //Debug.Log("maxlevel/10:" + (maxStatLevel / 10));
-            //Debug.Log("zkombinovane:" + Player.Controller.StatsInstance.GetShipStats(statType, StatOrigin.Upgrade) / (maxStatLevel / 10) * 2);
-
             for (int i = 0; i < points; i += 10)
                 upgradeIndicators[i/10].sprite = takenIndicator;
         }

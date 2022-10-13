@@ -18,6 +18,7 @@ namespace Shop.UI
         private void Start()
         {
             Controllers.Shop.Instance.onOpen += UpdateLabel;
+            Player.Controller.StatsInstance.onShipUpgrade += UpdateLabel;
             label = GetComponent<TMP_Text>();
             
             UpdateLabel();
