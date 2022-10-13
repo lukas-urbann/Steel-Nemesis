@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Controllers;
 using UnityEngine;
 
 namespace Collectible
@@ -9,7 +10,7 @@ namespace Collectible
     {
         private void OnEnable()
         {
-            base.value = 20;
+            base.value = Player.Controller.StatsInstance.GetShipStats(ShipStats.MaxHitPoints);
         }
     }
 }

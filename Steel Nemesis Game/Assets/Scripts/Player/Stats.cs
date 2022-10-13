@@ -11,7 +11,8 @@ namespace Player
         Base,
         Upgrade,
         Skillpoint,
-        Multiplicator
+        Multiplicator,
+        MaxStat
     }
     
     public class Stats : MonoBehaviour
@@ -24,6 +25,7 @@ namespace Player
         private List<float> shipBaseStatsValueList = new List<float>(); // Tohle jsou pouze base staty lodě
         private List<float> skillpointStatsValueList = new List<float>(); // Tohle jsou pouze hráčovy skillpointy
         private List<float> statMultiplierValueList = new List<float>(); // Tohle je multiplikátor lodě
+        private List<float> shipMaxStatsList = new List<float>(); // Tohle obsahuje maximální upgrady jednotlivých lodí
 
         public delegate void AttributeDelegate(); // volat na shop pro update labelu
         public AttributeDelegate onShipUpgrade;
@@ -42,7 +44,14 @@ namespace Player
                 Debug.Log("Loaded Ship Stat: " + stat);
         }
 
-        private void ManuallyAssignBaseShipStats()
+        private void ManuallyAssignShipStats()
+        {
+            ManuallyAssignMaxStatList();
+            ManuallyAssignShipBaseStats();
+            ManuallyAssignShipMultipliers();
+        }
+
+        private void ManuallyAssignShipBaseStats()
         {
             float[] baseStats =
                 {
@@ -59,6 +68,11 @@ namespace Player
                 }
                 ;
 
+            shipBaseStatsValueList.AddRange(baseStats);
+        }
+
+        private void ManuallyAssignShipMultipliers()
+        {
             float[] shipMultipliers =
                 {
                     Controller.Instance.shipType.maxHitPointsMultiplier,
@@ -74,8 +88,27 @@ namespace Player
                 }
                 ;
             
-            shipBaseStatsValueList.AddRange(baseStats);
             statMultiplierValueList.AddRange(shipMultipliers);
+        }
+
+        private void ManuallyAssignMaxStatList()
+        {
+            float[] maxStats =
+                {
+                    Controller.Instance.shipType.maxHitPointsStat,
+                    Controller.Instance.shipType.maxBatteryStat,
+                    Controller.Instance.shipType.maxBatteryRechargeStat,
+                    Controller.Instance.shipType.maxCooldownStat,
+                    Controller.Instance.shipType.maxFirepowerStat,
+                    Controller.Instance.shipType.maxDamageStat,
+                    1, // Scale
+                    1, // Aim
+                    1, // Turn
+                    Controller.Instance.shipType.maxEnginePerformanceStat
+                }
+                ;
+            
+            shipMaxStatsList.AddRange(maxStats);
         }
 
         private void LoadStatsIntoLists()
@@ -89,7 +122,7 @@ namespace Player
         
         public void AssignShipStats()
         {
-            ManuallyAssignBaseShipStats();
+            ManuallyAssignShipStats();
             LoadStatsIntoLists();
             UpdateShipStats();
         }
@@ -142,6 +175,8 @@ namespace Player
                             return skillpointStatsValueList[i];
                         case StatOrigin.Upgrade:
                             return shipStatsValueList[i] - shipBaseStatsValueList[i];
+                        case StatOrigin.MaxStat:
+                            return shipMaxStatsList[i];
                     }                    
 
             return 0;
@@ -149,6 +184,8 @@ namespace Player
         
         public void UpgradeShipStats(ShipStats stat, StatOrigin origin, float value)
         {
+            //TODO: Možná přidat možnost vylepšit kapacitu lodí
+            
             if (origin == StatOrigin.Base)
                 return;
             

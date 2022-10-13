@@ -10,23 +10,31 @@ namespace Shop
     public class Attribute : MonoBehaviour
     {
         [SerializeField] protected ShipStats statType;
-        [SerializeField] protected Player.StatOrigin statOrigin;
+        [SerializeField] protected StatOrigin statOrigin;
         [SerializeField] protected float increaseValue;
         private GameObject slots;
         protected List<Image> upgradeIndicators = new List<Image>();
         [SerializeField] protected Sprite takenIndicator, openIndicator;
-        protected int statLevel = 0, maxStatLevel = 10;
+        protected float statLevel = 0, maxStatLevel = 1;
 
         public Button plusButton, minusButton;
 
         private void Start()
         {
             slots = transform.Find("Slots").gameObject;
+            AssignMaxShipStats();
             
             foreach (Transform child in slots.transform)
                 upgradeIndicators.Add(child.GetComponent<Image>());
             
             CheckLevel();
+        }
+
+        private void AssignMaxShipStats()
+        {
+            for (int i = 0; i < Player.Controller.StatsInstance.shipStatsList.Count; i++)
+                if(statType == Player.Controller.StatsInstance.shipStatsList[i])
+                    maxStatLevel = Mathf.FloorToInt(Player.Controller.StatsInstance.GetShipStats(statType, StatOrigin.MaxStat));
         }
 
         protected void DisableButton(bool isPositive)
@@ -53,11 +61,6 @@ namespace Shop
                     minusButton.interactable = true;
                     break;
             }
-        }
-
-        public void UpdateLabel()
-        {
-            
         }
 
         public void Increase()
@@ -117,10 +120,15 @@ namespace Shop
                 upgradeIndicators[i].sprite = openIndicator;
             }
 
-            for (int i = 0; i < statLevel; i++)
-            {
-                upgradeIndicators[i].sprite = takenIndicator;
-            }
+
+            float points = (Player.Controller.StatsInstance.GetShipStats(statType, StatOrigin.Upgrade) / (maxStatLevel / 10)) * 2;
+            
+            //Debug.Log("getstat:" + Player.Controller.StatsInstance.GetShipStats(statType, StatOrigin.Upgrade));
+            //Debug.Log("maxlevel/10:" + (maxStatLevel / 10));
+            //Debug.Log("zkombinovane:" + Player.Controller.StatsInstance.GetShipStats(statType, StatOrigin.Upgrade) / (maxStatLevel / 10) * 2);
+
+            for (int i = 0; i < points; i += 10)
+                upgradeIndicators[i/10].sprite = takenIndicator;
         }
 
         protected virtual void CustomButtonAction() {}

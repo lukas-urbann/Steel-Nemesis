@@ -7,6 +7,8 @@ namespace Player
     [CreateAssetMenu(fileName = "Ship Type", menuName = "Ship Type", order = 1)]
     public class Ship : ScriptableObject
     {
+        //Obsahuje jenom base staty pro typ lodě Cadet
+        
         public string shipName;
         public Sprite shipSprite;
         
@@ -34,6 +36,12 @@ namespace Player
         public float enginePerformanceMultiplier = 1;
         
         [Header("Stat Max Levels")]
-        public float maxHpStat = 20;
+        public float maxHitPointsStat = 5;
+        public float maxBatteryStat = 3;
+        public float maxBatteryRechargeStat = 1;
+        public float maxFirepowerStat = 3;
+        public float maxCooldownStat = 5;
+        public float maxDamageStat = 3;
+        public float maxEnginePerformanceStat = 5;
     }
 }

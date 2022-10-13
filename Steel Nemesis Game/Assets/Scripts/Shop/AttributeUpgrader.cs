@@ -1,5 +1,4 @@
-﻿using System;
-using TMPro;
+﻿using TMPro;
 
 namespace Shop.Attributes
 {
@@ -9,7 +8,7 @@ namespace Shop.Attributes
         
         protected override void CustomButtonAction()
         {
-            level.text = base.statLevel + "/" + base.maxStatLevel;
+            level.text = statLevel + "/" + maxStatLevel;
         }
     }
 }

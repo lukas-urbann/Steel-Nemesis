@@ -33,4 +33,10 @@ MonoBehaviour:
   cooldownMultiplier: 1
   damageMultiplier: 1
   enginePerformanceMultiplier: 1
-  maxHpStat: 20
+  maxHitPointsStat: 5
+  maxBatteryStat: 3
+  maxBatteryRechargeStat: 1
+  maxFirepowerStat: 3
+  maxCooldownStat: 5
+  maxDamageStat: 3
+  maxEnginePerformanceStat: 5
