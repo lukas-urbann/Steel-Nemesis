@@ -330,6 +330,11 @@ namespace Player
         {
             return battery;
         }
+
+        public void RepairPlayer()
+        {
+            hp = StatsInstance.GetShipStats(ShipStats.MaxHitPoints);
+        }
         
         private void ShopOpenAction()
         {

@@ -29,5 +29,10 @@ namespace Controllers
         {
             credit += amount;
         }
+        
+        public int GetCredit()
+        {
+            return credit;
+        }
     }
 }

@@ -3,14 +3,16 @@ using System.Collections.Generic;
 using Controllers;
 using Player;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace Shop
 {
-    public class Attribute : MonoBehaviour
+    public class Attribute : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         [SerializeField] protected ShipStats statType;
         [SerializeField] protected StatOrigin statOrigin;
+        [SerializeField] protected float actualCost, baseCost;
         [SerializeField] protected float increaseValue;
         private GameObject slots;
         protected List<Image> upgradeIndicators = new List<Image>();
@@ -28,7 +30,11 @@ namespace Shop
                 upgradeIndicators.Add(child.GetComponent<Image>());
             
             CheckLevel();
+            CalculatePrice();
+            CustomStart();
         }
+
+        protected virtual void CustomStart() { }
 
         private void AssignMaxShipStats()
         {
@@ -99,12 +105,13 @@ namespace Shop
 
         protected void CalculatePrice()
         {
-            
+            actualCost = ((baseCost * (Wave.Instance.GetLevel() * 0.03f)) * statLevel) * Player.Controller.Instance.shipType.costMultiplier;
         }
 
         protected void CheckLevel()
         {
             CustomButtonAction();
+            CalculatePrice();
             
             EnableButton(true);
             EnableButton(false);
@@ -129,5 +136,18 @@ namespace Shop
         }
 
         protected virtual void CustomButtonAction() {}
+        
+        public void OnPointerEnter(PointerEventData eventData)
+        {
+            OnCursorEnter();
+        }
+
+        public void OnPointerExit(PointerEventData eventData)
+        {
+            OnCursorExit();
+        }
+        
+        protected virtual void OnCursorEnter() {}
+        protected virtual void OnCursorExit() {}
     }
 }
