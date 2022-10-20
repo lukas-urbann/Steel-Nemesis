@@ -176,6 +176,12 @@ namespace Player
             CheckHp();
         }
 
+        public void AddHitpoints(float value)
+        {
+            hp += value;
+            CheckFire();
+        }
+
         private void CheckHp()
         {
             if (hp <= 0)
@@ -219,7 +225,7 @@ namespace Player
             if (isColliding) return;
             isColliding = true;
 
-            string collectibleType;
+            //string collectibleType;
 
             if (col.gameObject.CompareTag("Collectible"))
             {
@@ -239,12 +245,12 @@ namespace Player
                 if (collectible.GetValue() > 0)
                 {
                     notificationText.color = positive;
-                    collectibleType = "++";
+                    //collectibleType = "++";
                 }
                 else
                 {
                     notificationText.color = negative;
-                    collectibleType = "--";
+                    //collectibleType = "--";
                 }
 
                 switch (collectible.pickupType)

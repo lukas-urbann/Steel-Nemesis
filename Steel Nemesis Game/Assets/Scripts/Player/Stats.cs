@@ -201,6 +201,11 @@ namespace Player
                             break;
                         case StatOrigin.Upgrade:
                             shipStatsValueList[i] += value;
+                            
+                            //Tohle slouží pro to aby hráči nebrečeli že se jim nedostaví hp za upgrady
+                            if (stat == ShipStats.MaxHitPoints)
+                                Player.Controller.Instance.AddHitpoints(value);
+                            
                             break;
                     }
 

@@ -10,6 +10,7 @@ namespace Shop
 {
     public class Attribute : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
+        //TODO: Opravit aj tuhle classu
         [SerializeField] protected ShipStats statType;
         [SerializeField] protected StatOrigin statOrigin;
         [SerializeField] protected float actualCost, baseCost;
@@ -130,9 +131,16 @@ namespace Shop
 
             float points = Player.Controller.StatsInstance.GetShipStats(statType, StatOrigin.Upgrade) /
                            ((maxStatLevel * increaseValue) / 100);
-            
-            for (int i = 0; i < points; i += 10)
-                upgradeIndicators[i/10].sprite = takenIndicator;
+
+            try
+            {
+                for (int i = 0; i < points; i += 10)
+                    upgradeIndicators[i / 10].sprite = takenIndicator;
+            }
+            catch (ArgumentOutOfRangeException e)
+            {
+                Debug.LogWarning("Upgrade slot vyletěl mimo dostupnej index. :: " + e.StackTrace);
+            }
         }
 
         protected virtual void CustomButtonAction() {}

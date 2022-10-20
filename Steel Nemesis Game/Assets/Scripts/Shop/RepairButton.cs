@@ -57,6 +57,8 @@ namespace Shop
                 gameObject.SetActive(false);
                 
                 Shop.UI.CostTyper.Instance.TextReset();
+                
+                Player.Controller.StatsInstance.onShipUpgrade.Invoke();
             }
             else
             {
