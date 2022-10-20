@@ -3209,9 +3209,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 451696149}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 465a2782b5e7d4224bcba75290b05d43, type: 3}
+  m_Script: {fileID: 11500000, guid: 7ce57cdad497c5e4eb97416e955e6d73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  letterType: {fileID: 8300000, guid: 6f058147043ba444bbf7f3898ffd4f13, type: 3}
 --- !u!1 &451755194
 GameObject:
   m_ObjectHideFlags: 0
@@ -6141,11 +6142,6 @@ MonoBehaviour:
   plusButton: {fileID: 657263521}
   minusButton: {fileID: 421091415}
   level: {fileID: 633312569}
-  cost: {fileID: 0}
-  charString: 
-  displayString: 
-  index: 0
-  letterType: {fileID: 8300000, guid: 6f058147043ba444bbf7f3898ffd4f13, type: 3}
 --- !u!114 &808986989
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8724,6 +8720,7 @@ GameObject:
   - component: {fileID: 1096376003}
   - component: {fileID: 1096376002}
   - component: {fileID: 1096376005}
+  - component: {fileID: 1096376006}
   m_Layer: 5
   m_Name: Repair Button
   m_TagString: Untagged
@@ -8771,7 +8768,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 0
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -8858,12 +8855,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00799619bb46343459956646f98bf63b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  charString: 
-  displayString: 
-  index: 0
-  letterType: {fileID: 8300000, guid: 6f058147043ba444bbf7f3898ffd4f13, type: 3}
-  cost: {fileID: 0}
   repairSound: {fileID: 8300000, guid: 917c40f182fb046aba2064f866e31361, type: 3}
+--- !u!114 &1096376006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1096376000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ead6050b62630a348b7f0e1ce51a19ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  changeTextColor: 1
+  buttonImageHover: {fileID: 21300000, guid: 1f6434b0b115ef849bcefa462d73bbc3, type: 3}
+  buttonImageNormal: {fileID: 21300000, guid: 7a6290e81b977314986cd290c2228347, type: 3}
+  inactiveTextColor: {r: 1, g: 1, b: 1, a: 1}
+  activeTextColor: {r: 0, g: 0, b: 0, a: 0}
+  hoverSound: {fileID: 8300000, guid: 29d330c8481f84ebbbb5eba03fd8e188, type: 3}
+  clickSound: {fileID: 8300000, guid: 954485096b6c846218d49fa223b5e841, type: 3}
 --- !u!1 &1101417032
 GameObject:
   m_ObjectHideFlags: 0
@@ -9958,11 +9969,6 @@ MonoBehaviour:
   plusButton: {fileID: 1168488732}
   minusButton: {fileID: 595290899}
   level: {fileID: 1236218973}
-  cost: {fileID: 0}
-  charString: 
-  displayString: 
-  index: 0
-  letterType: {fileID: 8300000, guid: 6f058147043ba444bbf7f3898ffd4f13, type: 3}
 --- !u!114 &1185467149
 MonoBehaviour:
   m_ObjectHideFlags: 0
