@@ -26,6 +26,8 @@ MonoBehaviour:
   baseAim: 2
   baseTurn: 4
   baseScale: 5
+  repairCost: 50
+  laserInaccuracy: 4
   maxHitPointsMultiplier: 1
   maxBatteryMultiplier: 1
   batteryRechargeMultiplier: 1
@@ -33,6 +35,7 @@ MonoBehaviour:
   cooldownMultiplier: 1
   damageMultiplier: 1
   enginePerformanceMultiplier: 1
+  costMultiplier: 1
   maxHitPointsStat: 5
   maxBatteryStat: 2
   maxBatteryRechargeStat: 2

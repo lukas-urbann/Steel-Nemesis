@@ -25,6 +25,8 @@ namespace Player
         public float baseAim = 2;
         public float baseTurn = 4;
         public float baseScale = 5;
+        public float repairCost = 50;
+        public float laserInaccuracy = 0.3f;
         
         [Header("Stat Multipliers")]
         public float maxHitPointsMultiplier = 1;

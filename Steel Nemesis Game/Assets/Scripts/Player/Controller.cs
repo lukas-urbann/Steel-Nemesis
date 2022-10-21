@@ -147,17 +147,15 @@ namespace Player
         {
             Audio.Instance.PlaySound(fire);
             battery -= (int)fireCost;
-            Vector3 positionUp;
-
+            
             foreach (Transform pos in firePoints)
             {
-                positionUp = pos.up;
                 GameObject projectile = Instantiate(laser, pos.position, pos.rotation);
                 projectile.GetComponent<Laser>().SetDamage(StatsInstance.GetShipStats(ShipStats.Damage));
                 Rigidbody2D rb = projectile.GetComponent<Rigidbody2D>();
-                Vector2 aimPosition =
-                    new Vector2(Random.Range(positionUp.x - 0,positionUp.x + 0), pos.up.y); // dodělat random spread
-                rb.AddForce(aimPosition * StatsInstance.GetShipStats(ShipStats.Firepower), ForceMode2D.Impulse);
+
+                projectile.transform.Rotate(0,0,Random.Range(-shipType.laserInaccuracy, shipType.laserInaccuracy));
+                rb.AddForce(projectile.transform.up * StatsInstance.GetShipStats(ShipStats.Firepower), ForceMode2D.Impulse);
                 
                 fireDelay = StartCoroutine(FireCooldown());
             }

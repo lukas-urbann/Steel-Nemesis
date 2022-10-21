@@ -580,7 +580,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minWave: 0
-  maxWave: 999999999
+  maxWave: 100
   fireSound: {fileID: 0}
   hitEffect: {fileID: 5052683511057602913, guid: bacd9643419f74431bdc93723c186629, type: 3}
   laser: {fileID: 0}

@@ -33,7 +33,7 @@ namespace Shop
         private void Appear()
         {
             gameObject.SetActive(true);
-            repairCost = 0;
+            repairCost = Player.Controller.Instance.shipType.repairCost;
         }
         
         public void OnPointerEnter(PointerEventData eventData)
