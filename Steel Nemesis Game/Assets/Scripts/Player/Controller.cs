@@ -6,6 +6,7 @@ using Enemy;
 using Other;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 namespace Player
@@ -150,12 +151,12 @@ namespace Player
             
             foreach (Transform pos in firePoints)
             {
-                GameObject projectile = Instantiate(laser, pos.position, pos.rotation);
+                GameObject projectile = Instantiate(laser, pos.position, pos.rotation * Quaternion.Euler(0,0, Random.Range(-shipType.laserInaccuracy,shipType.laserInaccuracy)));
                 projectile.GetComponent<Laser>().SetDamage(StatsInstance.GetShipStats(ShipStats.Damage));
                 Rigidbody2D rb = projectile.GetComponent<Rigidbody2D>();
 
-                projectile.transform.Rotate(0,0,Random.Range(-shipType.laserInaccuracy, shipType.laserInaccuracy));
-                rb.AddForce(projectile.transform.up * StatsInstance.GetShipStats(ShipStats.Firepower), ForceMode2D.Impulse);
+                rb.AddForce(projectile.transform.up * StatsInstance.GetShipStats(ShipStats.Firepower),
+                    ForceMode2D.Impulse);
                 
                 fireDelay = StartCoroutine(FireCooldown());
             }

@@ -15154,7 +15154,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5216874e4fd0b4eaa974b8ef6986af78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  doNotStart: 0
+  doNotStart: 1
   minEnemies: 3
   maxEnemies: 5
   actualEnemies: 0
@@ -34370,7 +34370,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1235602245503260}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.112, z: 0}
+  m_LocalPosition: {x: 0, y: 0.061, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
