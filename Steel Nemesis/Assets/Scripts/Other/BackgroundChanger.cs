@@ -14,9 +14,10 @@ namespace Other
 
         private void Start()
         {
+            Controllers.Wave.Instance.onWaveStart += StartBackgroundChangeAnimation;
             anim = GetComponent<Animator>();
             //background.sprite = backgrounds[Random.Range(0, backgrounds.Count)]; wtf
-            Controllers.Wave.Instance.onWaveStart += () => StartBackgroundChangeAnimation(); // Checkne jestli je pozadí správné každý konec kola
+            //Controllers.Wave.Instance.onWaveStart += () => StartBackgroundChangeAnimation(); // Checkne jestli je pozadí správné každý konec kola
         }
 
         public void OnEnable()
@@ -26,7 +27,8 @@ namespace Other
 
         private void CheckBackground()
         {
-            int level = Mathf.FloorToInt(Controllers.Wave.Instance.GetLevel() / 20);
+            Debug.Log("Změna pozadí");
+            int level = Mathf.FloorToInt(Controllers.Wave.Instance.GetLevel() / 5);
 
             if (level > backgrounds.Count)
             {
@@ -40,7 +42,8 @@ namespace Other
 
         public void StartBackgroundChangeAnimation()
         {
-            anim.Play("BackgroundChange");
+            if(Controllers.Wave.Instance.GetLevel() % 5 == 0)
+                anim.Play("BackgroundChange");
         }
     }
 }

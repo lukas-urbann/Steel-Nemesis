@@ -16,9 +16,9 @@ MonoBehaviour:
   shipSprite: {fileID: 21300000, guid: b28a6a54a24844ae6a6dd6fdd478aa09, type: 3}
   baseHitPoints: 20
   baseMaxHitPoints: 20
-  baseBattery: 10
-  baseMaxBattery: 10
-  baseBatteryRecharge: 1
+  baseBattery: 35
+  baseMaxBattery: 35
+  baseBatteryRecharge: 3.5
   baseCooldown: 0.5
   baseFirepower: 0.7
   baseDamage: 12
@@ -26,8 +26,8 @@ MonoBehaviour:
   baseAim: 2
   baseTurn: 4
   baseScale: 5
-  repairCost: 50
-  laserInaccuracy: 10
+  repairCost: 25
+  laserInaccuracy: 6
   maxHitPointsMultiplier: 1
   maxBatteryMultiplier: 1
   batteryRechargeMultiplier: 1
@@ -35,11 +35,10 @@ MonoBehaviour:
   cooldownMultiplier: 1
   damageMultiplier: 1
   enginePerformanceMultiplier: 1
-  costMultiplier: 1
-  maxHitPointsStat: 5
-  maxBatteryStat: 2
-  maxBatteryRechargeStat: 2
-  maxFirepowerStat: 2
-  maxCooldownStat: 5
-  maxDamageStat: 3
-  maxEnginePerformanceStat: 2
+  maxHitPointsStat: 15
+  maxBatteryStat: 25
+  maxBatteryRechargeStat: 15
+  maxFirepowerStat: 10
+  maxCooldownStat: 10
+  maxDamageStat: 10
+  maxEnginePerformanceStat: 10

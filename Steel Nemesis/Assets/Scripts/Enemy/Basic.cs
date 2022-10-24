@@ -10,7 +10,7 @@ namespace Enemy
     {
         private void Start()
         {
-            dropValues = new int[] { 0, 0, 1, 0, 0};
+            dropValues = new int[] { 0,0,1,1,0,1,0,1,2};
 
             hp = 22.5f + (Controllers.Wave.Instance.GetLevel() * 0.5f);
 

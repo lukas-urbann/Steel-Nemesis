@@ -21,7 +21,7 @@ namespace Other
 
         private void Start()
         {
-            movement = new Vector3(Random.Range(-3, 3f), Random.Range(-3f, 3f),0);
+            movement = new Vector3(Random.Range(-2, 2f), Random.Range(-2f, 2f),0);
             spriteColor = sprite.color;
         }
 

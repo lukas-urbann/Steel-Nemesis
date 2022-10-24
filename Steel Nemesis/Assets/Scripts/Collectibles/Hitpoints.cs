@@ -10,7 +10,7 @@ namespace Collectible
     {
         private void OnEnable()
         {
-            base.value = Player.Controller.StatsInstance.GetShipStats(ShipStats.MaxHitPoints);
+            value *= 10;
         }
     }
 }

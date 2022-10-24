@@ -187,7 +187,7 @@ namespace Controllers
         private void IncreaseEnemyCount()
         {
             minEnemies++;
-            maxEnemies = maxEnemies + 2 + (level / 2);
+            maxEnemies += 5;
         }
         
         private void KillAllHostiles()

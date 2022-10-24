@@ -18,6 +18,7 @@ namespace Controllers
         private int wavesWithoutShop = 0;
 
         public delegate void ShopDelegate();
+
         public ShopDelegate onClose;
         public ShopDelegate onOpen;
 
@@ -27,15 +28,15 @@ namespace Controllers
                 Destroy(gameObject);
             else
                 Instance = this;
-            
-            if(gameObject.activeSelf)
+
+            if (gameObject.activeSelf)
                 gameObject.SetActive(false);
         }
 
         public bool SignalShop()
         {
             shopOpen = TryToOpenShop();
-            
+
             IncreaseChance();
             return shopOpen;
         }
@@ -48,18 +49,20 @@ namespace Controllers
 
         public void OpenShop()
         {
-            if(!shopWindow.activeSelf)
+            Controllers.Barrier.Instance.ChangeHitpoints(1);
+
+            if (!shopWindow.activeSelf)
                 shopWindow.SetActive(true);
-            
+
             SetCursorVisible(true);
-            
+
             shopWindow.SetActive(true);
             ResetChanceValues();
 
             shopWindow.GetComponent<Animator>().Play("ShopAppear");
             onOpen.Invoke();
         }
-        
+
         private void ResetChanceValues()
         {
             chanceToAppear = 0;
@@ -69,7 +72,7 @@ namespace Controllers
         public void CloseShop()
         {
             Debug.Log("Shop Disabling...");
-            
+
             SetCursorVisible(false);
             onClose.Invoke();
 
@@ -80,9 +83,15 @@ namespace Controllers
         {
             Cursor.visible = boolean;
         }
-        
+
         public bool TryToOpenShop()
         {
+            if (Controllers.Wave.Instance.GetLevel() % 5 == 0)
+            {
+                CallShopStation();
+                return true;
+            }
+            
             float chance = Random.Range(0f, 100f);
 
             if (chance <= chanceToAppear)
@@ -97,11 +106,11 @@ namespace Controllers
         private void IncreaseChance()
         {
             wavesWithoutShop++;
-            
+
             if (chanceToAppear >= 100)
                 chanceToAppear = 100;
 
-            chanceToAppear += (wavesWithoutShop * 1.4f);
+            chanceToAppear += (wavesWithoutShop * 2f);
         }
     }
 }

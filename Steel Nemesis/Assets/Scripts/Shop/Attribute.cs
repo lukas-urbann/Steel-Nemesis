@@ -13,7 +13,7 @@ namespace Shop
         //TODO: Opravit aj tuhle classu
         [SerializeField] protected ShipStats statType;
         [SerializeField] protected StatOrigin statOrigin;
-        [SerializeField] protected float actualCost, baseCost;
+        [SerializeField] protected float oldCost, actualCost, baseCost;
         [SerializeField] protected float increaseValue;
         private GameObject slots;
         protected List<Image> upgradeIndicators = new List<Image>();
@@ -72,6 +72,14 @@ namespace Shop
 
         public void Increase()
         {
+            if (Controllers.Credit.Instance.GetCredit() < actualCost)
+            {
+                Shop.UI.CostTyper.Instance.TypeText(">> Not enough credits");
+                return;
+            }
+            
+            Payment(false, (int) actualCost);
+            
             switch (statOrigin)
             {
                 case StatOrigin.Skillpoint:
@@ -85,10 +93,26 @@ namespace Shop
             }
             statLevel++;
             CheckLevel();
+            Shop.UI.CostTyper.Instance.TypeText(">> Upgrade bought");
+        }
+
+        private void Payment(bool add, int amount)
+        {
+            switch (add)
+            {
+                case true:
+                    Controllers.Credit.Instance.AddCredit(amount);
+                    break;
+                case false:
+                    Controllers.Credit.Instance.AddCredit(-amount);
+                    break;
+            }
         }
 
         public void Decrease()
         {
+            Payment(true, (int) oldCost);
+
             switch (statOrigin)
             {
                 case StatOrigin.Skillpoint:
@@ -106,7 +130,9 @@ namespace Shop
 
         protected void CalculatePrice()
         {
-            actualCost = ((baseCost * (Wave.Instance.GetLevel() * 0.03f)) * statLevel) * Player.Controller.Instance.shipType.costMultiplier;
+            oldCost = (int)((baseCost + (baseCost * Wave.Instance.GetLevel() * 0.03f)) +
+                            ((statLevel - 1) / 2 * baseCost)) - 10;
+            actualCost = (int) ((baseCost + (baseCost * Wave.Instance.GetLevel() * 0.03f)) + (statLevel/2 * baseCost));
         }
 
         protected void CheckLevel()

@@ -210,7 +210,9 @@ namespace Player
                     }
 
             UpdateShipStats();
-            onShipUpgrade.Invoke(); // Nevim jestli je dobrej napad to sem davat
+            
+            if(onShipUpgrade != null)
+                onShipUpgrade.Invoke(); // Nevim jestli je dobrej napad to sem davat
         }
     }
 }

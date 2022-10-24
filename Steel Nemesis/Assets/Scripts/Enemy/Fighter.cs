@@ -9,7 +9,7 @@ namespace Enemy
        
         private void Start()
         {
-            dropValues = new int[] { 0, 0, 1, 0, 0};
+            dropValues = new int[] { 3,4,5,6,7,8};
             
             rb = GetComponent<Rigidbody2D>();
             hp = 70 + (Controllers.Wave.Instance.GetLevel() * 1f);

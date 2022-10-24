@@ -36,7 +36,6 @@ namespace Player
         public float cooldownMultiplier = 1;
         public float damageMultiplier = 1;
         public float enginePerformanceMultiplier = 1;
-        public float costMultiplier = 1;
         
         [Header("Stat Max Levels")]
         public float maxHitPointsStat = 5;

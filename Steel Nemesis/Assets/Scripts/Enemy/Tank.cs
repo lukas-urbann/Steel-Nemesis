@@ -14,6 +14,8 @@ namespace Enemy
 
         private void Start()
         {
+            dropValues = new int[] { 1, 1, 2, 2, 2};
+            
             hp = 120;
             
             if(speed < 3.5f)

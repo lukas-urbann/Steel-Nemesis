@@ -26,7 +26,7 @@ namespace Player
 
         [SerializeField] private float hp;
         [SerializeField] private float battery;
-        [SerializeField] private float fireCost;
+        [SerializeField] private float fireCost = 10;
 
         [SerializeField] private bool canMove = true;
         [SerializeField] private bool canFire = true;
@@ -146,8 +146,12 @@ namespace Player
 
         private void Fire()
         {
+            if (battery < 5)
+                return;
+            
+            battery -= 5;
+
             Audio.Instance.PlaySound(fire);
-            battery -= (int)fireCost;
             
             foreach (Transform pos in firePoints)
             {
@@ -211,7 +215,7 @@ namespace Player
                     Instantiate(playerHurtEffect, col.transform.position, Quaternion.identity);
                     Instantiate(Prefabs.Instance.scrap, col.transform.position, Quaternion.identity);
                     Destroy(col.gameObject);
-                    hp -= 20; // TODO: Enemy dmg
+                    hp -= 10; // TODO: Enemy dmg
                     CheckHp();
                     break;
                 default:
@@ -224,7 +228,7 @@ namespace Player
             if (isColliding) return;
             isColliding = true;
 
-            //string collectibleType;
+            string collectibleType;
 
             if (col.gameObject.CompareTag("Collectible"))
             {
@@ -235,6 +239,7 @@ namespace Player
                     col.GetComponent<CreditDrop>().PickUp();
                     Destroy(col.gameObject);
                     CreditCollection();
+                    hp += 2.5f;
                     StartCoroutine(TriggerCollisionReset());
                     return;
                 }
@@ -244,16 +249,16 @@ namespace Player
                 if (collectible.GetValue() > 0)
                 {
                     notificationText.color = positive;
-                    //collectibleType = "++";
+                    collectibleType = "++";
                 }
                 else
                 {
                     notificationText.color = negative;
-                    //collectibleType = "--";
+                    collectibleType = "--";
                 }
 
                 switch (collectible.pickupType)
-                {/*
+                {
                     case CollectibleType.Barrier:
                         Controllers.Barrier.Instance.ChangeHitpoints(1);
                         collectible.Collect();
@@ -261,38 +266,38 @@ namespace Player
                         break;
 
                     case CollectibleType.Cooldown:
-                        cooldown -= collectible.GetValue();
+                        Player.Controller.StatsInstance.UpgradeShipStats(ShipStats.Cooldown, StatOrigin.Skillpoint, collectible.GetValue());
                         collectible.Collect();
                         notificationText.text = collectibleType + " Cooldown";
                         break;
 
                     case CollectibleType.Damage:
                         Debug.Log(collectibleType);
-                        damage += collectible.GetValue();
+                        Player.Controller.StatsInstance.UpgradeShipStats(ShipStats.Damage, StatOrigin.Skillpoint, collectible.GetValue());
                         collectible.Collect();
                         notificationText.text = collectibleType + " Damage";
                         break;
 
                     case CollectibleType.Energy:
-                        maxBattery += collectible.GetValue();
+                        Player.Controller.StatsInstance.UpgradeShipStats(ShipStats.MaxBattery, StatOrigin.Skillpoint, collectible.GetValue());
                         collectible.Collect();
                         notificationText.text = collectibleType + " Battery";
                         break;
 
                     case CollectibleType.Firepower:
-                        firepower += collectible.GetValue();
+                        Player.Controller.StatsInstance.UpgradeShipStats(ShipStats.Firepower, StatOrigin.Skillpoint, collectible.GetValue());
                         collectible.Collect();
                         notificationText.text = collectibleType + " Firepower";
                         break;
 
                     case CollectibleType.Speed:
-                        enginePerformance += collectible.GetValue();
+                        Player.Controller.StatsInstance.UpgradeShipStats(ShipStats.EnginePerformance, StatOrigin.Skillpoint, collectible.GetValue());
                         collectible.Collect();
                         notificationText.text = collectibleType + " Speed";
                         break;
 
                     case CollectibleType.HP:
-                        maxHitPoints += collectible.GetValue();
+                        Player.Controller.StatsInstance.UpgradeShipStats(ShipStats.MaxHitPoints, StatOrigin.Skillpoint, collectible.GetValue());
                         collectible.Collect();
                         notificationText.text = collectibleType + " HP";
                         break;
@@ -300,7 +305,7 @@ namespace Player
                     default:
                         Debug.Log("the fuck");
                         break;
-                */}
+                }
                 SpawnNotification();
             }
             StartCoroutine(TriggerCollisionReset());

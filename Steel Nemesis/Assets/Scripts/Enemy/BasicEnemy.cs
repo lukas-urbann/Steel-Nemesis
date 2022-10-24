@@ -36,6 +36,7 @@ namespace Enemy
         protected float maxHp;
         protected float damage;
         protected float reloadTimeLeft;
+        [SerializeField] protected EnemyType type;
         
         protected bool canShoot = true;
         protected bool isColliding = false;
@@ -166,7 +167,10 @@ namespace Enemy
             {
                 LaserHit();
                 Instantiate(hitEffect, col.transform.position, Quaternion.identity);
-                SetSpeed(-(speed - (speed / 2)));
+                
+                if(type != EnemyType.Tank)
+                    SetSpeed(-(speed - (speed / 2)));
+                
                 Destroy(col.gameObject);
             }
         }
@@ -249,7 +253,7 @@ namespace Enemy
         
         protected void DropConsumable()
         { 
-            /*
+            
            int selected = dropValues[Random.Range(0, dropValues.Length)];
 
            if (selected-1 == -1) return;
@@ -260,7 +264,7 @@ namespace Enemy
                return;
            
            Instantiate(drop, transform.position, Quaternion.identity);
-           */
+           
         }
 
         private void OnTriggerEnter2D(Collider2D col)

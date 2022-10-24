@@ -11,7 +11,7 @@ namespace Enemy
     {
         private void Start()
         {
-            dropValues = new int[] { 0, 0, 1, 0, 0};
+            dropValues = new int[] { 0, 0, 1, 1, 1, 2};
             
             hp = 50;
             

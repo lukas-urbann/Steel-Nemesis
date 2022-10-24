@@ -8,7 +8,7 @@ namespace Collectible
     {
         private void OnEnable()
         {
-            base.value = 20;
+            value *= 10;
         }
     }
 }
