@@ -29,7 +29,7 @@ namespace Shop.UI
             for (int i = 0; i < Controller.StatsInstance.shipStatsList.Count; i++)
             {
                 if (stat == Controller.StatsInstance.shipStatsList[i])
-                    label.text = Player.Controller.StatsInstance.GetShipStats(Controller.StatsInstance.shipStatsList[i]).ToString("F2");
+                    label.text = Player.Controller.StatsInstance.GetShipStats(Controller.StatsInstance.shipStatsList[i]).ToString("F1") + " / " + Controller.StatsInstance.GetBestShipStats(Controller.StatsInstance.shipStatsList[i]).ToString("F1");
             }
         }
     }

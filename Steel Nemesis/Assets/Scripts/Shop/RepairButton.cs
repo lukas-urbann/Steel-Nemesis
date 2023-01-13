@@ -35,6 +35,11 @@ namespace Shop
             gameObject.SetActive(true);
             repairCost = Player.Controller.Instance.shipType.repairCost;
         }
+
+        public void Disappear()
+        {
+            gameObject.SetActive(false);
+        }
         
         public void OnPointerEnter(PointerEventData eventData)
         {

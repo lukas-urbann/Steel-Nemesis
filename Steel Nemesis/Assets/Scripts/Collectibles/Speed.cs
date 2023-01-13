@@ -9,7 +9,7 @@ namespace Collectible
     {
         private void OnEnable()
         {
-            value *= 0.25f;
+            value *= 0.1f;
         }
     }
 }

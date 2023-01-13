@@ -46,7 +46,7 @@ namespace Other
 
         public void PickUp()
         {
-            Instantiate(pickupEffect, transform.position, Quaternion.identity);
+            Instantiate(pickupEffect, transform.position, transform.rotation);
         }
     }
 }

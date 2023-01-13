@@ -35,10 +35,10 @@ namespace Collectible
             switch (type)
             {
                 case CollectiblePickupType.Negative:
-                    value = -1;
+                    value = -0.1f;
                     break;
                 case CollectiblePickupType.Positive:
-                    value = 1;
+                    value = 0.1f;
                     break;
             }
         }

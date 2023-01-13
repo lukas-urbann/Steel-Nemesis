@@ -45,5 +45,17 @@ namespace Player
         public float maxCooldownStat = 5;
         public float maxDamageStat = 3;
         public float maxEnginePerformanceStat = 5;
+        
+        [Header("Best Stats")]
+        public float bestMaxHitPoints = 20; //
+        public float bestMaxBattery = 10; //
+        public float bestBatteryRecharge = 25; //
+        public float bestCooldown = 0.5f; //
+        public float bestFirepower = 0.75f; //
+        public float bestDamage = 12;
+        public float bestEnginePerformance = 2f;
+        public float bestAim = 2;
+        public float bestTurn = 4;
+        public float bestScale = 5;
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Controllers;
+using Shop;
 using UnityEngine;
 
 namespace Player
@@ -17,8 +18,9 @@ namespace Player
     
     public class Stats : MonoBehaviour
     {
-        public List<ShipStats> shipStatsList = new List<ShipStats>();
+        [SerializeField] private RepairButton repairButton;
         
+        public List<ShipStats> shipStatsList = new List<ShipStats>();
         [Tooltip("Staty:\n1. Max HP\n2. Max Battery\n3. Battery Recharge\n4. Cooldown\n5. Firepower\n6. Damage\n7. Scale\n8. Aim\n9. Turn\n10.Engine Perf.")]
         [SerializeField] private List<float> activeStatsValueList = new List<float>(); // Tohle je to co používá hráč aktivně, jsou v tom všecky sečtené
         private List<float> shipStatsValueList = new List<float>(); // Tohle je pouze loď
@@ -26,6 +28,7 @@ namespace Player
         private List<float> skillpointStatsValueList = new List<float>(); // Tohle jsou pouze hráčovy skillpointy
         private List<float> statMultiplierValueList = new List<float>(); // Tohle je multiplikátor lodě
         private List<float> shipMaxStatsList = new List<float>(); // Tohle obsahuje maximální upgrady jednotlivých lodí
+        private List<float> shipBestStatsValueList = new List<float>(); // Tohle obsahuje maximální upgrady jednotlivých lodí
 
         public delegate void AttributeDelegate(); // volat na shop pro update labelu
         public AttributeDelegate onShipUpgrade;
@@ -49,6 +52,7 @@ namespace Player
             ManuallyAssignMaxStatList();
             ManuallyAssignShipBaseStats();
             ManuallyAssignShipMultipliers();
+            ManuallyAssignShipBestStats();
         }
 
         private void ManuallyAssignShipBaseStats()
@@ -69,6 +73,26 @@ namespace Player
                 ;
 
             shipBaseStatsValueList.AddRange(baseStats);
+        }
+        
+        private void ManuallyAssignShipBestStats()
+        {
+            float[] bestStats =
+                {
+                    Controller.Instance.shipType.bestMaxHitPoints,
+                    Controller.Instance.shipType.bestMaxBattery,
+                    Controller.Instance.shipType.bestBatteryRecharge,
+                    Controller.Instance.shipType.bestCooldown,
+                    Controller.Instance.shipType.bestFirepower,
+                    Controller.Instance.shipType.bestDamage,
+                    Controller.Instance.shipType.bestScale,
+                    Controller.Instance.shipType.bestAim,
+                    Controller.Instance.shipType.bestTurn,
+                    Controller.Instance.shipType.bestEnginePerformance
+                }
+                ;
+
+            shipBestStatsValueList.AddRange(bestStats);
         }
 
         private void ManuallyAssignShipMultipliers()
@@ -141,8 +165,14 @@ namespace Player
         private void UpdateActiveSlots()
         {
             for (int i = 0; i < shipStatsList.Count; i++)
-                activeStatsValueList[i] = (shipBaseStatsValueList[i] +
+            {
+                activeStatsValueList[i] = (shipBaseStatsValueList[i] +                                                                                                                       
                                            ((shipStatsValueList[i] * statMultiplierValueList[i]) - shipBaseStatsValueList[i]) + (skillpointStatsValueList[i] * statMultiplierValueList[i]));
+                                             
+                if (activeStatsValueList[i] >= shipBestStatsValueList[i])
+                    activeStatsValueList[i] = shipBestStatsValueList[i];
+                    
+            }
         }
 
         private void AssignActiveSlots()
@@ -160,6 +190,15 @@ namespace Player
 
             return 0;
         }
+        
+        public float GetBestShipStats(ShipStats stat)        
+        {                                                
+            for (int i = 0; i < shipStatsList.Count; i++)
+                if (shipStatsList[i] == stat)            
+                    return shipBestStatsValueList[i];      
+                                                 
+            return 0;                                    
+        }                                                
 
         public float GetShipStats(ShipStats stat, StatOrigin origin)
         {
@@ -201,10 +240,12 @@ namespace Player
                             break;
                         case StatOrigin.Upgrade:
                             shipStatsValueList[i] += value;
-                            
-                            //Tohle slouží pro to aby hráči nebrečeli že se jim nedostaví hp za upgrady
+
                             if (stat == ShipStats.MaxHitPoints)
-                                Player.Controller.Instance.AddHitpoints(value);
+                            {
+                                Player.Controller.Instance.SetHitpoints(shipStatsValueList[i]);
+                                repairButton.Disappear();
+                            }
                             
                             break;
                     }

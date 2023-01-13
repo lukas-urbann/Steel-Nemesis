@@ -126,7 +126,7 @@ namespace Player
             qt = Quaternion.AngleAxis(angle - 90, Vector3.forward);
 
             if (!Controllers.Pause.Instance.GetPauseState())
-                transform.rotation = Quaternion.RotateTowards(transform.rotation, qt, StatsInstance.GetShipStats(ShipStats.Turn));
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, qt, StatsInstance.GetShipStats(ShipStats.Turn) * (Time.deltaTime * 50));
         }
 
         private void CheckFire()
@@ -183,6 +183,14 @@ namespace Player
         {
             hp += value;
             CheckFire();
+            CheckHp();
+        }
+        
+        public void SetHitpoints(float value)
+        {
+            hp = value;
+            CheckFire();
+            CheckHp();
         }
 
         private void CheckHp()
@@ -262,44 +270,44 @@ namespace Player
                     case CollectibleType.Barrier:
                         Controllers.Barrier.Instance.ChangeHitpoints(1);
                         collectible.Collect();
-                        notificationText.text = collectibleType + " Barrier";
+                        notificationText.text = collectibleType + " Barrier Multiplicator";
                         break;
 
                     case CollectibleType.Cooldown:
-                        Player.Controller.StatsInstance.UpgradeShipStats(ShipStats.Cooldown, StatOrigin.Skillpoint, collectible.GetValue());
+                        Player.Controller.StatsInstance.UpgradeShipStats(ShipStats.Cooldown, StatOrigin.Multiplicator, collectible.GetValue());
                         collectible.Collect();
-                        notificationText.text = collectibleType + " Cooldown";
+                        notificationText.text = collectibleType + " Cooldown Multiplicator";
                         break;
 
                     case CollectibleType.Damage:
                         Debug.Log(collectibleType);
-                        Player.Controller.StatsInstance.UpgradeShipStats(ShipStats.Damage, StatOrigin.Skillpoint, collectible.GetValue());
+                        Player.Controller.StatsInstance.UpgradeShipStats(ShipStats.Damage, StatOrigin.Multiplicator, collectible.GetValue());
                         collectible.Collect();
-                        notificationText.text = collectibleType + " Damage";
+                        notificationText.text = collectibleType + " Damage Multiplicator";
                         break;
 
                     case CollectibleType.Energy:
-                        Player.Controller.StatsInstance.UpgradeShipStats(ShipStats.MaxBattery, StatOrigin.Skillpoint, collectible.GetValue());
+                        Player.Controller.StatsInstance.UpgradeShipStats(ShipStats.MaxBattery, StatOrigin.Multiplicator, collectible.GetValue());
                         collectible.Collect();
-                        notificationText.text = collectibleType + " Battery";
+                        notificationText.text = collectibleType + " Battery Multiplicator";
                         break;
 
                     case CollectibleType.Firepower:
-                        Player.Controller.StatsInstance.UpgradeShipStats(ShipStats.Firepower, StatOrigin.Skillpoint, collectible.GetValue());
+                        Player.Controller.StatsInstance.UpgradeShipStats(ShipStats.Firepower, StatOrigin.Multiplicator, collectible.GetValue());
                         collectible.Collect();
-                        notificationText.text = collectibleType + " Firepower";
+                        notificationText.text = collectibleType + " Firepower Multiplicator";
                         break;
 
                     case CollectibleType.Speed:
-                        Player.Controller.StatsInstance.UpgradeShipStats(ShipStats.EnginePerformance, StatOrigin.Skillpoint, collectible.GetValue());
+                        Player.Controller.StatsInstance.UpgradeShipStats(ShipStats.EnginePerformance, StatOrigin.Multiplicator, collectible.GetValue());
                         collectible.Collect();
-                        notificationText.text = collectibleType + " Speed";
+                        notificationText.text = collectibleType + " Speed Multiplicator";
                         break;
 
                     case CollectibleType.HP:
-                        Player.Controller.StatsInstance.UpgradeShipStats(ShipStats.MaxHitPoints, StatOrigin.Skillpoint, collectible.GetValue());
+                        Player.Controller.StatsInstance.UpgradeShipStats(ShipStats.MaxHitPoints, StatOrigin.Multiplicator, collectible.GetValue());
                         collectible.Collect();
-                        notificationText.text = collectibleType + " HP";
+                        notificationText.text = collectibleType + " HP Multiplicator";
                         break;
 
                     default:
@@ -317,6 +325,11 @@ namespace Player
             notificationText.color = positive;
             notificationText.text = "++ Credit";
             SpawnNotification();
+        }
+
+        public void CreditCollectionCheat()
+        {
+            CreditCollection();
         }
 
         private void SpawnNotification()

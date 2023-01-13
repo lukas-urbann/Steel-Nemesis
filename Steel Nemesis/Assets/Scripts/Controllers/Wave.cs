@@ -17,7 +17,7 @@ namespace Controllers
         private Vector2 minSpawnDimension = new Vector2(-5.50f, 4.5f);
         private Vector2 maxSpawnDimension = new Vector2(5.50f, 2f);
 
-        public int minEnemies = 3, maxEnemies = 5, actualEnemies;
+        public float minEnemies = 3, maxEnemies = 5, actualEnemies;
         public List<GameObject> spawnedEnemies = new List<GameObject>();
         private int level = 0;
 
@@ -100,7 +100,7 @@ namespace Controllers
                             spawnedEnemies.RemoveAt(i);
                     }
                     
-                    if(actualEnemies == 0 && spawnedEnemies.Count == 0)
+                    if(actualEnemies <= 0 && spawnedEnemies.Count == 0)
                         WaveEnd();
 
                     yield return null;
@@ -186,8 +186,8 @@ namespace Controllers
 
         private void IncreaseEnemyCount()
         {
-            minEnemies++;
-            maxEnemies += 5;
+            minEnemies += 0.3f;
+            maxEnemies += 1;
         }
         
         private void KillAllHostiles()
@@ -241,7 +241,7 @@ namespace Controllers
         private void GenerateEnemiesForWave()
         {
             SelectEligibleEnemies();
-            actualEnemies = Random.Range(minEnemies, maxEnemies);
+            actualEnemies = Random.Range(Mathf.FloorToInt(minEnemies), maxEnemies);
         }
 
         private void GenerateSpawnDelays()
@@ -249,7 +249,7 @@ namespace Controllers
             if(minSpawnDelay > 0.1f)
                 minSpawnDelay = (0.5f - (level * 0.002f));
 
-            if (maxSpawnDelay < 1)
+            if (maxSpawnDelay > 1)
                 maxSpawnDelay = (6 - (level * 0.03f));
         }
         
