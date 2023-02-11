@@ -14,10 +14,6 @@ namespace Settings
     
     public class SettingsManager : MonoBehaviour
     {
-        private int settingVsync = 0;
-        private int settingMasterVolume = 100;
-        private int settingMasterMusic = 100;
-        private int settingMasterSfx = 100;
         public static string masterVolPref = "MasterVol";
         public static string effectVolPref = "EffectsVol";
         public static string musicVolPref = "MusicVol";
