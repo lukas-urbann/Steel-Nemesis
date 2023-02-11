@@ -9,8 +9,8 @@ namespace GameUI
     public class ButtonInteractor : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         public bool changeTextColor = true;
-        private TMP_Text buttonText;
-        private Image buttonImage;
+        [SerializeField] private TMP_Text buttonText;
+        [SerializeField] private Image buttonImage;
 
         public Sprite buttonImageHover, buttonImageNormal; 
         
