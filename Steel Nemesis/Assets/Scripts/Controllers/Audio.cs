@@ -30,7 +30,14 @@ namespace Controllers
 
         public void PlaySound(AudioClip sound)
         {
-            audioSource.PlayOneShot(sound);
+            try
+            {
+                audioSource.PlayOneShot(sound);
+            }
+            catch (Exception e)
+            {
+                
+            }
         }
 
         public void HitSound()

@@ -25,6 +25,7 @@ using UnityEngine.SceneManagement;
         private IEnumerator LoadAsynchronously(string levelName)
         {
             Time.timeScale = 1;
+            loadingScreen.SetActive(true);
             AsyncOperation operation = SceneManager.LoadSceneAsync(levelName, LoadSceneMode.Single);
             
             while (!operation.isDone)

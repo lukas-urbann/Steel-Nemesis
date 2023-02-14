@@ -1,7 +1,6 @@
-using System;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Settings
 {
@@ -24,6 +23,13 @@ namespace Settings
                 {
                     screenResolutions.Remove(screenResolutions[i]);
                     i--; //Fuck you
+                    continue;
+                }
+                
+                if ((screenResolutions[i].width / screenResolutions[i].height) > 2f)
+                {
+                    screenResolutions.Remove(screenResolutions[i]);
+                    i--; //Fuck you again
                 }
             }
 
