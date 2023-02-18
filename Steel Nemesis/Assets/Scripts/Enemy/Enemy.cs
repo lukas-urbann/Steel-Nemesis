@@ -5,11 +5,13 @@ using Controllers;
 using Other;
 using Triggers;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 namespace Enemy
 {
+    /// <summary>
+    /// Nový systém letu. Obsahuje označení os.
+    /// </summary>
     public enum EnemyDirection
     {
         X,
@@ -17,14 +19,20 @@ namespace Enemy
         General
     }
     
+    /// <summary>
+    /// Typy nepřátel zaznamenané v enumech.
+    /// </summary>
     public enum EnemyType
     {
-        Basic,
+        Standard,
         Attacker,
         Tank,
         Fighter,
     }
     
+    /// <summary>
+    /// Legacy systém letu. Obsahuje možné směry letu.
+    /// </summary>
     public enum FlyDirection
     {
         Top,
@@ -33,70 +41,127 @@ namespace Enemy
         Left
     }
 
-   public class BasicEnemy : MonoBehaviour
+   public abstract class Enemy : MonoBehaviour
    {
-        //Hidden values
-        [HideInInspector] private GameObject drop;
-        protected FlyDirection flyDirection;
-        private Vector3 movement = new Vector3(0, 0,0);
-        private Death deathScript;
+       #region Proměnné
 
-        [Header("--- Base enemy stats ---")]
-        [SerializeField] protected float speed;
-        protected float xSpeed;
-        protected float ySpeed;
-        [SerializeField] protected float hp;
-        [SerializeField] protected float maxHp;
-        [SerializeField] protected float damage;
-        [SerializeField] protected float reloadTimeLeft;
-        [SerializeField] protected EnemyType type;
-        
-        [Header("--- Advanced features ---")]
-        [SerializeField] protected bool lockedInView = false;
-        [Tooltip("Zaplé - loď má defaultní hodnoty\nVyplé - loď se vylepšuje růstem vlivem úrovně")]
-        [SerializeField] protected bool defaultShipValues = false;
-        [SerializeField] protected bool slowOnHit = false;
-        [SerializeField] protected bool smoothSpeed = false;
-        [SerializeField] protected bool canShoot = true;
-        [SerializeField] protected bool isColliding = false;
-        [SerializeField] protected bool disabledBoundaries = false;
-        [SerializeField] protected bool visible = true;
+       //General - Hidden values
+       private GameObject drop;
+       protected FlyDirection flyDirection;
+       private Vector3 movement;
+       private Death deathScript;
+       private float maxHp;
+       protected bool visible = true;
+       private bool isColliding;
+       private float reloadTimeLeft;
+       private float xSpeed;
+       private float ySpeed;
 
-        [Header("--- Additional features ---")]
-        [SerializeField] protected int minWave;
-        [SerializeField] protected int maxWave;
-        
-        [Header("--- Drop capabilities ---")]
-        [SerializeField] protected int[] dropValues;
-        
-        [Header("--- Ship sound effects ---")]
-        [SerializeField] protected AudioClip fireSound;
-        
-        [Header("--- Assignable objects ---")]
-        [SerializeField] protected GameObject bulletPrefab;
-        public GameObject damageEffectPrefab;
+       //AI Location - Hidden values
+       private Vector3 oldPosition;     
+       private Vector3 newPosition;
+       private int positionOldX, positionNewX, positionOldY, positionNewY;
+       private bool canChangeXSpeed = true;
+       private bool canChangeYSpeed = true;
+       
+       [Header("--- Base enemy stats ---")]
+       [SerializeField] protected EnemyType type;
+       [SerializeField] protected float speed;
+       [SerializeField] protected float hp;
+       [SerializeField] protected float damage;
+       [Header("--- Advanced features ---")]
+       [SerializeField] protected bool lockedInView;
+       [Tooltip("Zaplé - loď má defaultní hodnoty\nVyplé - loď se vylepšuje růstem vlivem úrovně")] [SerializeField]
+       protected bool defaultShipValues;
+       [Tooltip("Zaplé - loď má hodnoty z inspectoru\nVyplé - loď používá hodnoty ze skriptu.")] [SerializeField]
+       protected bool inspectorValues;
+       [SerializeField] protected bool slowOnHit;
+       [SerializeField] protected bool smoothSpeed;
+       [SerializeField] protected bool canShoot = true;
+       [SerializeField] protected bool disabledBoundaries;
 
-        [Header("--- Cannon barrels ---")]
-        [SerializeField] protected List<Transform> barrelPoints = new List<Transform>();
-        
-        //NEGR
-        public Vector3 oldPosition;     
-        public Vector3 newPosition;
-        public int positionOldX, positionNewX, positionOldY, positionNewY;
-        public bool canDebilTurn = true, canDebilTurn2 = true;
+       [Header("--- Additional features ---")]
+       [SerializeField] protected int minWave;
+       [SerializeField] protected int maxWave;
+       
+       [Header("--- Drop capabilities ---")]
+       [SerializeField] protected int[] dropValues;
+       
+       [Header("--- Ship sound effects ---")]
+       [SerializeField] protected AudioClip fireSound;
+       
+       [Header("--- Assignable objects ---")]
+       [SerializeField] protected GameObject bulletPrefab;
+       public GameObject damageEffectPrefab;
 
+       [Header("--- Cannon barrels ---")]
+       [SerializeField] protected List<Transform> barrelPoints = new List<Transform>();
+
+       #endregion
+
+       #region Inicializace
+
+        /// <summary>
+        /// Spouští úvodní metody
+        /// </summary>
         private void OnEnable()
         {
+            EarlyStart();
+            SetShipValues();
+            AssignScripts();
+            InitMaxHp();
+        }
+        
+        /// <summary>
+        /// Inicializuje se před startem, je potřeba zde definovat věci, se kterými se
+        /// pracuje ve Startu a OnEnable. Nejčastěji proměnné lodě.
+        /// </summary>
+        protected abstract void EarlyStart();
+
+        /// <summary>
+        /// Zde se píší základní hodnoty lodí pro případy, kdy by nebyly přiřazené v inspectoru.
+        /// </summary>
+        protected abstract void AssignScriptShipValues();
+        
+        /// <summary>
+        /// Přiřazuje nějaké základní věci při spuštění, slouží spíše k čistějšímu kódu.
+        /// </summary>
+        private void AssignScripts()
+        {
             oldPosition = transform.position;
-            damage = 0;
             deathScript = transform.root.GetComponent<Death>();
         }
 
-        protected void InitMaxHp()
+        /// <summary>
+        /// Nastaví maximální HP nepřítele dle HP se kterými se spawne
+        /// </summary>
+        private void InitMaxHp()
         {
             maxHp = hp;
         }
 
+        /// <summary>
+        /// Každá loď má své defaultní hodnoty definované ve skriptech. Pokud je 'inspectorValues' zaškrtlé, tak
+        /// loď bere své hodnoty právě z inspektoru.
+        /// </summary>
+        private void SetShipValues()
+        {
+            if (!inspectorValues)
+            {
+                AssignScriptShipValues();
+                return;
+            }
+            
+            SetDropValues(dropValues);
+            hp = defaultShipValues ? hp : (hp + Controllers.Wave.Instance.GetLevel() * 1f);
+            speed = defaultShipValues ? speed : (speed + (Controllers.Wave.Instance.GetLevel() * 0.005f));
+            damage = defaultShipValues ? damage : (damage + (Controllers.Wave.Instance.GetLevel() * 0.1f));
+        }
+
+        /// <summary>
+        /// Nastaví hodnoty dropů nepřátel dle ID
+        /// </summary>
+        /// <param name="drops">Jednotlivé čísla ID dropů</param>
         protected void SetDropValues(params int[] drops)
         {
             dropValues = new int[drops.Length];
@@ -110,11 +175,15 @@ namespace Enemy
             }
         }
 
+        #endregion
+        
+       #region Ovládání letu nepřítele
+        
         protected float GetVelocity(EnemyDirection direction)
         {
             newPosition = transform.position;
             var media =  (newPosition - oldPosition);
-            Vector3 velocity = media /Time.deltaTime;
+            Vector3 velocity = media / Time.deltaTime;
             oldPosition = newPosition;
             newPosition = transform.position;
 
@@ -128,83 +197,71 @@ namespace Enemy
                     return velocity.x + velocity.y + velocity.z;
             }
         }
-
-        public void CheckDement()
+        
+        protected void CheckStuckX()
         {
-            Debug.LogWarning("dement 1");
             positionOldX = (int) (oldPosition.x * 10);
             positionNewX = (int) (newPosition.x * 10);
 
-            if (positionOldX == positionNewX && canDebilTurn && GetVelocity(EnemyDirection.X) < 0.1f)
+            if (positionOldX == positionNewX && canChangeXSpeed && GetVelocity(EnemyDirection.X) < 0.1f)
             {
-                canDebilTurn = false;
+                canChangeXSpeed = false;
                 StartCoroutine(ChangeDirectionAfterStuck());
             }
         }
-
-        public void CheckDement2()
+        
+        protected void CheckStuckY()
         {
-            Debug.LogWarning("dement y1");
             positionOldY = (int) (oldPosition.y * 10);
             positionNewY = (int) (newPosition.y * 10);
 
-            if (positionOldY == positionNewY && canDebilTurn2 && GetVelocity(EnemyDirection.Y) < 0.1f)
+            if (positionOldY == positionNewY && canChangeYSpeed && GetVelocity(EnemyDirection.Y) < 0.1f)
             {
-                canDebilTurn2 = false;
+                canChangeYSpeed = false;
                 StartCoroutine(ChangeDirectionAfterStuckY());
             }
         }
         
         private IEnumerator ChangeDirectionAfterStuckY()
         {
-            Debug.LogWarning("dement y2");
-
-            if (!canDebilTurn2)
-            {
+            if (!canChangeYSpeed)
                 yield return null;
-            }
 
             yield return new WaitForSeconds(1f);
 
             if (positionOldY == positionNewY)
             {
-                canDebilTurn2 = false;
+                canChangeYSpeed = false;
                 SetNewRandomSpeed(-ySpeed / 2, -ySpeed, EnemyDirection.Y);
-                Debug.LogWarning("dement y3");
-                StartCoroutine(RETARD2());
+                StartCoroutine(EnableCanChangeYSpeed());
             }
         }
-
+        
         private IEnumerator ChangeDirectionAfterStuck()
         {
-            Debug.LogWarning("dement 2");
-
-            if (!canDebilTurn)
-            {
+            if (!canChangeXSpeed)
                 yield return null;
-            }
 
             yield return new WaitForSeconds(1f);
 
             if (positionOldX == positionNewX)
             {
-                canDebilTurn = false;
+                canChangeXSpeed = false;
                 SetNewRandomSpeed(-xSpeed / 2, -xSpeed, EnemyDirection.X);
-                Debug.LogWarning("dement 3");
-                StartCoroutine(RETARD());
+                StartCoroutine(EnableCanChangeXSpeed());
             }
         }
         
-        private IEnumerator RETARD2()
+        private IEnumerator EnableCanChangeYSpeed()
         {
             yield return new WaitForSeconds(0.5f);
-            canDebilTurn2 = true;
+            canChangeYSpeed = true;
         }
-
-        private IEnumerator RETARD()
+        
+        private IEnumerator EnableCanChangeXSpeed()
         {
-                yield return new WaitForSeconds(0.5f);
-                canDebilTurn = true;
+            yield return new WaitForSeconds(0.5f);
+            canChangeXSpeed = true;
         }
 
         private void SetSpeed(float spd)
@@ -225,6 +282,7 @@ namespace Enemy
                     break;
             }
         }
+        #endregion
 
         //Asi legacy
         protected virtual void ChangeDirection(FlyDirection side)
@@ -261,22 +319,20 @@ namespace Enemy
             StartCoroutine(CalculateFireCooldown(reloadTimeLeft));
         }
 
-        protected IEnumerator CalculateFireCooldown(float time)
+        private IEnumerator CalculateFireCooldown(float time)
         {
             yield return new WaitForSeconds(time);
             canShoot = true;
             Fire();
         }
-        
-        protected void Fire()
+
+        private void Fire()
         {
-            GameObject enemyLaser;
-            
-            foreach (Transform barrel in barrelPoints)
+            foreach (var barrel in barrelPoints)
             {
-                enemyLaser = Instantiate(bulletPrefab, barrel.position, gameObject.transform.rotation);
-                enemyLaser.GetComponent<Enemy.Laser>().SetDamage(damage);
-                Rigidbody2D rb = enemyLaser.GetComponent<Rigidbody2D>();
+                var enemyLaser = Instantiate(bulletPrefab, barrel.position, gameObject.transform.rotation);
+                enemyLaser.GetComponent<Laser>().damage = damage;
+                var rb = enemyLaser.GetComponent<Rigidbody2D>();
                 rb.AddForce(barrel.up * -1, ForceMode2D.Impulse);
             }
             
@@ -352,7 +408,7 @@ namespace Enemy
             StartCoroutine(ChangeDirections(Random.Range(seconds - 1, seconds + 1)));
         }
 
-        protected void ChangeDirectionRandomly()
+        private void ChangeDirectionRandomly()
         {
             int[] random = new[] { 0, 1, 2, 3 };
             int selected = random[Random.Range(0, random.Length)];
@@ -393,7 +449,7 @@ namespace Enemy
             CheckHp();
         }
 
-        protected virtual void CheckHp()
+        private void CheckHp()
         {
             if (hp <= 0)
             {
@@ -412,27 +468,38 @@ namespace Enemy
         
         protected void OnBecameInvisible()
         {
-            visible = false;
+            if(!lockedInView)
+                visible = false;
         }
 
         protected virtual void CustomDeath()
         {
             Controllers.Score.Instance.AddScore((int) ((speed + maxHp/3 + damage) * Controllers.Wave.Instance.GetLevel()) );  
         }
-        
-        protected void DropConsumable()
-        { 
+
+        private void DropConsumable()
+        {
+            try
+            {
+                if (dropValues?.Length == 0 || dropValues == null)
+                    return;
+            }
+            catch (IndexOutOfRangeException e)
+            {
+                Debug.LogWarning("Rozbitý enemy consumable drop script. " + e.Message);
+                return;
+            }
             
-           int selected = dropValues[Random.Range(0, dropValues.Length)];
+            int selected = dropValues[Random.Range(0, dropValues.Length)];
+            
+            if (selected-1 == -1) return;
 
-           if (selected-1 == -1) return;
+            drop = Drops.Instance.GetDrop(selected);
 
-           drop = Drops.Instance.GetDrop(selected);
-
-           if (drop == null)
-               return;
+            if (drop == null)
+                return;
            
-           Instantiate(drop, transform.position, Quaternion.identity);
+            Instantiate(drop, transform.position, Quaternion.identity);
            
         }
 

@@ -243,7 +243,7 @@ namespace Player
 
                             if (stat == ShipStats.MaxHitPoints)
                             {
-                                Player.Controller.Instance.SetHitpoints(shipStatsValueList[i]);
+                                Controller.Instance.SetHitpoints(shipStatsValueList[i]);
                                 repairButton.Disappear();
                             }
                             

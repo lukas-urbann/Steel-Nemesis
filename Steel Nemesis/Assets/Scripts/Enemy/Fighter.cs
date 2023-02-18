@@ -3,22 +3,23 @@ using UnityEngine;
 
 namespace Enemy
 {
-    public class Fighter : BasicEnemy
+    public class Fighter : Enemy
     {
-        private Rigidbody2D rb;
-        private IEnumerator speedChanger;
-       
-        private void Start()
+        protected override void EarlyStart()
+        {
+            
+        }
+
+        protected override void AssignScriptShipValues()
         {
             SetDropValues(3,4,5,6,7,8);
-            
-            rb = GetComponent<Rigidbody2D>();
             hp = defaultShipValues ? 70 : (70 + (Controllers.Wave.Instance.GetLevel() * 1f));
             speed = defaultShipValues ? 2 : (2f + (Controllers.Wave.Instance.GetLevel() * 0.005f));
-            
-            InitMaxHp();
-            //StartCoroutine(ChangeDirections(2f));
-            speedChanger = ChangeDirection();
+            damage = 8;
+        }
+
+        private void Start()
+        {
             StartCoroutine(ChangeDirection());
         }
 
@@ -65,8 +66,8 @@ namespace Enemy
 
         private void Update()
         {
-            CheckDement();
-            CheckDement2();
+            CheckStuckX();
+            CheckStuckY();
             GetVelocity(EnemyDirection.X);
             
             if (GetPlayerDistance() < 2.5f)
@@ -85,14 +86,7 @@ namespace Enemy
                 flyDirection = FlyDirection.Down;
                 ChangeDirection(flyDirection);
             }
-            
-            /*
-            if(hp < maxHp / 4)
-                ChangeDirectionRandomly();
-                */
         }
-        
-        
 
         private void FlyTowardsPlayer()
         {

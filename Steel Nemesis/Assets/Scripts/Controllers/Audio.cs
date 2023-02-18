@@ -34,9 +34,9 @@ namespace Controllers
             {
                 audioSource.PlayOneShot(sound);
             }
-            catch (Exception e)
+            catch
             {
-                
+                Debug.LogWarning("Chyba v přehrávání audia. Nejspíše způsobeno nastavením na začátku nové scény.");
             }
         }
 

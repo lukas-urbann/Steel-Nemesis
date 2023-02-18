@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Controllers;
+using Player;
 using UnityEngine;
 
 namespace Crosshair
@@ -31,6 +32,9 @@ namespace Crosshair
 
         private void Update()
         {
+            if (Controller.Instance == null)
+                return;
+            
             transform.position = Vector3.Lerp(transform.position, crosshair.position, Time.deltaTime * Player.Controller.StatsInstance.GetShipStats(ShipStats.Aim));
             targetedLocation = new Vector3(transform.position.x, transform.position.y, transform.position.z);
         }

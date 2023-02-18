@@ -30,7 +30,7 @@ namespace Player
 
         [SerializeField] private bool canMove = true;
         [SerializeField] private bool canFire = true;
-        private bool isColliding = false; //Pro práci s kolizemi s triggery
+        private bool isColliding; //Pro práci s kolizemi s triggery
         public Ship shipType;
         private Coroutine fireDelay;
 
@@ -78,7 +78,7 @@ namespace Player
             else
             {
                 Instance = this;
-                StatsInstance = GetComponent<Player.Stats>();
+                StatsInstance = GetComponent<Stats>();
             }
         }
 
@@ -207,7 +207,7 @@ namespace Player
                     if (col.gameObject.layer != 8)
                         return;
 
-                    col.gameObject.GetComponent<BasicEnemy>().InstaKill();
+                    col.gameObject.GetComponent<Enemy.Enemy>().InstaKill();
 
                     if (hp < (StatsInstance.GetShipStats(ShipStats.MaxHitPoints) / 4))
                         RemoveHitpoints(hp);
@@ -218,15 +218,14 @@ namespace Player
                     if (col.gameObject.layer != 8)
                         return;
 
-                    Other.CameraShake.Instance.ShakeScreen(0.2f, 0.2f);
-                    Controllers.Audio.Instance.PlaySound(playerHurt);
+                    CameraShake.Instance.ShakeScreen(0.2f, 0.2f);
+                    Audio.Instance.PlaySound(playerHurt);
                     Instantiate(playerHurtEffect, col.transform.position, Quaternion.identity);
                     Instantiate(Prefabs.Instance.scrap, col.transform.position, Quaternion.identity);
+                    
                     Destroy(col.gameObject);
-                    hp -= 10; // TODO: Enemy dmg
+                    hp -= col.gameObject.GetComponent<Enemy.Laser>().damage;
                     CheckHp();
-                    break;
-                default:
                     break;
             }
         }

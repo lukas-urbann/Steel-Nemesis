@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 571f34d9d91b54083a4be235be6cc98a, type: 3}
   m_Name: Starfighter
   m_EditorClassIdentifier: 
-  shipName: negr
-  shipSprite: {fileID: 21300000, guid: e9f4560889725454fba589cb62b1eded, type: 3}
+  shipName: Starfighter
+  shipSprite: {fileID: 21300000, guid: d736793a11a9cbe4890a34e3a340bbb0, type: 3}
   baseHitPoints: 20
   baseMaxHitPoints: 20
   baseBattery: 10
@@ -42,3 +42,13 @@ MonoBehaviour:
   maxCooldownStat: 5
   maxDamageStat: 3
   maxEnginePerformanceStat: 5
+  bestMaxHitPoints: 20
+  bestMaxBattery: 10
+  bestBatteryRecharge: 25
+  bestCooldown: 0.5
+  bestFirepower: 0.75
+  bestDamage: 12
+  bestEnginePerformance: 2
+  bestAim: 2
+  bestTurn: 4
+  bestScale: 5

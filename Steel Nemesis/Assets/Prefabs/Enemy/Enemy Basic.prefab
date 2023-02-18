@@ -579,13 +579,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe95c4f9573274a719d7a0c95692997d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 1.5
+  hp: 22.5
+  damage: 5
+  reloadTimeLeft: 0
   type: 0
+  lockedInView: 0
+  defaultShipValues: 0
+  overwriteValues: 1
+  slowOnHit: 1
+  smoothSpeed: 0
+  canShoot: 0
+  isColliding: 0
+  disabledBoundaries: 0
+  visible: 1
   minWave: 0
   maxWave: 20
+  dropValues: 
   fireSound: {fileID: 0}
-  hitEffect: {fileID: 5052683511057602913, guid: bacd9643419f74431bdc93723c186629, type: 3}
-  laser: {fileID: 0}
+  bulletPrefab: {fileID: 0}
+  damageEffectPrefab: {fileID: 5052683511057602913, guid: bacd9643419f74431bdc93723c186629, type: 3}
   barrelPoints: []
+  oldPosition: {x: 0, y: 0, z: 0}
+  newPosition: {x: 0, y: 0, z: 0}
+  positionOldX: 0
+  positionNewX: 0
+  positionOldY: 0
+  positionNewY: 0
+  canDebilTurn: 1
+  canDebilTurn2: 1
 --- !u!50 &8816277502398131453
 Rigidbody2D:
   serializedVersion: 4

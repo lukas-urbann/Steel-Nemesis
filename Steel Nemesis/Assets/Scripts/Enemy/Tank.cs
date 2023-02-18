@@ -1,31 +1,31 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using Other;
-using Triggers;
+﻿using System.Collections;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 namespace Enemy
 {
-    public class Tank : BasicEnemy
+    public class Tank : Enemy
     {
         private bool attacking = false;
 
+        protected override void EarlyStart()
+        {
+            
+        }
+
+        protected override void AssignScriptShipValues()
+        {
+            SetDropValues(1,1,2,2,2);
+            hp = defaultShipValues ? 120 : (120 + (Controllers.Wave.Instance.GetLevel() * 2f));
+            speed = defaultShipValues ? 1 : (1f + (Controllers.Wave.Instance.GetLevel() * 0.005f));
+            damage = 5;
+        }
+
         private void Start()
         {
-            dropValues = new int[] { 1, 1, 2, 2, 2};
-            
-            hp = 120;
-            
-            if(speed < 3.5f)
-                speed = 0.35f + (Controllers.Wave.Instance.GetLevel() * 0.005f);
-            
+            StartCoroutine(AttackCooldown());
             flyDirection = FlyDirection.Down;
             ChangeDirection(flyDirection);
-            
-            InitMaxHp();
-            StartCoroutine(AttackCooldown());
         }
 
         private void Update()

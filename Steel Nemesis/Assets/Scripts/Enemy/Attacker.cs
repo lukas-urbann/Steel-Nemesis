@@ -1,46 +1,86 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
-using Other;
-using Triggers;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Enemy
 {
-    public class Attacker : BasicEnemy
+    public class Attacker : Enemy
     {
+        protected override void EarlyStart()
+        {
+            
+        }
+
+        protected override void AssignScriptShipValues()
+        {
+            SetDropValues(0,0,1,1,1,2);
+            hp = defaultShipValues ? 30 : (30 + (Controllers.Wave.Instance.GetLevel() * 1f));
+            speed = defaultShipValues ? 1 : (1f + (Controllers.Wave.Instance.GetLevel() * 0.005f));
+            damage = 5;
+        }
+
         private void Start()
         {
-            dropValues = new int[] { 0, 0, 1, 1, 1, 2};
-            
-            hp = 50;
-            
-            if(speed < 6.5f)
-                speed = 0.5f + (Controllers.Wave.Instance.GetLevel() * 0.05f);
+            StartCoroutine(ChangeDirection());
+        }
+        
+        private IEnumerator ChangeDirection()
+        {
+            float timer = Random.Range(0f, 1.5f);
 
-            damage = 20 + (Controllers.Wave.Instance.GetLevel() * 1);
+            float spd = Random.Range(speed / 2, speed);
             
-            flyDirection = FlyDirection.Down;
-            ChangeDirection(flyDirection);
-            
-            InitMaxHp();
+            switch (Mathf.FloorToInt(Random.Range(0.001f, 1.999f)))
+            {
+                case 0:
+                    switch (Mathf.FloorToInt(Random.Range(0.001f, 1.999f)))
+                    {
+                        case 0:
+                            SetNewRandomSpeed(spd,speed, EnemyDirection.X);
+                            break;
+                        case 1:
+                            SetNewRandomSpeed(-spd,-speed, EnemyDirection.X);
+                            break;
+                    }
+                    break;
+                case 1:
+                    switch (Mathf.FloorToInt(Random.Range(0.001f, 1.999f)))
+                    {
+                        case 0:
+                            SetNewRandomSpeed(spd,speed, EnemyDirection.Y);
+                            break;
+                        case 1:
+                            SetNewRandomSpeed(-spd,-speed, EnemyDirection.Y);
+                            break;
+                    }
+                    break;
+            }
+            yield return new WaitForSeconds(timer);
+            debil();
+        }
+
+        private void debil()
+        {
+            StopCoroutine(ChangeDirection());
+            StartCoroutine(ChangeDirection());
         }
 
         private void Update()
         {
+            CheckStuckX();
+            CheckStuckY();
+            GetVelocity(EnemyDirection.X);
             Fly();
 
             if (visible)
             {
-                if (hp <= (maxHp / 2))
-                {
-                    FaceDown(3);
-                }
-                else
-                {
-                    FacePlayer(3); 
-                    Shoot(2.5f);
-                }
+                FacePlayer(3); 
+                Shoot(2.5f);
+            }
+            else
+            {
+                FaceDown(3);
             }
         }
     }

@@ -193,8 +193,8 @@ namespace Controllers
         private void KillAllHostiles()
         {
             //TODO: NEVIM JESTLI FUNGUJE, JSOU TU POTIZE
-            var enemyListToDestroy = new List<BasicEnemy>();
-            enemyListToDestroy.AddRange(FindObjectsOfType<BasicEnemy>().ToList());
+            var enemyListToDestroy = new List<Enemy.Enemy>();
+            enemyListToDestroy.AddRange(FindObjectsOfType<Enemy.Enemy>().ToList());
 
             for (int i = 0; i < enemyListToDestroy.Count; i++)
             {
@@ -212,7 +212,7 @@ namespace Controllers
             
             foreach (GameObject obj in enemyList)
             {
-                BasicEnemy en = obj.GetComponentInChildren<BasicEnemy>();
+                Enemy.Enemy en = obj.GetComponentInChildren<Enemy.Enemy>();
                 
                 if (en.GetMinLevel() <= level && en.GetMaxLevel() >= level)
                     selectedEnemies.Add(obj);

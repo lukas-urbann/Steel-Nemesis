@@ -431,14 +431,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 646cb21eff1b493f855a894218655aa2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 1
+  hp: 120
+  maxHp: 0
+  damage: 5
+  reloadTimeLeft: 0
   type: 2
+  lockedInView: 0
+  defaultShipValues: 0
+  overwriteValues: 1
+  slowOnHit: 0
+  smoothSpeed: 0
+  canShoot: 1
+  isColliding: 0
+  disabledBoundaries: 0
+  visible: 1
   minWave: 10
   maxWave: 999999
+  dropValues: 
   fireSound: {fileID: 8300000, guid: f1626cbe9b6454c68843f15032c6e686, type: 3}
-  hitEffect: {fileID: 5052683511057602913, guid: bacd9643419f74431bdc93723c186629, type: 3}
-  laser: {fileID: 6198669016382031342, guid: f5983895b0f296941b1aaa77786fbaef, type: 3}
+  bulletPrefab: {fileID: 6198669016382031342, guid: f5983895b0f296941b1aaa77786fbaef, type: 3}
+  damageEffectPrefab: {fileID: 5052683511057602913, guid: bacd9643419f74431bdc93723c186629, type: 3}
   barrelPoints:
   - {fileID: 2125300941744698224}
+  oldPosition: {x: 0, y: 0, z: 0}
+  newPosition: {x: 0, y: 0, z: 0}
+  positionOldX: 0
+  positionNewX: 0
+  positionOldY: 0
+  positionNewY: 0
+  canDebilTurn: 1
+  canDebilTurn2: 1
 --- !u!60 &8058052842308629341
 PolygonCollider2D:
   m_ObjectHideFlags: 0

@@ -74,12 +74,33 @@ namespace Shop
         
         private void OnTriggerEnter2D(Collider2D col)
         {
+            try
+            {
+                if (Player.Controller.Instance == null)
+                    return;
+            }
+            catch (NullReferenceException e)
+            {
+                Debug.LogWarning("Hráč nenalezen. - " + e.Message);
+            }
+            
+            
             if (col.gameObject == Player.Controller.Instance.gameObject)
                 playerInShop = true;
         }
 
         private void OnTriggerExit2D(Collider2D col)
         {
+            try
+            {
+                if (Player.Controller.Instance == null)
+                    return;
+            }
+            catch (NullReferenceException e)
+            {
+                Debug.LogWarning("Hráč nenalezen. - " + e.Message);
+            }
+            
             if (col.gameObject == Player.Controller.Instance.gameObject)
                 playerInShop = false;
         }
