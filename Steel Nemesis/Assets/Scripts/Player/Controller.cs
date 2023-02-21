@@ -2,11 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using Collectible;
 using Controllers;
-using Enemy;
 using Other;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 namespace Player
@@ -24,9 +22,9 @@ namespace Player
         public static Controller Instance;
         public static Stats StatsInstance;
 
-        [SerializeField] private float hp;
-        [SerializeField] private float battery;
-        [SerializeField] private float fireCost = 10;
+        private float hp;
+        private float battery;
+        private float fireCost = 10;
 
         [SerializeField] private bool canMove = true;
         [SerializeField] private bool canFire = true;
@@ -52,10 +50,10 @@ namespace Player
         private Vector3 vectorToTarget;
         private float angle;
         private Quaternion qt;
-
+        
+        private GameObject crosshair;
+        
         [Header("-- Assignable --")] [Header("Game Objects")]
-        public GameObject crosshair;
-
         public GameObject laser;
         public GameObject playerHurtEffect;
 
@@ -67,7 +65,7 @@ namespace Player
         public AudioClip playerHurt;
 
         [Header("Notification Pickup")]
-        public TMP_Text notificationText;
+        private TMP_Text notificationText;
 
         [SerializeField] private Color positive, negative;
 
@@ -84,11 +82,33 @@ namespace Player
 
         private void Start()
         {
+            AssignObjects();
             hp = shipType.baseHitPoints;
             battery = shipType.baseBattery;
             Controllers.Shop.Instance.onClose += ShopCloseAction;
             Controllers.Shop.Instance.onOpen += ShopOpenAction;
             //statUpgrade += CalculateUpgrades;
+            DetectMissing();
+        }
+
+        private void DetectMissing()
+        {
+            if (crosshair == null)
+                Debug.LogError("Crosshair není přiřazený.");
+
+            if (notificationText == null)
+            {
+                Debug.LogError("NotificationText není přiřazený.");
+            }
+        }
+
+        private void AssignObjects()
+        {
+            if (crosshair == null)
+                crosshair = GameObject.FindWithTag("Crosshair");
+            
+            if (notificationText == null)
+                notificationText = GameObject.FindWithTag("NotificationText").GetComponent<TMP_Text>();
         }
 
         private void Update()

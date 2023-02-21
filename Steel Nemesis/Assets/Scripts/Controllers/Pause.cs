@@ -10,6 +10,7 @@ namespace Controllers
         public static Pause Instance;
         public GameObject pauseScreen;
         private bool pause = false;
+        public AudioSource musicAudioSource;
 
         private void Awake()
         {
@@ -22,11 +23,18 @@ namespace Controllers
         private void Start()
         {
             Cursor.visible = false;
+            AssignObjects();
+        }
+
+        private void AssignObjects()
+        {
+            if (musicAudioSource == null)
+                musicAudioSource = GameObject.Find("MusicController").GetComponent<AudioSource>();
         }
 
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Escape) && !Game.Instance.GetGameOver())
+            if (Input.GetKeyDown(KeyCode.Escape) && !Game.Instance.GetGameOver() && !pause)
                 CheckPause();
         }
 
@@ -44,12 +52,14 @@ namespace Controllers
                 pauseScreen.SetActive(true);
                 Cursor.visible = true;
                 Time.timeScale = 0;
+                musicAudioSource.Pause();
             }
             else
             {
                 pauseScreen.SetActive(false);
                 Cursor.visible = false;
                 Time.timeScale = 1;
+                musicAudioSource.Play();
             }
         }
     }

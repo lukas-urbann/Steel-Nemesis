@@ -5103,14 +5103,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1710796150757237346}
-  - component: {fileID: 1532058089686221456}
   - component: {fileID: 1532058089686221457}
   - component: {fileID: 1532058089686221458}
   - component: {fileID: 1532058089686221459}
   - component: {fileID: 1532058089686221484}
-  - component: {fileID: 1532058089686221485}
-  - component: {fileID: 1532058089686221486}
   - component: {fileID: 1532058089686221487}
+  - component: {fileID: 1532058089686221456}
+  - component: {fileID: 1532058089686221486}
+  - component: {fileID: 1532058089686221485}
   - component: {fileID: 1532058089686221480}
   m_Layer: 7
   m_Name: Player Cadet
@@ -5137,6 +5137,83 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1532058089686221457
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1708953805533136142}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b280dceeb1605498eb1e72bb197f1427, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canMove: 1
+  canFire: 1
+  shipType: {fileID: 11400000, guid: b5772db4f98354ab68daf37265079c45, type: 2}
+  laser: {fileID: 1178998862013183786, guid: f539eb8736568485a88ac7fabc149306, type: 3}
+  playerHurtEffect: {fileID: 3053539486649149702, guid: 9c22355a5db99c441bab6478f07b50da, type: 3}
+  firePoints:
+  - {fileID: 1710501581408849872}
+  fire: {fileID: 8300000, guid: 9b450e5caa68440eb898893d0c5f01ed, type: 3}
+  pickup: {fileID: 8300000, guid: 9a06a35dc2c9b4d689657ff866bc43b2, type: 3}
+  playerHurt: {fileID: 8300000, guid: ee31fcb5e504d4db684b65637fa6a8db, type: 3}
+  positive: {r: 0.4850481, g: 0.9433962, b: 0.4889459, a: 1}
+  negative: {r: 1, g: 0.3254717, b: 0.3935436, a: 1}
+--- !u!114 &1532058089686221458
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1708953805533136142}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f9cc6e54145d4f91bcb3aa5a39f5b0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1532058089686221459
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1708953805533136142}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c309ec87894c42db9c9064a07374eaf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggerType: 2
+--- !u!114 &1532058089686221484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1708953805533136142}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a9ab01405223467787e60c1dc8f86ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  explosionPrefab: {fileID: 1259019885177489596, guid: d71a680da71f149f48498002a600cfbe, type: 3}
+--- !u!114 &1532058089686221487
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1708953805533136142}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfb5d5f354d949fb80050e83fac55cd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  repairButton: {fileID: 0}
+  shipStatsList: 
+  activeStatsValueList: []
 --- !u!212 &1532058089686221456
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -5189,73 +5266,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1532058089686221457
-MonoBehaviour:
+--- !u!50 &1532058089686221486
+Rigidbody2D:
+  serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1708953805533136142}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b280dceeb1605498eb1e72bb197f1427, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hp: 0
-  battery: 0
-  fireCost: 0
-  canMove: 1
-  canFire: 1
-  shipType: {fileID: 11400000, guid: b5772db4f98354ab68daf37265079c45, type: 2}
-  crosshair: {fileID: 0}
-  laser: {fileID: 1178998862013183786, guid: f539eb8736568485a88ac7fabc149306, type: 3}
-  playerHurtEffect: {fileID: 3053539486649149702, guid: 9c22355a5db99c441bab6478f07b50da, type: 3}
-  firePoints:
-  - {fileID: 1710501581408849872}
-  fire: {fileID: 8300000, guid: 9b450e5caa68440eb898893d0c5f01ed, type: 3}
-  pickup: {fileID: 8300000, guid: 9a06a35dc2c9b4d689657ff866bc43b2, type: 3}
-  playerHurt: {fileID: 8300000, guid: ee31fcb5e504d4db684b65637fa6a8db, type: 3}
-  notificationText: {fileID: 0}
-  positive: {r: 0.4850481, g: 0.9433962, b: 0.4889459, a: 1}
-  negative: {r: 1, g: 0.3254717, b: 0.3935436, a: 1}
---- !u!114 &1532058089686221458
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1708953805533136142}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f9cc6e54145d4f91bcb3aa5a39f5b0b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1532058089686221459
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1708953805533136142}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c309ec87894c42db9c9064a07374eaf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  triggerType: 2
---- !u!114 &1532058089686221484
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1708953805533136142}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a9ab01405223467787e60c1dc8f86ae, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  explosionPrefab: {fileID: 1259019885177489596, guid: d71a680da71f149f48498002a600cfbe, type: 3}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 1
+  m_UseAutoMass: 0
+  m_Mass: 0.0001
+  m_LinearDrag: 0
+  m_AngularDrag: 0
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 1
+  m_Constraints: 0
 --- !u!60 &1532058089686221485
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -5291,42 +5322,6 @@ PolygonCollider2D:
       - {x: 0.037794534, y: -0.004528107}
       - {x: 0.008240057, y: 0.03110677}
       - {x: 0.0006011531, y: 0.03919497}
---- !u!50 &1532058089686221486
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1708953805533136142}
-  m_BodyType: 1
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 1
-  m_UseAutoMass: 0
-  m_Mass: 0.0001
-  m_LinearDrag: 0
-  m_AngularDrag: 0
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 1
-  m_Constraints: 0
---- !u!114 &1532058089686221487
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1708953805533136142}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dfb5d5f354d949fb80050e83fac55cd5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  repairButton: {fileID: 0}
-  shipStatsList: 
-  activeStatsValueList: []
 --- !u!60 &1532058089686221480
 PolygonCollider2D:
   m_ObjectHideFlags: 0

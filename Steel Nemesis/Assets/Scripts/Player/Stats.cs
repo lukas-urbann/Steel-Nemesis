@@ -27,7 +27,7 @@ namespace Player
         private List<float> shipBaseStatsValueList = new List<float>(); // Tohle jsou pouze base staty lodě
         private List<float> skillpointStatsValueList = new List<float>(); // Tohle jsou pouze hráčovy skillpointy
         private List<float> statMultiplierValueList = new List<float>(); // Tohle je multiplikátor lodě
-        private List<float> shipMaxStatsList = new List<float>(); // Tohle obsahuje maximální upgrady jednotlivých lodí
+        private List<float> shipMaxStatsList; // Tohle obsahuje maximální upgrady jednotlivých lodí
         private List<float> shipBestStatsValueList = new List<float>(); // Tohle obsahuje maximální upgrady jednotlivých lodí
 
         public delegate void AttributeDelegate(); // volat na shop pro update labelu
@@ -35,7 +35,13 @@ namespace Player
         
         private void OnEnable()
         {
-            LoadStats();            
+            LoadStats();
+        }
+
+        private void Start()
+        {
+            //TOHLE TU MUSÍ BÝT, NEBO SE TO CELÉ KURVA ROZBIJE Z NĚJAKÉHO DŮVODU, MUSÍ TO BÝT VE STARTU
+            //PRO LÁSKU BOŽÍ AŤ SE DĚJE CO SE DĚJE NESMÍ SE TO SPOUŠTĚT DŘÍVE PRO LÁSKU BOŽÍ.
             AssignShipStats();
         }
 
@@ -131,7 +137,8 @@ namespace Player
                     Controller.Instance.shipType.maxEnginePerformanceStat
                 }
                 ;
-            
+
+            shipMaxStatsList = new List<float>(maxStats.Length);
             shipMaxStatsList.AddRange(maxStats);
         }
 

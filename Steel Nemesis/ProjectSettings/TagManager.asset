@@ -28,6 +28,8 @@ TagManager:
   - Ship
   - Collectible
   - Solid
+  - Crosshair
+  - NotificationText
   layers:
   - Default
   - TransparentFX

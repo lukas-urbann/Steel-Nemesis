@@ -209,7 +209,11 @@ PrefabInstance:
     - target: {fileID: 1532058089686221457, guid: 8cb0376a9455d46448a465fe1bcc919b, type: 3}
       propertyPath: crosshair
       value: 
-      objectReference: {fileID: 15979295}
+      objectReference: {fileID: 0}
+    - target: {fileID: 1532058089686221457, guid: 8cb0376a9455d46448a465fe1bcc919b, type: 3}
+      propertyPath: notificationText
+      value: 
+      objectReference: {fileID: 825259352}
     - target: {fileID: 1532058089686221487, guid: 8cb0376a9455d46448a465fe1bcc919b, type: 3}
       propertyPath: repairButton
       value: 
@@ -264,11 +268,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8cb0376a9455d46448a465fe1bcc919b, type: 3}
---- !u!1 &15979295 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4969452813988316383, guid: a02f4c1278373ae4ab056f5c06cab802, type: 3}
-  m_PrefabInstance: {fileID: 4969452813709372974}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &19780486
 GameObject:
   m_ObjectHideFlags: 0
@@ -1304,7 +1303,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 0
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -11612,6 +11611,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseScreen: {fileID: 1306031888}
+  musicAudioSource: {fileID: 0}
 --- !u!4 &721171273
 Transform:
   m_ObjectHideFlags: 0
@@ -12704,7 +12704,7 @@ GameObject:
   - component: {fileID: 825259354}
   m_Layer: 5
   m_Name: Notification
-  m_TagString: Untagged
+  m_TagString: NotificationText
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -20986,7 +20986,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_Camera: {fileID: 1901222104}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -29055,7 +29055,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 0
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -35440,6 +35440,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4969452813038627002, guid: a02f4c1278373ae4ab056f5c06cab802, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4969452813190747524, guid: a02f4c1278373ae4ab056f5c06cab802, type: 3}
       propertyPath: m_Name
       value: Cursor
@@ -35450,11 +35454,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4969452813190747525, guid: a02f4c1278373ae4ab056f5c06cab802, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.012103029
+      value: -4.44
       objectReference: {fileID: 0}
     - target: {fileID: 4969452813190747525, guid: a02f4c1278373ae4ab056f5c06cab802, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.05967392
+      value: -2.46
       objectReference: {fileID: 0}
     - target: {fileID: 4969452813190747525, guid: a02f4c1278373ae4ab056f5c06cab802, type: 3}
       propertyPath: m_LocalPosition.z
